@@ -13,12 +13,12 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Route path={"/"} component={Root}>
-          <Route component={General} />
-          <Route path={"Map"} component={Map} />
-          <Route path={"AboutUs"} component={AboutUs} />
-          <Route path={"Login"} component={Login} />
-        </Route>
+        <Root>
+          <Route path='/' exact={true} component={General} />
+          <Route path="/Maps" component={Map} />
+          <Route path="/AboutUs" component={AboutUs} />
+          <Route path="/Login" component={Login} />
+        </Root>
       </BrowserRouter>
     );
   }
