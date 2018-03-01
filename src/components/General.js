@@ -3,12 +3,12 @@ import React from 'react';
 export class General extends React.Component {
   render(){
     return(
-      <div class="container mt-5 pt-5">
+      <div class="container mt-5 pt-5 pb-5">
         <div class="page-header">
           <h1>General</h1>
         </div>
 
-        <div class="container">
+        <div class="container mb-5">
           <div class="container col-sm-7">
             <h3>What is Gerrymander?</h3>
             <p>
@@ -18,9 +18,9 @@ export class General extends React.Component {
           <div class="container col-sm-5">
             <img src="./img/demoImg.png" class="img-responsive" alt="Demo" />
           </div>
-          
+
         </div>
-        <div class="container">
+        <div class="container mb-5">
           <div class="container col-sm-5">
             <img src="./img/demoImg.png" class="img-responsive" alt="Demo" />
           </div>
