@@ -1,49 +1,52 @@
 import React from 'react';
-import mapboxgl from 'mapbox-gl';
+import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 
-mapboxgl.accessToken ='pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
-//const key='pk.eyJ1IjoibWxjaGFlbGxpbjIyMiIsImEiOiJjamU4MGQydGYwaW1mMnhtemRqNjZpcm9lIn0.BnWHaQPHz8IPtBXoNW-wzA';
+const geojsonColorado = require('../geodata/Colorado_County_Boundaries.geojson');
 export class MapPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lng: 5,
-      lat: 34,
+      center:[39,-98],
+      lng: 39,
+      lat: -98,
       zoom: 1.5
     };
   }
   componentDidMount() {
-    const { lng, lat, zoom } = this.state;
 
-    const map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v9',
-      center: [lng, lat],
-      zoom
-    });
-
-    map.on('move', () => {
-      const { lng, lat } = map.getCenter();
-
-      this.setState({
-        lng: lng.toFixed(4),
-        lat: lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2)
-      });
-    });
   }
+
   render() {
-    const { lng, lat, zoom } = this.state;
-    const bbb="https://source.unsplash.com/random";
+    const Map = ReactMapboxGl({
+      accessToken: 'pk.eyJ1IjoibWxjaGFlbGxpbjIyMiIsImEiOiJjamU4MGQydGYwaW1mMnhtemRqNjZpcm9lIn0.BnWHaQPHz8IPtBXoNW-wzA',
+
+    });
+    var thecenter = [-98, 39];
+    var thezoom=[4.5];
+
     return (
-      <div>
-        <div className="inline-block absolute top left mt12 ml12 bg-darken75 color-white z1 py6 px12 round-full txt-s txt-bold">
-          <div>{`Longitude: ${lng} Latitude: ${lat} Zoom: ${zoom}`}</div>
+      <div class="container">
+        <div class="page-header">
+          <h1>Map</h1>
         </div>
-        <div class="container">
-          <div ref={el => this.mapContainer = el} className="absolute top right left bottom" />
-          <img src={bbb} />
-        </div>
+        <Map style="mapbox://styles/mapbox/streets-v9"
+          containerStyle={{
+            height: "100vh",
+            width: "100vw"
+          }}
+          center={thecenter}
+          zoom={thezoom}
+        >
+        <GeoJSONLayer
+        data={geojsonColorado}
+        fillPaint={{
+          'fill-color': '#F5B041',
+          'fill-opacity': 0.5,
+          'fill-outline-color' :'#FA2305'
+        }}
+
+          />
+        </Map>
 
       </div>
     );

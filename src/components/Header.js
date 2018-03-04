@@ -14,7 +14,7 @@ export const Header = (props) => {
             <ul class="nav navbar-nav">
               <li ><Link to={"/"}>General</Link></li>
               <li ><Link to={"/Maps"}>Maps</Link></li>
-              <li ><Link to={"/AboutUs"}>AboutUs</Link></li>
+              <li ><Link to={"/AboutUs"}>About Us</Link></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
