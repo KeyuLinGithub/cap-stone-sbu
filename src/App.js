@@ -8,6 +8,7 @@ import General from './components/General';
 import MapPage from './components/Map';
 import Login from './components/Login';
 import AboutUs from './components/AboutUs';
+import SignUp from './components/SignUp';
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
           <Route path={process.env.PUBLIC_URL +'/Maps'} component={MapPage} />
           <Route path={process.env.PUBLIC_URL +'/AboutUs'} component={AboutUs} />
           <Route path={process.env.PUBLIC_URL +'/Login'} component={Login} />
+          <Route path={process.env.PUBLIC_URL +'/SignUp'} component={SignUp} />
         </Root>
       </BrowserRouter>
     );
