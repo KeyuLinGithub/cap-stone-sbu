@@ -19,7 +19,7 @@ export class Login extends React.Component{
               <input type="password" class="form-control" id="loginPassword" placeholder="Password" />
             </div>
             <div class="form-group">
-              <Link to={process.env.PUBLIC_URL +'/Login'}><button type="button" class="btn btn-primary">Login</button></Link>
+              <Link to={process.env.PUBLIC_URL +'/'}><button type="button" class="btn btn-primary">Login</button></Link>
             </div>
             <div class="form-group">
 
