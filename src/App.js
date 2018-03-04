@@ -14,10 +14,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Root>
-          <Route path='/' exact={true} component={General} />
-          <Route path="/Maps" component={MapPage} />
-          <Route path="/AboutUs" component={AboutUs} />
-          <Route path="/Login" component={Login} />
+          <Route path={process.env.PUBLIC_URL +'/'} exact={true} component={General} />
+          <Route path={process.env.PUBLIC_URL +'/Maps'} component={MapPage} />
+          <Route path={process.env.PUBLIC_URL +'/AboutUs'} component={AboutUs} />
+          <Route path={process.env.PUBLIC_URL +'/Login'} component={Login} />
         </Root>
       </BrowserRouter>
     );

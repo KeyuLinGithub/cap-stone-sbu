@@ -1,5 +1,5 @@
 import React from 'react';
-
+import demo from '../img/demoImg.png';
 export class General extends React.Component {
   render(){
     return(
@@ -16,13 +16,13 @@ export class General extends React.Component {
             </p>
           </div>
           <div class="container col-sm-5">
-            <img src="./img/demoImg.png" class="img-responsive" alt="Demo" />
+            <img src={demo} class="img-responsive" alt="Demo" />
           </div>
 
         </div>
         <div class="container mb-5">
           <div class="container col-sm-5">
-            <img src="./img/demoImg.png" class="img-responsive" alt="Demo" />
+            <img src={demo} class="img-responsive" alt="Demo" />
           </div>
           <div class="container col-sm-7">
             <h3>About congressional-redistrict-generation:</h3>
