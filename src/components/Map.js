@@ -26,98 +26,110 @@ export class MapPage extends React.Component {
 
     });
     var thecenter = [-105.358887, 39.113014];
-    var thezoom=[5];
+    var thezoom=[5.5];
 
     return (
       <div class="container">
         <div class="page-header">
-          <h1>Map</h1>
+          <h1>Original Map</h1>
         </div>
-        <div>
-          <label>State:&nbsp;
-          </label>
-          <select id="state" >
-          <option value="US" >US</option>
-            <option value="Colorado" >Colorado</option>
-            <option value="New Hampshire">New Hampshire</option>
-            <option value="Ohio">Ohio</option>
-          </select>
-          <label>&nbsp;District Level:&nbsp;
-          </label>
-          <select id="compactness">
-            <option value="congressional">Congressional distric</option>
-            <option value="state" >State district</option>
-            <option value="polling">Polling district</option>
-          </select>
-          <label>&nbsp;Compactness:&nbsp;
-          </label>
-          <select id="compactness">
-            <option value="1">Level 1</option>
-            <option value="2" >Level 2</option>
-            <option value="3">Level 3</option>
-          </select>
-          <label>&nbsp;Alignment By:&nbsp;
-          </label>
-          <select id="Alignment">
-            <option value="county">County Boundaries</option>
-            <option value="highways" >Highways</option>
-            <option value="rivers">Rivers</option>
-          </select>
-          <button type="button" class="btn btn-primary pull-right">Generate</button>
-        </div>
-        <div class="container col-sm-5">
-          <Map style="mapbox://styles/mapbox/streets-v9"
-            containerStyle={{
-              height: "60vh",
-              width: "100%"
-            }}
-            center={thecenter}
-            zoom={thezoom}>
-          <GeoJSONLayer
-          data={geojsonColorado}
-          fillPaint={{
-            'fill-color': '#F5B041',
-            'fill-opacity': 0.5,
-            'fill-outline-color' :'#FA2305'
-          }}/>
-          </Map>
-        </div>
-        <div class="container col-sm-2">
-          <div class="col-sm-offset-4">
-          <i class="fas fa-angle-double-right fa-5x vertical-center"></i>
-          <i class="fas fa-angle-double-right fa-5x vertical-center"></i>
-          <i class="fas fa-angle-double-right fa-5x vertical-center"></i>
-          <i class="fas fa-angle-double-right fa-5x vertical-center"></i>
-          <i class="fas fa-angle-double-right fa-5x vertical-center"></i>
+        <div id="original">
+          <div class="container col-sm-3">
+            <div class="form-group">
+              <label>State:</label><br />
+              <select id="state">
+                <option value="US" >US</option>
+                <option value="Colorado" >Colorado</option>
+                <option value="New Hampshire">New Hampshire</option>
+                <option value="Ohio">Ohio</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>District Level:</label><br />
+              <select id="compactness">
+                <option value="congressional">Congressional distric</option>
+                <option value="state" >State district</option>
+                <option value="polling">Polling district</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Compactness:</label><br />
+              <select id="compactness">
+                <option value="1">Level 1</option>
+                <option value="2" >Level 2</option>
+                <option value="3">Level 3</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Alignment By:</label><br />
+              <select id="Alignment">
+                <option value="county">County Boundaries</option>
+                <option value="highways" >Highways</option>
+                <option value="rivers">Rivers</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn btn-primary pull-middle">Redistrict</button>
+            </div>
+          </div>
+          <div class="container col-sm-9" id="originalmap">
+            <Map style="mapbox://styles/mapbox/streets-v9"
+              containerStyle={{
+                height: "60vh",
+                width: "100%"
+              }}
+              center={thecenter}
+              zoom={thezoom}>
+            <GeoJSONLayer
+            data={geojsonColorado}
+            fillPaint={{
+              'fill-color': '#F5B041',
+              'fill-opacity': 0.5,
+              'fill-outline-color' :'#FA2305'
+            }}/>
+            </Map>
           </div>
         </div>
-        <div class="container col-sm-5">
-          <Map style="mapbox://styles/mapbox/streets-v9"
-            containerStyle={{
-              height: "60vh",
-              width: "100%"
-            }}
-            center={thecenter}
-            zoom={thezoom}>
-          <GeoJSONLayer
-          data={geojsonColorado}
-          fillPaint={{
-            'fill-color': '#F5B041',
-            'fill-opacity': 0.5,
-            'fill-outline-color' :'#FA2305'
-          }}/>
-          </Map>
+        <div class="page-header">
+          <h2>Redistricted Map</h2>
         </div>
+        <div id="redistricted" >
+          <div class="container col-sm-3">
+            <strong>Basic Comparison and Analysis:</strong>
+            <p>
+              <br /><br />
+              text text text text text<br /><br />
+              text text text text text<br /><br />
+              text text text text text<br /><br />
+              text text text text text<br /><br />
 
-        <div class="col-sm-offset-5 pt-5 mt-5 d-block">
-          <button type="button" class="btn btn-primary">Show Analysis </button>
+            </p>
+            <button type="button" class="btn btn-primary">Show Detailed Analysis </button>
+          </div>
+          <div class="container col-sm-9" id="newmap">
+            <Map style="mapbox://styles/mapbox/streets-v9"
+              containerStyle={{
+                height: "60vh",
+                width: "100%"
+              }}
+              center={thecenter}
+              zoom={thezoom}>
+            <GeoJSONLayer
+            data={geojsonColorado}
+            fillPaint={{
+              'fill-color': '#F5B041',
+              'fill-opacity': 0.5,
+              'fill-outline-color' :'#FA2305'
+            }}/>
+            </Map>
+          </div>
         </div>
-        <div>
+        <div id="detailedanalysis">
           <div class="page-header">
-            <h1>Analysis</h1>
+            <h2>Detailed Analysis</h2>
           </div>
           <div class="card">
-            <h3 class="card-header">About the Efficiency gap: </h3>
+            <h4 class="card-header">About the Efficiency gap: </h4>
             <div class="card-block container">
 
               <div class="container col-sm-5">
@@ -130,7 +142,7 @@ export class MapPage extends React.Component {
             <hr />
           </div>
           <div class="card">
-            <h3 class="card-header">Measurement of the partisan fairness: </h3>
+            <h4 class="card-header">Measurement of the partisan fairness: </h4>
             <div class="card-block container">
               <div class="container col-sm-7">
                 <p> Measurement of the partisan fairness....</p>
