@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
+import ReactMapboxGl, { GeoJSONLayer,Layer } from "react-mapbox-gl";
 import demo from '../img/demoImg.png';
 
 const geojsonColorado = require('../geodata/Colorado_County_Boundaries.geojson');
@@ -15,11 +15,18 @@ export class MapPage extends React.Component {
       lat: -98,
       zoom: 1.5
     };
+    this.fillClick=this.fillClick.bind(this);
   }
   componentDidMount() {
 
   }
+  fillClick(event){
+    console.log(event);
+    console.log('The County: '+event.features[0].properties.COUNTY);
 
+    // var json = JSON.parse(geojsonColorado);
+    // console.log(json);
+  }
   render() {
     const Map = ReactMapboxGl({
       accessToken: 'pk.eyJ1IjoibWxjaGFlbGxpbjIyMiIsImEiOiJjamU4MGQydGYwaW1mMnhtemRqNjZpcm9lIn0.BnWHaQPHz8IPtBXoNW-wzA',
@@ -27,6 +34,8 @@ export class MapPage extends React.Component {
     });
     var thecenter = [-105.358887, 39.113014];
     var thezoom=[5.5];
+
+
 
     return (
       <div class="container">
@@ -81,12 +90,15 @@ export class MapPage extends React.Component {
               center={thecenter}
               zoom={thezoom}>
             <GeoJSONLayer
-            data={geojsonColorado}
-            fillPaint={{
-              'fill-color': '#F5B041',
-              'fill-opacity': 0.5,
-              'fill-outline-color' :'#FA2305'
-            }}/>
+              data={geojsonColorado}
+              fillPaint={{
+                'fill-color': '#F5B041',
+                'fill-opacity': 0.5,
+                'fill-outline-color' :'#FA2305'
+              }}
+              fillOnClick={this.fillClick}
+            />
+
             </Map>
           </div>
         </div>

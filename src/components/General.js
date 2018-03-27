@@ -32,6 +32,7 @@ export class General extends React.Component {
           </div>
 
         </div>
+        <hr/>
       </div>
     )
   }
