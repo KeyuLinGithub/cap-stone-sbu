@@ -137,12 +137,12 @@ class SingleOriginalMap extends React.Component {
     }
     return(
     <div id="original">
-      <div class="page-header">
+      <div className="page-header">
         <h1>Original Map</h1>
       </div>
       <div>
-        <div class="container col-sm-3">
-          <div class="form-group">
+        <div className="container col-sm-3">
+          <div className="form-group">
             <label>State:</label><br />
             <select id="state"
             options={this.state.stateOptionsoptions}
@@ -154,7 +154,7 @@ class SingleOriginalMap extends React.Component {
               <option value="Ohio">Ohio</option>
             </select>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label>District Level:</label><br />
             <select id="compactness">
               <option value="congressional">Congressional distric</option>
@@ -162,7 +162,7 @@ class SingleOriginalMap extends React.Component {
               <option value="polling">Polling district</option>
             </select>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label>Compactness:</label><br />
             <select id="compactness">
               <option value="1">Level 1</option>
@@ -170,7 +170,7 @@ class SingleOriginalMap extends React.Component {
               <option value="3">Level 3</option>
             </select>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label>Alignment By:</label><br />
             <select id="Alignment">
               <option value="county">County Boundaries</option>
@@ -178,7 +178,7 @@ class SingleOriginalMap extends React.Component {
               <option value="rivers">Rivers</option>
             </select>
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label>Current Color:</label><br />
             <select id="color" onChange={this.changeColor}>
               <option value="Default">Default</option>
@@ -188,12 +188,12 @@ class SingleOriginalMap extends React.Component {
               <option value="Yellow">Yellow</option>
             </select>
           </div>
-          <div class="form-group">
-            <button type="button" class="btn btn-primary pull-middle">Redistrict</button>
+          <div className="form-group">
+            <button type="button" className="btn btn-primary pull-middle">Redistrict</button>
 
           </div>
         </div>
-        <div class="container col-sm-9" id="originalmap">
+        <div className="container col-sm-9" id="originalmap">
           <div ref='map' style={originalStyle}>
             loading map...
           </div>

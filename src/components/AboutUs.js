@@ -3,20 +3,20 @@ import { Link } from 'react-router-dom';
 export class AboutUs extends React.Component{
   render(){
     return(
-      <div class="container">
-        <div class="page-header">
+      <div className="container">
+        <div className="page-header">
           <h1>About Us</h1>
         </div>
-        <div class="card">
-          <h3 class="card-header">This project: </h3>
-          <div class="card-block">
-            <p class="card-text">This is the Cap Stone project for CSE 308 at Stony Brook University.</p>
+        <div className="card">
+          <h3 className="card-header">This project: </h3>
+          <div className="card-block">
+            <p className="card-text">This is the Cap Stone project for CSE 308 at Stony Brook University.</p>
           </div>
           <hr />
         </div>
-        <div class="card">
-          <h3 class="card-header">The team 	Titans: </h3>
-          <div class="card-block">
+        <div className="card">
+          <h3 className="card-header">The team 	Titans: </h3>
+          <div className="card-block">
             <ul>
               <li>Keyu Lin</li>
               <li>Yushan Zhou</li>
@@ -27,26 +27,26 @@ export class AboutUs extends React.Component{
           <hr />
         </div>
 
-        <div class="card ">
-          <h3 class="card-header">Give us feedback: </h3>
-          <div class="card-block">
-            <div class="container">
-              <div class="col-lg-4 col-lg-offset-1">
+        <div className="card ">
+          <h3 className="card-header">Give us feedback: </h3>
+          <div className="card-block">
+            <div className="container">
+              <div className="col-lg-4 col-lg-offset-1">
                 <form>
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Full Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter your name" />
+                    <input type="text" className="form-control" id="name" placeholder="Enter your name" />
                   </div>
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="example@gmail.com" />
+                    <input type="email" className="form-control" id="email" placeholder="example@gmail.com" />
                   </div>
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Feedback:</label>
-                    <input type="textarea" class="form-control" id="feedback" style={{ height: 150, width: 400 }}/>
+                    <input type="textarea" className="form-control" id="feedback" style={{ height: 150, width: 400 }}/>
                   </div>
-                  <div class="form-group">
-                    <Link to={process.env.PUBLIC_URL +'/'}><button type="button" class="btn btn-primary">Submit</button></Link>
+                  <div className="form-group">
+                    <Link to={process.env.PUBLIC_URL +'/'}><button type="button" className="btn btn-primary">Submit</button></Link>
                   </div>
 
                 </form>

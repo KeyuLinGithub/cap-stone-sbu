@@ -4,32 +4,32 @@ import { Link } from 'react-router-dom';
 export class Login extends React.Component{
   render(){
     return(
-      <div class="container">
-        <div class="page-header">
+      <div className="container">
+        <div className="page-header">
           <h1>Sign Up</h1>
         </div>
-        <div class="container col-sm-4">
+        <div className="container col-sm-4">
           <form>
-            <div class="form-group">
+            <div className="form-group">
               <label>First Name</label>
-              <input type="text" class="form-control" id="loginEmail" placeholder="Enter first name" />
+              <input type="text" className="form-control" id="loginEmail" placeholder="Enter first name" />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label>Last Name</label>
-              <input type="text" class="form-control" id="loginEmail" placeholder="Enter Last name" />
+              <input type="text" className="form-control" id="loginEmail" placeholder="Enter Last name" />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label>Email address</label>
-              <input type="email" class="form-control" id="loginEmail" placeholder="Enter email" />
+              <input type="email" className="form-control" id="loginEmail" placeholder="Enter email" />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label>Password</label>
-              <input type="text" class="form-control" id="loginPassword" placeholder="Password" />
+              <input type="text" className="form-control" id="loginPassword" placeholder="Password" />
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <Link to={process.env.PUBLIC_URL +'/Login'}><button type="button" class="btn btn-primary">Sign up</button></Link>
             </div>
-            <div class="form-group">
+            <div className="form-group">
 
 
             </div>

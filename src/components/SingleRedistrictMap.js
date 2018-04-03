@@ -36,11 +36,11 @@ class SingleRedistrictMap extends React.Component {
     }
     return(
       <div id='redistrict'>
-        <div class="page-header">
+        <div className="page-header">
           <h2>Redistricted Map</h2>
         </div>
         <div >
-          <div class="container col-sm-3">
+          <div className="container col-sm-3">
             <strong>Basic Comparison and Analysis:</strong>
             <p>
               <br /><br />
@@ -50,39 +50,39 @@ class SingleRedistrictMap extends React.Component {
               text text text text text<br /><br />
 
             </p>
-            <button type="button" class="btn btn-primary">Show Detailed Analysis </button>
+            <button type="button" className="btn btn-primary">Show Detailed Analysis </button>
           </div>
-          <div class="container col-sm-9" id="newmap">
+          <div className="container col-sm-9" id="newmap">
             <div ref='map' style={NewStyle}>
               loading map...
             </div>
           </div>
         </div>
         <div id="detailedanalysis">
-          <div class="page-header">
+          <div className="page-header">
             <h2>Detailed Analysis</h2>
           </div>
-          <div class="card">
-            <h4 class="card-header">About the Efficiency gap: </h4>
-            <div class="card-block container">
+          <div className="card">
+            <h4 className="card-header">About the Efficiency gap: </h4>
+            <div className="card-block container">
 
-              <div class="container col-sm-5">
-                <img src={demo} class="img-responsive" alt="Demo" />
+              <div className="container col-sm-5">
+                <img src={demo} className="img-responsive" alt="Demo" />
               </div>
-              <div class="container col-sm-7">
+              <div className="container col-sm-7">
                 <p> The efficiency gap....</p>
               </div>
             </div>
             <hr />
           </div>
-          <div class="card">
-            <h4 class="card-header">Measurement of the partisan fairness: </h4>
-            <div class="card-block container">
-              <div class="container col-sm-7">
+          <div className="card">
+            <h4 className="card-header">Measurement of the partisan fairness: </h4>
+            <div className="card-block container">
+              <div className="container col-sm-7">
                 <p> Measurement of the partisan fairness....</p>
               </div>
-              <div class="container col-sm-5">
-                <img src={demo} class="img-responsive" alt="Demo" />
+              <div className="container col-sm-5">
+                <img src={demo} className="img-responsive" alt="Demo" />
               </div>
             </div>
             <hr />
