@@ -12,9 +12,11 @@ class SingleOriginalMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      current:"US"
+      current:"US",
+      color:"Default"
     };
     this.changeState=this.changeState.bind(this);
+    this.changeColor=this.changeColor.bind(this);
   }
 
   componentDidMount () {
@@ -48,21 +50,12 @@ class SingleOriginalMap extends React.Component {
       Layer.addGeoJson(c_c_d);
       Layer.addGeoJson(n_c_d);
       Layer.addGeoJson(o_c_d);
-      Layer.revertStyle();
-      // Layer.setStyle({
-      //     fillColor: '#b0987a',
-      //      fillOpacity: 0.8,
-      //      strokeColor: '#000000',
-      //     strokeWeight: 1,
-      //      zIndex: 1,
-      //     visible: true
-      // });
+
       this.Layer.setStyle({visible: false});
 
       // Add mouseover and mouse out styling for the GeoJSON State data
       Layer.addListener('mouseover', e => {
         Layer.overrideStyle(e.feature, {
-
           strokeWeight: 3,
           zIndex: 3
         })
@@ -76,6 +69,22 @@ class SingleOriginalMap extends React.Component {
         })
       })
       Layer.addListener('click',  e =>{
+        console.log(this.state.color);
+        var newColor;
+        if(this.state.color==='Blue'){
+          newColor="#006eff"
+        }else if(this.state.color==='Green'){
+          newColor="#00ff48"
+        }else if(this.state.color==='Red'){
+          newColor="#ff3700"
+        }else if(this.state.color==='Yellow'){
+          newColor="#f6ff00"
+        }else{
+          newColor="#b0987a"
+        }
+        Layer.overrideStyle(e.feature, {
+          fillColor: newColor
+        })
         console.log(this.state.current);
         console.log('STATEFP: '+e.feature.f.STATEFP+' GEOID: '+e.feature.f.GEOID);
       })
@@ -85,7 +94,7 @@ class SingleOriginalMap extends React.Component {
   }
   changeState(e){
     const { google } = this.props;
-    this.state=e.target.value;
+
     this.setState({current: e.target.value});
     //console.log(e.target.value);
     var state=e.target.value;
@@ -118,6 +127,9 @@ class SingleOriginalMap extends React.Component {
     });
 
   }
+  changeColor(e){
+    this.setState({color: e.target.value});
+  }
   render(){
     const originalStyle = {
       width: '100%',
@@ -136,10 +148,10 @@ class SingleOriginalMap extends React.Component {
             options={this.state.stateOptionsoptions}
             onChange={this.changeState}
             >
-              <option value="US" onChange={this.changeState}>US</option>
-              <option value="Colorado" onChange={this.changeState}>Colorado</option>
-              <option value="NewHampshire" onChange={this.changeState}>New Hampshire</option>
-              <option value="Ohio" onChange={this.changeState}>Ohio</option>
+              <option value="US">US</option>
+              <option value="Colorado">Colorado</option>
+              <option value="NewHampshire">New Hampshire</option>
+              <option value="Ohio">Ohio</option>
             </select>
           </div>
           <div class="form-group">
@@ -167,9 +179,18 @@ class SingleOriginalMap extends React.Component {
             </select>
           </div>
           <div class="form-group">
+            <label>Current Color:</label><br />
+            <select id="color" onChange={this.changeColor}>
+              <option value="Default">Default</option>
+              <option value="Blue">Blue</option>
+              <option value="Green">Green</option>
+              <option value="Red">Red</option>
+              <option value="Yellow">Yellow</option>
+            </select>
+          </div>
+          <div class="form-group">
             <button type="button" class="btn btn-primary pull-middle">Redistrict</button>
-            <button type="button" class="btn btn-primary " onClick={this.changeToBlue}>Blue</button>
-            <button type="button" class="btn btn-danger " onClick={this.changeToRed}>Red</button>
+
           </div>
         </div>
         <div class="container col-sm-9" id="originalmap">
