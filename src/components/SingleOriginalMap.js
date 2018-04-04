@@ -13,10 +13,18 @@ class SingleOriginalMap extends React.Component {
     super(props);
     this.state = {
       current:"US",
-      color:"Default"
+      color:"Default",
+      compactness:25,
+      population:25,
+      racial:25,
+      partisan:25
     };
     this.changeState=this.changeState.bind(this);
     this.changeColor=this.changeColor.bind(this);
+    this.handleCompactnessChange=this.handleCompactnessChange.bind(this);
+    this.handlePopulationChange=this.handlePopulationChange.bind(this);
+    this.handleRacialChange=this.handleRacialChange.bind(this);
+    this.handlePartisanChange=this.handlePartisanChange.bind(this);
   }
 
   componentDidMount () {
@@ -130,6 +138,18 @@ class SingleOriginalMap extends React.Component {
   changeColor(e){
     this.setState({color: e.target.value});
   }
+  handleCompactnessChange(e){
+    this.setState({compactness: e.target.value});
+  }
+  handlePopulationChange(e){
+    this.setState({population: e.target.value});
+  }
+  handleRacialChange(e){
+    this.setState({racial: e.target.value});
+  }
+  handlePartisanChange(e){
+    this.setState({partisan: e.target.value});
+  }
   render(){
     const originalStyle = {
       width: '100%',
@@ -137,6 +157,7 @@ class SingleOriginalMap extends React.Component {
     }
     return(
     <div id="original">
+
       <div className="page-header">
         <h1>Original Map</h1>
       </div>
@@ -162,31 +183,39 @@ class SingleOriginalMap extends React.Component {
               <option value="polling">Polling district</option>
             </select>
           </div>
+
           <div className="form-group">
-            <label>Compactness:</label><br />
-            <select id="compactness">
-              <option value="1">Level 1</option>
-              <option value="2" >Level 2</option>
-              <option value="3">Level 3</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Alignment By:</label><br />
-            <select id="Alignment">
-              <option value="county">County Boundaries</option>
-              <option value="highways" >Highways</option>
-              <option value="rivers">Rivers</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Current Color:</label><br />
-            <select id="color" onChange={this.changeColor}>
-              <option value="Default">Default</option>
-              <option value="Blue">Blue</option>
-              <option value="Green">Green</option>
-              <option value="Red">Red</option>
-              <option value="Yellow">Yellow</option>
-            </select>
+            <label>Constraints By Weights:</label><br />
+            <div>Partisan Fairness: {this.state.partisan}%</div>
+            <input type="range"
+              value={this.state.partisan}
+              onChange={e=> {this.handlePartisanChange(e)}}
+            />
+            <div>Equal Population: {this.state.population}%</div>
+            <input type="range"
+              value={this.state.population}
+              onChange={e=> {this.handlePopulationChange(e)}}
+            />
+            <div>Racial Fairness: {this.state.racial}%</div>
+            <input type="range"
+              value={this.state.racial}
+              onChange={e=> {this.handleRacialChange(e)}}
+            />
+            <div>Compactness: {this.state.compactness}%</div>
+            <input type="range"
+              value={this.state.compactness}
+              onChange={e=> {this.handleCompactnessChange(e)}}
+            />
+            <div>
+              Contiguity:&nbsp;&nbsp;
+              <input type="checkbox" class="form-check-input" />
+
+            </div>
+            <div>
+              Preserve Existing Communities:&nbsp;&nbsp;
+              <input type="checkbox" class="form-check-input" />
+
+            </div>
           </div>
           <div className="form-group">
             <button type="button" className="btn btn-primary pull-middle">Redistrict</button>
@@ -203,5 +232,15 @@ class SingleOriginalMap extends React.Component {
     )
   }
 }
-
+//color selection
+// <div className="form-group">
+//   <label>Current Color:</label><br />
+//   <select id="color" onChange={this.changeColor}>
+//     <option value="Default">Default</option>
+//     <option value="Blue">Blue</option>
+//     <option value="Green">Green</option>
+//     <option value="Red">Red</option>
+//     <option value="Yellow">Yellow</option>
+//   </select>
+// </div>
 export default SingleOriginalMap;
