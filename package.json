@@ -2,6 +2,7 @@
   "name": "congressional-district-generation",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "homepage": "https://keyulingithub.github.io/cap-stone-sbu/",
   "dependencies": {
     "antd": "^3.4.0",

@@ -14,7 +14,15 @@ export class Login extends React.Component{
   }
   handleLogin(event){
     console.log(this.state.email+' '+this.state.password);
-    fetch('http://localhost:8080/login/'+this.state.email+','+this.state.password)
+    fetch('http://localhost:8080/RedistrictSystem/login.do',
+    		{
+        method: 'POST',
+        body:{
+              email: this.state.email,
+              password : this.state.password
+              },
+        dataType: "text",
+    })
     .then(res => console.log(res));
   }
   editEmail(event){
