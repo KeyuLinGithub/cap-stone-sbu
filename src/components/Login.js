@@ -27,17 +27,20 @@ export class Login extends React.Component{
 	  		"&wocao="+this.state.email+
 	  		"&password="+this.state.password+
 	  		""
-	}).then(function(res) {
-//		console.log(res.params.email)
-		console.log(res.json())
-	  if (res.ok) {
-	    alert("Perfect! Your settings are saved.");
-	  } else if (res.status == 404) {
-	    alert("Oops! You are not authorized.");
-	  }
-	}, function(e) {
-	  alert("Error submitting form!");
-	});
+	})
+  .then(response => response.json())
+  .then(data => console.log(data));
+//   .then(function(res) {
+// //		console.log(res.params.email)
+// 		console.log(res.json())
+// 	  if (res.ok) {
+// 	    alert("Perfect! Your settings are saved.");
+// 	  } else if (res.status == 404) {
+// 	    alert("Oops! You are not authorized.");
+// 	  }
+// 	}, function(e) {
+// 	  alert("Error submitting form!");
+// 	});
   }
   editEmail(event){
     this.setState({email: event.target.value});
