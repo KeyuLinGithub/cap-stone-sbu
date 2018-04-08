@@ -14,12 +14,30 @@ export class Login extends React.Component{
   }
   handleLogin(event){
     console.log(this.state.email+' '+this.state.password);
-    var formData = new FormData();  
-    formData.append('email', '11');  
-    formData.append('password', 'kong');  
-    fetch('http://localhost:8080/RedistrictSystem/login.do?wocao=aaa'
-    		)
-    .then(res => console.log(res));
+//    fetch('http://localhost:8080/RedistrictSystem/login.do', opts
+//    ).then(res => console.log(res));
+//  }
+  fetch("http://localhost:8080/RedistrictSystem/login.do", {
+	  method: "POST",
+	  credentials: 'include',//open sending cookie(default doesnt send cookie)
+	  headers: {
+	    "Content-Type": "application/x-www-form-urlencoded"
+	  },
+	  body: "email="+this.state.email+
+	  		"&wocao="+this.state.email+
+	  		"&password="+this.state.password+
+	  		""
+	}).then(function(res) {
+//		console.log(res.params.email)
+		console.log(res.json())
+	  if (res.ok) {
+	    alert("Perfect! Your settings are saved.");
+	  } else if (res.status == 404) {
+	    alert("Oops! You are not authorized.");
+	  }
+	}, function(e) {
+	  alert("Error submitting form!");
+	});
   }
   editEmail(event){
     this.setState({email: event.target.value});
