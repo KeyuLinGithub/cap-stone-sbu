@@ -1,4 +1,5 @@
 import React from 'react';
+import User from './User';
 import { Link } from 'react-router-dom';
 
 
@@ -17,14 +18,12 @@ export const Header = (props) => {
               <li ><Link to={process.env.PUBLIC_URL +'/AboutUs'}>About Us</Link></li>
 
             </ul>
-            <ul className="nav navbar-nav navbar-right">
-              <li ><Link to={process.env.PUBLIC_URL +'/Login'}> Login <span className="glyphicon glyphicon-log-in">  </span></Link></li>
-            </ul>
+            <User />
           </div>
           </div>
         </nav>
 
     );
 };
-
+//<li ><Link to={process.env.PUBLIC_URL +'/Login'}> Login <span className="glyphicon glyphicon-log-in">  </span></Link></li>
 export default Header;
