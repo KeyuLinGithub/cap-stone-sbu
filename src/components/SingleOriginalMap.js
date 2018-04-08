@@ -208,12 +208,12 @@ class SingleOriginalMap extends React.Component {
             />
             <div>
               Contiguity:&nbsp;&nbsp;
-              <input type="checkbox" class="form-check-input" />
+              <input type="checkbox" className="form-check-input" />
 
             </div>
             <div>
               Preserve Existing Communities:&nbsp;&nbsp;
-              <input type="checkbox" class="form-check-input" />
+              <input type="checkbox" className="form-check-input" />
 
             </div>
           </div>

@@ -2,6 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export class Login extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      email:'',
+      password:''
+    };
+    this.handleLogin=this.handleLogin.bind(this);
+    this.editEmail=this.editEmail.bind(this);
+    this.editPassword=this.editPassword.bind(this);
+  }
+  handleLogin(event){
+    console.log(this.state.email+' '+this.state.password);
+    fetch('http://localhost:8080/login/'+this.state.email+','+this.state.password)
+    .then(res => console.log(res));
+  }
+  editEmail(event){
+    this.setState({email: event.target.value});
+  }
+  editPassword(event){
+    this.setState({password: event.target.value});
+  }
   render(){
     return(
       <div className="container">
@@ -12,14 +33,16 @@ export class Login extends React.Component{
           <form>
             <div className="form-group">
               <label>Email address</label>
-              <input type="email" className="form-control" id="loginEmail" placeholder="Enter email" />
+              <input type="email" className="form-control" id="loginEmail" placeholder="Enter email" onChange={this.editEmail}/>
             </div>
             <div className="form-group">
               <label>Password</label>
-              <input type="password" className="form-control" id="loginPassword" placeholder="Password" />
+              <input type="password" className="form-control" id="loginPassword" placeholder="Password" onChange={this.editPassword}/>
             </div>
             <div className="form-group">
-              <Link to={process.env.PUBLIC_URL +'/'}><button type="button" className="btn btn-primary">Login</button></Link>
+
+              <button type="button" onClick={this.handleLogin} className="btn btn-primary">Login</button>
+
             </div>
             <div className="form-group">
 
@@ -31,5 +54,6 @@ export class Login extends React.Component{
     )
   }
 };
-
+  //<Link to={process.env.PUBLIC_URL +'/'}>
+    //</Link>
 export default Login;
