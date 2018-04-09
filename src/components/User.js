@@ -26,8 +26,8 @@ export class User extends React.Component{
 	  headers: {
 	    "Content-Type": "application/x-www-form-urlencoded"
 	  },
-	  body: "email="+this.state.email+
-	  		"&wocao="+this.state.email+
+	  body: "email="+this.state.username+
+	  		"&wocao="+this.state.username+
 	  		"&password="+this.state.password+
 	  		""
 	})
