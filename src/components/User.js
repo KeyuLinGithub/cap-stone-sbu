@@ -16,7 +16,7 @@ export class User extends React.Component{
     this.editPassword=this.editPassword.bind(this);
   }
   handleLogin(event){
-    console.log(this.state.email+' '+this.state.password);
+    console.log(this.state.username+' '+this.state.password);
 //    fetch('http://localhost:8080/RedistrictSystem/login.do', opts
 //    ).then(res => console.log(res));
 //  }
