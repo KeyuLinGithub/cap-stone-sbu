@@ -34,7 +34,7 @@ export class User extends React.Component{
   	})
     .then(response => response.json())
     .then(data => {
-      if(data==='1'){
+      if(data=='1'){
         this.setState({
           login:true,
         });
