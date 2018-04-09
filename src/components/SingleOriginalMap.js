@@ -6,6 +6,7 @@ import c_c_d from '../geodata/c_c_d.json';
 import n_c_d from '../geodata/n_c_d.json';
 import o_c_d from '../geodata/o_c_d.json';
 import o_p from '../geodata/o_p.json';
+import n_p from '../geodata/n_p.json';
 ///
 
 class SingleOriginalMap extends React.Component {
@@ -170,6 +171,7 @@ class SingleOriginalMap extends React.Component {
 
     }else if(e.target.value==="precinct"){
       this.Layer.addGeoJson(o_p);
+      this.Layer.addGeoJson(n_p);
     }
   }
   render(){
