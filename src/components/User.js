@@ -111,7 +111,7 @@ export class User extends React.Component{
               </div>
             </li>
             <li className="nav-item dropdown">
-              <Link to={process.env.PUBLIC_URL +'/SignUp'}> Login <span className="glyphicon glyphicon-log-in">  </span></Link>
+              <Link to={process.env.PUBLIC_URL +'/SignUp'}> SignUp <span className="glyphicon glyphicon-log-in">  </span></Link>
             </li>
           </ul>
         </div>
