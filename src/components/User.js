@@ -16,33 +16,34 @@ export class User extends React.Component{
     this.editPassword=this.editPassword.bind(this);
   }
   handleLogin(event){
+    // this.setState({
+    //   login:true,
+    // });
     console.log(this.state.username+' '+this.state.password);
-//    fetch('http://localhost:8080/RedistrictSystem/login.do', opts
-//    ).then(res => console.log(res));
-//  }
-  fetch("http://localhost:8080/RedistrictSystem/login.do", {
-	  method: "POST",
-	  credentials: 'include',//open sending cookie(default doesnt send cookie)
-	  headers: {
-	    "Content-Type": "application/x-www-form-urlencoded"
-	  },
-	  body: "email="+this.state.username+
-	  		"&wocao="+this.state.username+
-	  		"&password="+this.state.password+
-	  		""
-	})
-  .then(response => response.json())
-  .then(data => {
-    if(data==='1'){
-      this.setState({
-        login:true,
-      });
-    }else{
-      this.setState({
-        showInvalid:true,
-      });
-    }
-  });
+
+    fetch("http://localhost:8080/RedistrictSystem/login.do", {
+  	  method: "POST",
+  	  credentials: 'include',//open sending cookie(default doesnt send cookie)
+  	  headers: {
+  	    "Content-Type": "application/x-www-form-urlencoded"
+  	  },
+  	  body: "email="+this.state.username+
+  	  		"&wocao="+this.state.username+
+  	  		"&password="+this.state.password+
+  	  		""
+  	})
+    .then(response => response.json())
+    .then(data => {
+      if(data==='1'){
+        this.setState({
+          login:true,
+        });
+      }else{
+        this.setState({
+          showInvalid:true,
+        });
+      }
+    });
 //   .then(function(res) {
 // //		console.log(res.params.email)
 // 		console.log(res.json())

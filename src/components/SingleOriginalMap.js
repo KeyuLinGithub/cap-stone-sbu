@@ -25,6 +25,8 @@ class SingleOriginalMap extends React.Component {
     this.handlePopulationChange=this.handlePopulationChange.bind(this);
     this.handleRacialChange=this.handleRacialChange.bind(this);
     this.handlePartisanChange=this.handlePartisanChange.bind(this);
+    this.changeLayer=this.changeLayer.bind(this);
+    this.removePreviousLayer=this.removePreviousLayer.bind(this);
   }
 
   componentDidMount () {
@@ -127,7 +129,7 @@ class SingleOriginalMap extends React.Component {
     }
     this.Layer.setStyle({
         fillColor: '#b0987a',
-         fillOpacity: 0.8,
+         fillOpacity: 0.4,
          strokeColor: '#000000',
         strokeWeight: 1,
          zIndex: 1,
@@ -149,6 +151,26 @@ class SingleOriginalMap extends React.Component {
   }
   handlePartisanChange(e){
     this.setState({partisan: e.target.value});
+  }
+  removePreviousLayer(){
+    var layer=this.Layer;
+    layer.forEach(function (feature) {
+        //console.log(feature);
+        layer.remove(feature);
+    });
+  }
+  changeLayer(e){
+    console.log(e.target.value);
+    this.removePreviousLayer();
+    if(e.target.value==="congressional"){
+      this.Layer.addGeoJson(c_c_d);
+      this.Layer.addGeoJson(n_c_d);
+      this.Layer.addGeoJson(o_c_d);
+    }else if(e.target.value==="state"){
+
+    }else if(e.target.value==="precinct"){
+      this.Layer.addGeoJson(o_p);
+    }
   }
   render(){
     const originalStyle = {
@@ -177,10 +199,10 @@ class SingleOriginalMap extends React.Component {
           </div>
           <div className="form-group">
             <label>District Level:</label><br />
-            <select id="compactness">
-              <option value="congressional">Congressional distric</option>
+            <select id="compactness" onChange={this.changeLayer}>
+              <option value="congressional" >Congressional district</option>
               <option value="state" >State district</option>
-              <option value="polling">Polling district</option>
+              <option value="precinct" >Precinct district</option>
             </select>
           </div>
 
@@ -212,7 +234,7 @@ class SingleOriginalMap extends React.Component {
 
             </div>
             <div>
-              Preserve Existing Communities:&nbsp;&nbsp;
+              Align with natural boundary:&nbsp;&nbsp;
               <input type="checkbox" className="form-check-input" />
 
             </div>
