@@ -120,11 +120,11 @@ class SingleOriginalMap extends React.Component {
 
 
     }else if(state==='NewHampshire'){
-      this.map.setZoom(7);
-      this.map.setCenter({lat: 44.1938516, lng: -71.57239529999998});
+      this.map.setZoom(8);
+      this.map.setCenter({lat: 43.8938516, lng: -71.57239529999998});
 
     }else if(state==='Ohio'){
-      this.map.setZoom(7);
+      this.map.setZoom(8);
       this.map.setCenter({lat: 40.4172871, lng: -82.90712300000001});
 
     }
@@ -177,7 +177,7 @@ class SingleOriginalMap extends React.Component {
   render(){
     const originalStyle = {
       width: '100%',
-      height: '80vh'
+      height: '120vh'
     }
     return(
     <div id="original">
@@ -186,7 +186,7 @@ class SingleOriginalMap extends React.Component {
         <h1>Original Map</h1>
       </div>
       <div>
-        <div className="container col-sm-3">
+        <div className="container col-sm-2">
           <div className="form-group">
             <label>State:</label><br />
             <select id="state"
@@ -246,7 +246,7 @@ class SingleOriginalMap extends React.Component {
 
           </div>
         </div>
-        <div className="container col-sm-9" id="originalmap">
+        <div className="container col-sm-10" id="originalmap">
           <div ref='map' style={originalStyle}>
             loading map...
           </div>

@@ -35,12 +35,12 @@ class SingleRedistrictMap extends React.Component {
       height: '80vh'
     }
     return(
-      <div id='redistrict'>
+      <div id='redistrict' style={{marginTop:'20px'}}>
         <div className="page-header">
           <h2>Redistricted Map</h2>
         </div>
         <div >
-          <div className="container col-sm-3">
+          <div className="container col-sm-2">
             <strong>Basic Comparison and Analysis:</strong>
             <p>
               <br /><br />
@@ -52,7 +52,7 @@ class SingleRedistrictMap extends React.Component {
             </p>
             <button type="button" className="btn btn-primary">Show Detailed Analysis </button>
           </div>
-          <div className="container col-sm-9" id="newmap">
+          <div className="container col-sm-10" id="newmap">
             <div ref='map' style={NewStyle}>
               loading map...
             </div>

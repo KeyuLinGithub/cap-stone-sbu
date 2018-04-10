@@ -37,9 +37,13 @@ class MapPage extends React.Component {
     var color=this.state.color;
 
     return (
-      <div className="container">
+      <div className="container-fluid">
+        <div className="row">
         <SingleOriginalMap google={this.props.google} />
+        </div>
+        <div className="row">
         <SingleRedistrictMap google={this.props.google} />
+        </div >
       </div>
     );
   }

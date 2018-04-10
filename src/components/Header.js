@@ -7,7 +7,7 @@ export const Header = (props) => {
     return(
 
         <nav className="navbar navbar-inverse bg-inverse navbar-default navbar-static-top">
-          <div className="container ">
+          <div className="container-fluid ">
           <div className="containercontainer-fluid">
             <div className="navbar-header mr-5">
               <Link className="navbar-brand text-white" to={process.env.PUBLIC_URL +'/'}>Congressional Redistrict Generation</Link>

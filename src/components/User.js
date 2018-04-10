@@ -37,6 +37,7 @@ export class User extends React.Component{
       if(data=='1'){
         this.setState({
           login:true,
+          showInvalid:false
         });
       }else{
         this.setState({
@@ -104,7 +105,7 @@ export class User extends React.Component{
                     <input type="password" className="form-control" id="loginPassword" placeholder="Password" onChange={this.editPassword} style={{width:"150px"}}/>
                   </div>
                   <div className="form-group">
-                    {this.state.showInvalid && <p className="text-danger">Invalide UserName or Password</p>}
+                    {this.state.showInvalid && <p className="text-danger">Invalid UserName or Password</p>}
                     <button type="button" onClick={this.handleLogin} className="btn btn-primary">Login</button>
                   </div>
                 </form>
