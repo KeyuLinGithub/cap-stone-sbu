@@ -28,9 +28,7 @@ export class User extends React.Component{
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
   	  body: "email="+this.state.username+
-  	  		"&wocao="+this.state.username+
-  	  		"&password="+this.state.password+
-  	  		""
+  	  		"&password="+this.state.password
   	})
     .then(response => response.json())
     .then(data => {

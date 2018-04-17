@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+///all geojson
+import c_c_d from '../geodata/c_c_d.json';
+import n_c_d from '../geodata/n_c_d.json';
+import o_c_d from '../geodata/o_c_d.json';
+import o_p from '../geodata/o_p.json';
+import n_p from '../geodata/n_p.json';
+///
+
 class SingleOriginalMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      state:"US",
-      DLevel:"congressional",
+      current:"US",
       color:"Default",
       compactness:25,
       population:25,
@@ -14,13 +21,12 @@ class SingleOriginalMap extends React.Component {
       partisan:25
     };
     this.changeState=this.changeState.bind(this);
-    this.changeDLevel=this.changeDLevel.bind(this);
-    this.updateLayer=this.updateLayer.bind(this);
-
+    this.changeColor=this.changeColor.bind(this);
     this.handleCompactnessChange=this.handleCompactnessChange.bind(this);
     this.handlePopulationChange=this.handlePopulationChange.bind(this);
     this.handleRacialChange=this.handleRacialChange.bind(this);
     this.handlePartisanChange=this.handlePartisanChange.bind(this);
+    this.changeLayer=this.changeLayer.bind(this);
     this.removePreviousLayer=this.removePreviousLayer.bind(this);
   }
 
@@ -73,42 +79,36 @@ class SingleOriginalMap extends React.Component {
           zIndex: 1
         })
       })
-
+      Layer.addListener('click',  e =>{
+        console.log(this.state.color);
+        var newColor;
+        if(this.state.color==='Blue'){
+          newColor="#006eff"
+        }else if(this.state.color==='Green'){
+          newColor="#00ff48"
+        }else if(this.state.color==='Red'){
+          newColor="#ff3700"
+        }else if(this.state.color==='Yellow'){
+          newColor="#f6ff00"
+        }else{
+          newColor="#b0987a"
+        }
+        Layer.overrideStyle(e.feature, {
+          fillColor: newColor
+        })
+        console.log(this.state.current);
+        console.log('STATEFP: '+e.feature.f.STATEFP+' GEOID: '+e.feature.f.GEOID);
+      })
       //sets the geojson Layer onto the map
       Layer.setMap(this.map)
     }
   }
   changeState(e){
-    this.setState({state: e.target.value});
-    this.updateLayer();
+    const { google } = this.props;
 
-  }
-  changeDLevel(e){
-    this.setState({DLevel: e.target.value});
-    this.updateLayer();
-  }
-  updateLayer(){
-    this.updateMapCenter();
-    this.removePreviousLayer();
-    if(this.state.state==='US'){
-      return;
-    }
-    fetch("http://localhost:8080/RedistrictSystem/displayState.do", {
-  	  method: "POST",
-  	  credentials: 'include',//open sending cookie(default doesnt send cookie)
-  	  headers: {
-  	    "Content-Type": "application/x-www-form-urlencoded"
-  	  },
-  	  body: "state="+this.state.state+
-  	  		"DLevel="+this.state.DLevel
-  	})
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      this.Layer.addGeoJson(data);
-    });
-  }
-  updateMapCenter(){
+    this.setState({current: e.target.value});
+    //console.log(e.target.value);
+    var state=e.target.value;
     if(state==='US'){
       this.map.setZoom(4);
       this.map.setCenter({lat: 40, lng: -98});
@@ -117,13 +117,29 @@ class SingleOriginalMap extends React.Component {
     }else if(state==='Colorado'){
       this.map.setZoom(7);
       this.map.setCenter({lat: 39, lng: -105.7821});
+
+
     }else if(state==='NewHampshire'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 43.8938516, lng: -71.57239529999998});
+
     }else if(state==='Ohio'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 40.4172871, lng: -82.90712300000001});
+
     }
+    this.Layer.setStyle({
+        fillColor: '#b0987a',
+         fillOpacity: 0.4,
+         strokeColor: '#000000',
+        strokeWeight: 1,
+         zIndex: 1,
+        visible: true
+    });
+
+  }
+  changeColor(e){
+    this.setState({color: e.target.value});
   }
   handleCompactnessChange(e){
     this.setState({compactness: e.target.value});
@@ -144,7 +160,20 @@ class SingleOriginalMap extends React.Component {
         layer.remove(feature);
     });
   }
+  changeLayer(e){
+    console.log(e.target.value);
+    this.removePreviousLayer();
+    if(e.target.value==="congressional"){
+      this.Layer.addGeoJson(c_c_d);
+      this.Layer.addGeoJson(n_c_d);
+      this.Layer.addGeoJson(o_c_d);
+    }else if(e.target.value==="state"){
 
+    }else if(e.target.value==="precinct"){
+      this.Layer.addGeoJson(o_p);
+      this.Layer.addGeoJson(n_p);
+    }
+  }
   render(){
     const originalStyle = {
       width: '100%',
@@ -172,8 +201,9 @@ class SingleOriginalMap extends React.Component {
           </div>
           <div className="form-group">
             <label>District Level:</label><br />
-            <select id="compactness" onChange={this.changeDLevel}>
+            <select id="compactness" onChange={this.changeLayer}>
               <option value="congressional" >Congressional district</option>
+              <option value="state" >State district</option>
               <option value="precinct" >Precinct district</option>
             </select>
           </div>
@@ -226,5 +256,15 @@ class SingleOriginalMap extends React.Component {
     )
   }
 }
-
+//color selection
+// <div className="form-group">
+//   <label>Current Color:</label><br />
+//   <select id="color" onChange={this.changeColor}>
+//     <option value="Default">Default</option>
+//     <option value="Blue">Blue</option>
+//     <option value="Green">Green</option>
+//     <option value="Red">Red</option>
+//     <option value="Yellow">Yellow</option>
+//   </select>
+// </div>
 export default SingleOriginalMap;
