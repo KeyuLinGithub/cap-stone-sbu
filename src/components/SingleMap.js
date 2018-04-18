@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class SingleOriginalMap extends React.Component {
+class SingleMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       state:"US",
-      DLevel:"congressional",
+      dLevel:"congressional",
       color:"Default",
       compactness:25,
       population:25,
@@ -52,9 +52,6 @@ class SingleOriginalMap extends React.Component {
       // var obj = this
       this.Layer = new google.maps.Data();
       var Layer=this.Layer;
-      Layer.addGeoJson(c_c_d);
-      Layer.addGeoJson(n_c_d);
-      Layer.addGeoJson(o_c_d);
 
       this.Layer.setStyle({visible: false});
 
@@ -80,17 +77,18 @@ class SingleOriginalMap extends React.Component {
   }
   changeState(e){
     this.setState({state: e.target.value});
-    this.updateLayer();
+    this.updateLayer(e.target.value,this.state.dLevel);
 
   }
   changeDLevel(e){
-    this.setState({DLevel: e.target.value});
-    this.updateLayer();
+    this.setState({dLevel: e.target.value});
+    this.updateLayer(this.state.state,e.target.value);
   }
-  updateLayer(){
-    this.updateMapCenter();
+  updateLayer(state,dLevel){
+    console.log(state,dLevel);
+    this.updateMapCenter(state);
     this.removePreviousLayer();
-    if(this.state.state==='US'){
+    if(state==='US'){
       return;
     }
     fetch("http://localhost:8080/RedistrictSystem/displayState.do", {
@@ -99,16 +97,16 @@ class SingleOriginalMap extends React.Component {
   	  headers: {
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
-  	  body: "state="+this.state.state+
-  	  		"DLevel="+this.state.DLevel
+  	  body: "state="+state+
+  	  		"DLevel="+dLevel
   	})
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      this.Layer.addGeoJson(data);
+      //this.Layer.addGeoJson(data);
     });
   }
-  updateMapCenter(){
+  updateMapCenter(state){
     if(state==='US'){
       this.map.setZoom(4);
       this.map.setCenter({lat: 40, lng: -98});
@@ -161,7 +159,6 @@ class SingleOriginalMap extends React.Component {
           <div className="form-group">
             <label>State:</label><br />
             <select id="state"
-            options={this.state.stateOptionsoptions}
             onChange={this.changeState}
             >
               <option value="US">US</option>
@@ -227,4 +224,4 @@ class SingleOriginalMap extends React.Component {
   }
 }
 
-export default SingleOriginalMap;
+export default SingleMap;

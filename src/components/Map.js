@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { GoogleApiWrapper } from 'google-maps-react';
-import SingleOriginalMap from './SingleOriginalMap';
-import SingleRedistrictMap from './SingleRedistrictMap';
+import SingleMap from './SingleMap';
+import Analysis from './Analysis';
 
 class MapPage extends React.Component {
   constructor(props) {
@@ -39,10 +39,10 @@ class MapPage extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row">
-        <SingleOriginalMap google={this.props.google} />
+        <SingleMap google={this.props.google} />
         </div>
         <div className="row">
-        <SingleRedistrictMap google={this.props.google} />
+        <Analysis />
         </div >
       </div>
     );
