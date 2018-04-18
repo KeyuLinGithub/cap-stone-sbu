@@ -11,7 +11,11 @@ class SingleMap extends React.Component {
       compactness:25,
       population:25,
       racial:25,
-      partisan:25
+      partisan:25,
+      redistrictStatus:false,
+      algorithmStatus:false,
+      algorithmStatusClassName:"btn btn-primary",
+      algorithmStatusText:"Running..."
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
@@ -22,6 +26,9 @@ class SingleMap extends React.Component {
     this.handleRacialChange=this.handleRacialChange.bind(this);
     this.handlePartisanChange=this.handlePartisanChange.bind(this);
     this.removePreviousLayer=this.removePreviousLayer.bind(this);
+
+    this.handleRedistrictRequest=this.handleRedistrictRequest.bind(this);
+    this.changeAlgorithmStatus=this.changeAlgorithmStatus.bind(this);
   }
 
   componentDidMount () {
@@ -46,15 +53,10 @@ class SingleMap extends React.Component {
           mapTypeIds: [google.maps.MapTypeId.ROADMAP]
         }
       })
-
       this.map = new maps.Map(node, mapConfig);
-
-      // var obj = this
       this.Layer = new google.maps.Data();
       var Layer=this.Layer;
-
       this.Layer.setStyle({visible: false});
-
       // Add mouseover and mouse out styling for the GeoJSON State data
       Layer.addListener('mouseover', e => {
         Layer.overrideStyle(e.feature, {
@@ -62,15 +64,12 @@ class SingleMap extends React.Component {
           zIndex: 3
         })
       })
-
       Layer.addListener('mouseout', e => {
         Layer.overrideStyle(e.feature, {
-
           strokeWeight: 1,
           zIndex: 1
         })
       })
-
       //sets the geojson Layer onto the map
       Layer.setMap(this.map)
     }
@@ -98,7 +97,7 @@ class SingleMap extends React.Component {
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
   	  body: "state="+state+
-  	  		"DLevel="+dLevel
+  	  		"dLevel="+dLevel
   	})
     .then(response => response.json())
     .then(data => {
@@ -142,15 +141,34 @@ class SingleMap extends React.Component {
         layer.remove(feature);
     });
   }
-
+  handleRedistrictRequest(){
+    this.setState({
+      redistrictStatus:true,
+      algorithmStatus:true
+    });
+  }
+ changeAlgorithmStatus(){
+   if(this.state.algorithmStatus==true){
+     this.setState({
+       algorithmStatus:false,
+       algorithmStatusClassName:"btn btn-danger",
+       algorithmStatusText:"Stopped"
+     });
+   }else{
+     this.setState({
+       algorithmStatus:true,
+       algorithmStatusClassName:"btn btn-primary",
+       algorithmStatusText:"Running..."
+     });
+   }
+ }
   render(){
     const originalStyle = {
       width: '100%',
       height: '120vh'
     }
     return(
-    <div id="original">
-
+    <div id="singleMaps">
       <div className="page-header">
         <h1>Original Map</h1>
       </div>
@@ -205,13 +223,28 @@ class SingleMap extends React.Component {
             <div>
               Align with natural boundary:&nbsp;&nbsp;
               <input type="checkbox" className="form-check-input" />
-
             </div>
           </div>
           <div className="form-group">
-            <button type="button" className="btn btn-primary pull-middle">Redistrict</button>
-
+            <button type="button" className="btn btn-primary" onClick={this.handleRedistrictRequest}>Redistrict</button>
           </div>
+          {this.state.redistrictStatus &&
+            <div className="form-group">
+              <label>Controller:</label><br />
+              The Status:&nbsp;
+              <button type="button" className={this.state.algorithmStatusClassName} onClick={this.changeAlgorithmStatus}>{this.state.algorithmStatusText}</button>
+
+              <br /><br/>
+              Reset the Map:
+              <button type="button" className="btn btn-success">Reset</button>
+
+              <br /><br/>
+              --after that--<br />
+              Show Analysis:
+              <button type="button" className="btn btn-primary">Show</button>
+              <br />--after that--
+            </div>
+          }
         </div>
         <div className="container col-sm-10" id="originalmap">
           <div ref='map' style={originalStyle}>
