@@ -32,7 +32,7 @@ export class User extends React.Component{
   	})
     .then(response => response.json())
     .then(data => {
-      if(data=='1'){
+      if(data==='USER' || data==='ADMIN'){
         this.setState({
           login:true,
           showInvalid:false
