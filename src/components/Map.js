@@ -5,21 +5,6 @@ import SingleMap from './SingleMap';
 import Analysis from './Analysis';
 
 class MapPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      uscenter:[39,-98],
-      uszoom:[4.5],
-      lng: 39,
-      lat: -98,
-      zoom: 1.5,
-      color: '#F5B041',
-      features: []
-    };
-
-
-  }
-
   componentDidMount() {
 
   }
