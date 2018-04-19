@@ -5,7 +5,11 @@ export class SignUp extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-
+      fName:'',
+      lName:'',
+      email:'',
+      password:'',
+      validPassword:false
     };
     this.editFName=this.editFName.bind(this);
     this.editLName=this.editLName.bind(this);
@@ -14,7 +18,42 @@ export class SignUp extends React.Component{
     this.checkPassword=this.checkPassword.bind(this);
     this.signUp=this.signUp.bind(this);
   }
-
+  editFName(event){
+    this.setState({fName: event.target.value});
+  }
+  editLName(event){
+    this.setState({lName: event.target.value});
+  }
+  editEmail(event){
+    this.setState({email: event.target.value});
+  }
+  editPassword(event){
+    this.setState({password: event.target.value});
+  }
+  checkPassword(event){
+    if(event.target.value.length!=0 && event.target.value!=this.state.password){
+      this.setState({validPassword:true});
+    }else{
+      this.setState({validPassword:false});
+    }
+  }
+  signUp(){
+    fetch("http://localhost:8080/RedistrictSystem/signup.do", {
+  	  method: "POST",
+  	  credentials: 'include',//open sending cookie(default doesnt send cookie)
+  	  headers: {
+  	    "Content-Type": "application/x-www-form-urlencoded"
+  	  },
+  	  body:  "fName="+this.state.fName+
+            "&lName="+this.state.lName+
+          "&email="+this.state.username+
+  	  		"&password="+this.state.password
+  	})
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    });
+  }
   render(){
     return(
       <div className="container">
@@ -42,6 +81,7 @@ export class SignUp extends React.Component{
             <div className="form-group">
               <label>Confirm the Password</label>
               <input type="text" className="form-control" id="loginPassword" placeholder="Password" onChange={this.checkPassword}/>
+              {this.state.validPassword && <p className="text-danger">The Password do not match</p>}
             </div>
             <div className="form-group">
               <button type="button" class="btn btn-primary" onClick={this.signUp}>Sign up</button>
@@ -59,4 +99,4 @@ export class SignUp extends React.Component{
 };
 
 export default SignUp;
-<Link to={process.env.PUBLIC_URL +'/'}></Link>
+//<Link to={process.env.PUBLIC_URL +'/'}></Link>
