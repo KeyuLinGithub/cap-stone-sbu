@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import o_test from '../geodata/o_test2.json';
 
 class SingleMap extends React.Component {
   constructor(props) {
@@ -56,7 +57,7 @@ class SingleMap extends React.Component {
       this.map = new maps.Map(node, mapConfig);
       this.Layer = new google.maps.Data();
       var Layer=this.Layer;
-      this.Layer.setStyle({visible: false});
+      //this.Layer.setStyle({visible: false});
       // Add mouseover and mouse out styling for the GeoJSON State data
       Layer.addListener('mouseover', e => {
         Layer.overrideStyle(e.feature, {
@@ -70,6 +71,7 @@ class SingleMap extends React.Component {
           zIndex: 1
         })
       })
+
       //sets the geojson Layer onto the map
       Layer.setMap(this.map)
     }
@@ -104,12 +106,24 @@ class SingleMap extends React.Component {
       console.log(data);
       //this.Layer.addGeoJson(data);
     });
+    this.Layer.addGeoJson(o_test);
+    var temp=this.Layer;
+    this.Layer.forEach(function (feature) {
+        console.log(feature.getProperty('fill'));
+        temp.overrideStyle(feature, {
+          fillColor: feature.getProperty('fill'),
+          fillOpacity: 0.2,
+          strokeColor: '#000000',
+          strokeWeight: 1,
+          zIndex: 1
+        })
+    });
   }
   updateMapCenter(state){
     if(state==='US'){
       this.map.setZoom(4);
       this.map.setCenter({lat: 40, lng: -98});
-      this.Layer.setStyle({visible: false});
+      //this.Layer.setStyle({visible: false});
       return;
     }else if(state==='Colorado'){
       this.map.setZoom(7);
@@ -121,6 +135,9 @@ class SingleMap extends React.Component {
       this.map.setZoom(8);
       this.map.setCenter({lat: 40.4172871, lng: -82.90712300000001});
     }
+
+
+
   }
   handleCompactnessChange(e){
     this.setState({compactness: e.target.value});

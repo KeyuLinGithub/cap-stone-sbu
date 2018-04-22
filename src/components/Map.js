@@ -19,7 +19,7 @@ class MapPage extends React.Component {
 
     var thecenter = [-105.358887, 39.113014];
     var thezoom=[5.5];
-    var color=this.state.color;
+    //var color=this.state.color;
 
     return (
       <div className="container-fluid">
