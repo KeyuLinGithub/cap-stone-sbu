@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import o_test from '../geodata/o_test2.json';
+
+//import all geojson
+import c_c_d from '../geodata/c_c_d.json';
+import n_c_d from '../geodata/n_c_d.json';
+import o_c_d from '../geodata/o_c_d.json';
+import n_p from '../geodata/n_p.json';
+import c_p from '../geodata/c_p.json';
+import o_p from '../geodata/o_test2.json';
 
 class SingleMap extends React.Component {
   constructor(props) {
@@ -87,8 +94,8 @@ class SingleMap extends React.Component {
   }
   updateLayer(state,dLevel){
     console.log(state,dLevel);
-    this.updateMapCenter(state);
     this.removePreviousLayer();
+    this.updateMapCenter(state,dLevel);
     if(state==='US'){
       return;
     }
@@ -106,38 +113,48 @@ class SingleMap extends React.Component {
       console.log(data);
       //this.Layer.addGeoJson(data);
     });
-    this.Layer.addGeoJson(o_test);
-    var temp=this.Layer;
-    this.Layer.forEach(function (feature) {
-        console.log(feature.getProperty('fill'));
-        temp.overrideStyle(feature, {
-          fillColor: feature.getProperty('fill'),
-          fillOpacity: 0.2,
-          strokeColor: '#000000',
-          strokeWeight: 1,
-          zIndex: 1
-        })
-    });
   }
-  updateMapCenter(state){
+  updateMapCenter(state,dLevel){
     if(state==='US'){
       this.map.setZoom(4);
       this.map.setCenter({lat: 40, lng: -98});
-      //this.Layer.setStyle({visible: false});
       return;
     }else if(state==='Colorado'){
       this.map.setZoom(7);
       this.map.setCenter({lat: 39, lng: -105.7821});
+      if(dLevel==="congressional"){
+        this.Layer.addGeoJson(c_c_d);
+      }else{
+        this.Layer.addGeoJson(c_p);
+      }
     }else if(state==='NewHampshire'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 43.8938516, lng: -71.57239529999998});
+      if(dLevel==="congressional"){
+        this.Layer.addGeoJson(n_c_d);
+      }else{
+        this.Layer.addGeoJson(n_p);
+      }
     }else if(state==='Ohio'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 40.4172871, lng: -82.90712300000001});
+      if(dLevel==="congressional"){
+        this.Layer.addGeoJson(o_c_d);
+      }else{
+        this.Layer.addGeoJson(o_p);
+        var temp=this.Layer;
+        this.Layer.forEach(function (feature) {
+            console.log(feature.getProperty('fill'));
+            temp.overrideStyle(feature, {
+              fillColor: feature.getProperty('fill'),
+              fillOpacity: 0.2,
+              strokeColor: '#000000',
+              strokeWeight: 1,
+              zIndex: 1
+            })
+        });
+      }
     }
-
-
-
   }
   handleCompactnessChange(e){
     this.setState({compactness: e.target.value});
