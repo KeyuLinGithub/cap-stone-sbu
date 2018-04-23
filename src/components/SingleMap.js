@@ -74,7 +74,7 @@ class SingleMap extends React.Component {
           strokeWeight: 1,
           zIndex: 1
         })
-        
+
         infowindow.close();
       })
       layer.setMap(this.map)
@@ -193,7 +193,7 @@ class SingleMap extends React.Component {
       redistrictStatus:true,
       algorithmStatus:true
     });
-    console.log(this.state);
+
   }
  changeAlgorithmStatus(){
    if(this.state.algorithmStatus==true){
@@ -304,6 +304,16 @@ class SingleMap extends React.Component {
           <div ref='map' style={originalStyle}>
             loading map...
           </div>
+          {this.state.state!=='US' &&
+            <div id='stateInfoBox'>
+              <h4>{this.state.state} :</h4>
+              <p>Population: 111</p>
+              <p>Avg. Income: 111</p>
+              <p>Area: 111 sq mi </p>
+              <p>Number of C. D.: 111</p>
+              <p>Number of P. D.: 111</p>
+            </div>
+          }
         </div>
       </div>
     </div>

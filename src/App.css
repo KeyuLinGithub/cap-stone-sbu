@@ -116,3 +116,12 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
   background: #3071A9;
 }
+
+#stateInfoBox{
+   background:#FFFFFF;
+   position: absolute;
+   top: 20px;
+   left: 20px;
+   width: 18%;
+   padding-left: 10px;
+}
