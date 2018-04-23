@@ -37,7 +37,7 @@ export class SignUp extends React.Component{
         "Content-Type": "application/x-www-form-urlencoded"
       },
       body:
-          "email="+this.state.email
+          "email="+value
     })
     .then(response => response.json())
     .then(data => {
