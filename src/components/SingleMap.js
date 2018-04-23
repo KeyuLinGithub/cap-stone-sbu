@@ -36,10 +36,9 @@ class SingleMap extends React.Component {
   }
   loadMap(){
     if (this.props && this.props.google) {
-      //google api wrapper
+      //map set up
       const { google } = this.props;
       const maps = google.maps;
-      //find the component
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
       const mapConfig = Object.assign({}, {
@@ -51,20 +50,32 @@ class SingleMap extends React.Component {
           mapTypeIds: [google.maps.MapTypeId.ROADMAP]
         }
       })
+      //data layer
       this.map = new maps.Map(node, mapConfig);
-      this.layer = new google.maps.Data();
+      this.layer = new maps.Data();
+      //info window
+      var infowindow = new maps.InfoWindow();
+      //install all the event listener
       var layer=this.layer;
       layer.addListener('mouseover', e => {
         layer.overrideStyle(e.feature, {
           strokeWeight: 3,
           zIndex: 3
         })
+        if(this.state.dLevel==="congressional"){
+          var content='STATEFP: '+e.feature.f.STATEFP+' GEOID: '+e.feature.f.GEOID;
+          infowindow.setContent(content);
+          infowindow.setPosition(e.latLng);
+          infowindow.open(this.map);
+        }
       })
       layer.addListener('mouseout', e => {
         layer.overrideStyle(e.feature, {
           strokeWeight: 1,
           zIndex: 1
         })
+        
+        infowindow.close();
       })
       layer.setMap(this.map)
     }
