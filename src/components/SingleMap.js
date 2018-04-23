@@ -127,6 +127,14 @@ class SingleMap extends React.Component {
       }else{
         this.Layer.addGeoJson(c_p);
       }
+      this.Layer.setStyle({
+          fillColor: '#b0987a',
+           fillOpacity: 0.4,
+           strokeColor: '#000000',
+          strokeWeight: 1,
+           zIndex: 1,
+          visible: true
+      });
     }else if(state==='NewHampshire'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 43.8938516, lng: -71.57239529999998});
@@ -135,11 +143,27 @@ class SingleMap extends React.Component {
       }else{
         this.Layer.addGeoJson(n_p);
       }
+      this.Layer.setStyle({
+          fillColor: '#b0987a',
+           fillOpacity: 0.4,
+           strokeColor: '#000000',
+          strokeWeight: 1,
+           zIndex: 1,
+          visible: true
+      });
     }else if(state==='Ohio'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 40.4172871, lng: -82.90712300000001});
       if(dLevel==="congressional"){
         this.Layer.addGeoJson(o_c_d);
+        this.Layer.setStyle({
+            fillColor: '#b0987a',
+             fillOpacity: 0.4,
+             strokeColor: '#000000',
+            strokeWeight: 1,
+             zIndex: 1,
+            visible: true
+        });
       }else{
         this.Layer.addGeoJson(o_p);
         var temp=this.Layer;
