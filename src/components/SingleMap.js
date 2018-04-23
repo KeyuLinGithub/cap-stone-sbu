@@ -27,20 +27,14 @@ class SingleMap extends React.Component {
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
-    this.updateLayer=this.updateLayer.bind(this);
-
     this.handleConstraintChange=this.handleConstraintChange.bind(this);
-    
-    this.removePreviousLayer=this.removePreviousLayer.bind(this);
     this.handleRedistrictRequest=this.handleRedistrictRequest.bind(this);
     this.changeAlgorithmStatus=this.changeAlgorithmStatus.bind(this);
   }
-
   componentDidMount () {
-    this.loadMap()
+    this.loadMap();
   }
-
-  loadMap () {
+  loadMap(){
     if (this.props && this.props.google) {
       //google api wrapper
       const { google } = this.props;
@@ -48,7 +42,6 @@ class SingleMap extends React.Component {
       //find the component
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
-
       const mapConfig = Object.assign({}, {
         center: new google.maps.LatLng(40.00, -98),
         zoom: 4,
@@ -59,25 +52,21 @@ class SingleMap extends React.Component {
         }
       })
       this.map = new maps.Map(node, mapConfig);
-      this.Layer = new google.maps.Data();
-      var Layer=this.Layer;
-      //this.Layer.setStyle({visible: false});
-      // Add mouseover and mouse out styling for the GeoJSON State data
-      Layer.addListener('mouseover', e => {
-        Layer.overrideStyle(e.feature, {
+      this.layer = new google.maps.Data();
+      var layer=this.layer;
+      layer.addListener('mouseover', e => {
+        layer.overrideStyle(e.feature, {
           strokeWeight: 3,
           zIndex: 3
         })
       })
-      Layer.addListener('mouseout', e => {
-        Layer.overrideStyle(e.feature, {
+      layer.addListener('mouseout', e => {
+        layer.overrideStyle(e.feature, {
           strokeWeight: 1,
           zIndex: 1
         })
       })
-
-      //sets the geojson Layer onto the map
-      Layer.setMap(this.map)
+      layer.setMap(this.map)
     }
   }
   changeState(e){
@@ -90,7 +79,6 @@ class SingleMap extends React.Component {
     this.updateLayer(this.state.state,e.target.value);
   }
   updateLayer(state,dLevel){
-    console.log(state,dLevel);
     this.removePreviousLayer();
     this.updateMapCenter(state,dLevel);
     if(state==='US'){
@@ -108,7 +96,7 @@ class SingleMap extends React.Component {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      //this.Layer.addGeoJson(data);
+      //this.layer.addGeoJson(data);
     });
   }
   updateMapCenter(state,dLevel){
@@ -120,11 +108,11 @@ class SingleMap extends React.Component {
       this.map.setZoom(7);
       this.map.setCenter({lat: 39, lng: -105.7821});
       if(dLevel==="congressional"){
-        this.Layer.addGeoJson(c_c_d);
+        this.layer.addGeoJson(c_c_d);
       }else{
-        this.Layer.addGeoJson(c_p);
+        this.layer.addGeoJson(c_p);
       }
-      this.Layer.setStyle({
+      this.layer.setStyle({
           fillColor: '#b0987a',
            fillOpacity: 0.4,
            strokeColor: '#000000',
@@ -136,11 +124,11 @@ class SingleMap extends React.Component {
       this.map.setZoom(8);
       this.map.setCenter({lat: 43.8938516, lng: -71.57239529999998});
       if(dLevel==="congressional"){
-        this.Layer.addGeoJson(n_c_d);
+        this.layer.addGeoJson(n_c_d);
       }else{
-        this.Layer.addGeoJson(n_p);
+        this.layer.addGeoJson(n_p);
       }
-      this.Layer.setStyle({
+      this.layer.setStyle({
           fillColor: '#b0987a',
            fillOpacity: 0.4,
            strokeColor: '#000000',
@@ -152,8 +140,8 @@ class SingleMap extends React.Component {
       this.map.setZoom(8);
       this.map.setCenter({lat: 40.4172871, lng: -82.90712300000001});
       if(dLevel==="congressional"){
-        this.Layer.addGeoJson(o_c_d);
-        this.Layer.setStyle({
+        this.layer.addGeoJson(o_c_d);
+        this.layer.setStyle({
             fillColor: '#b0987a',
              fillOpacity: 0.4,
              strokeColor: '#000000',
@@ -162,9 +150,9 @@ class SingleMap extends React.Component {
             visible: true
         });
       }else{
-        this.Layer.addGeoJson(o_p);
-        var temp=this.Layer;
-        this.Layer.forEach(function (feature) {
+        this.layer.addGeoJson(o_p);
+        var temp=this.layer;
+        this.layer.forEach(function (feature) {
             console.log(feature.getProperty('fill'));
             temp.overrideStyle(feature, {
               fillColor: feature.getProperty('fill'),
@@ -183,7 +171,7 @@ class SingleMap extends React.Component {
     this.setState({[name]: value});
   }
   removePreviousLayer(){
-    var layer=this.Layer;
+    var layer=this.layer;
     layer.forEach(function (feature) {
         //console.log(feature);
         layer.remove(feature);
@@ -279,18 +267,20 @@ class SingleMap extends React.Component {
             </div>
           </div>
           <div className="form-group">
-            <button type="button" className="btn btn-primary" onClick={this.handleRedistrictRequest}>Redistrict</button>
+            <button type="button" className="btn btn-primary" onClick={this.handleRedistrictRequest}>
+             Redistrict
+            </button>
           </div>
           {this.state.redistrictStatus &&
             <div className="form-group">
               <label>Controller:</label><br />
               The Status:&nbsp;
-              <button type="button" className={this.state.algorithmStatusClassName} onClick={this.changeAlgorithmStatus}>{this.state.algorithmStatusText}</button>
-
+              <button type="button" className={this.state.algorithmStatusClassName} onClick={this.changeAlgorithmStatus}>
+               {this.state.algorithmStatusText}
+              </button>
               <br /><br/>
               Reset the Map:
               <button type="button" className="btn btn-success">Reset</button>
-
               <br /><br/>
               --after that--<br />
               Show Analysis:

@@ -16,7 +16,6 @@ export class User extends React.Component{
     this.editPassword=this.editPassword.bind(this);
   }
   handleLogin(event){
-    console.log(this.state.username+' '+this.state.password);
     fetch("http://localhost:8080/RedistrictSystem/login.do", {
   	  method: "POST",
   	  credentials: 'include',//open sending cookie(default doesnt send cookie)
@@ -39,17 +38,6 @@ export class User extends React.Component{
         });
       }
     });
-//   .then(function(res) {
-// //		console.log(res.params.email)
-// 		console.log(res.json())
-// 	  if (res.ok) {
-// 	    alert("Perfect! Your settings are saved.");
-// 	  } else if (res.status == 404) {
-// 	    alert("Oops! You are not authorized.");
-// 	  }
-// 	}, function(e) {
-// 	  alert("Error submitting form!");
-// 	});
   }
   handleLogout(){
     this.setState({login:false});

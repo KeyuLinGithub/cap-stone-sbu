@@ -3,9 +3,6 @@ import demo from '../img/demoImg.png';
 import ReactDOM from 'react-dom';
 
 class Analysis extends React.Component {
-  componentDidMount () {
-    this.loadMap()
-  }
   render(){
     return(
         <div id="detailedanalysis">
