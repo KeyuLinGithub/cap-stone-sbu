@@ -86,7 +86,7 @@ export class SignUp extends React.Component{
     // console.log(this.state.password);
     console.log(this.state);
     if(this.checkAllFields()==true){
-      fetch("http://localhost:8080/RedistrictSystem/signup.do", {
+      fetch("http://localhost:8080/RedistrictSystem/register.do", {
     	  method: "POST",
     	  credentials: 'include',//open sending cookie(default doesnt send cookie)
     	  headers: {
