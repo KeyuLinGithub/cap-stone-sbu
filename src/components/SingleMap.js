@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 //import all geojson
 import c_c_d from '../geodata/c_c_d.json';
 import n_c_d from '../geodata/n_c_d.json';
-import o_c_d from '../geodata/o_c_d.json';
+import o_c_d from '../geodata/o_c_d_test.json';
 import n_p from '../geodata/n_p.json';
 import c_p from '../geodata/c_p.json';
-import o_p from '../geodata/o_test2.json';
+import o_p from '../geodata/o_p_test.json';
 
 class SingleMap extends React.Component {
   constructor(props) {
@@ -162,18 +162,18 @@ class SingleMap extends React.Component {
         });
       }else{
         this.layer.addGeoJson(o_p);
-        var temp=this.layer;
-        this.layer.forEach(function (feature) {
-            console.log(feature.getProperty('fill'));
-            temp.overrideStyle(feature, {
-              fillColor: feature.getProperty('fill'),
-              fillOpacity: 0.2,
-              strokeColor: '#000000',
-              strokeWeight: 1,
-              zIndex: 1
-            })
-        });
       }
+      //add color for the layer
+      var temp=this.layer;
+      this.layer.forEach(function (feature) {
+          temp.overrideStyle(feature, {
+            fillColor: feature.getProperty('fill'),
+            fillOpacity: 0.2,
+            strokeColor: '#000000',
+            strokeWeight: 1,
+            zIndex: 1
+          })
+      });
     }
   }
   handleConstraintChange (event) {
