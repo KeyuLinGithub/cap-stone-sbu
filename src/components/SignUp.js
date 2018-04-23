@@ -92,8 +92,8 @@ export class SignUp extends React.Component{
     	  headers: {
     	    "Content-Type": "application/x-www-form-urlencoded"
     	  },
-    	  body:  "fName="+this.state.fName+
-              "&lName="+this.state.lName+
+    	  body:  "firstName="+this.state.fName+
+              "&lastName="+this.state.lName+
             "&email="+this.state.email+
     	  		"&password="+this.state.password
     	})
