@@ -30,7 +30,7 @@ export class SignUp extends React.Component{
   handleEmailInput (event) {
     var value = event.target.value;
     this.setState({email: value});
-    fetch("http://localhost:8080/RedistrictSystem/ValidateEmail.do", {
+    fetch("http://localhost:8080/RedistrictSystem/validateEmail.do", {
       method: "POST",
       credentials: 'include',
       headers: {
@@ -49,7 +49,8 @@ export class SignUp extends React.Component{
     });
   }
   checkPassword(event){
-    if(event.target.value.length!=0 && event.target.value!=this.state.password){
+    if(event.target.value.length!=0 &&
+       event.target.value!=this.state.password){
       this.setState({incorrectPassword:true});
     }else{
       this.setState({incorrectPassword:false});
@@ -80,15 +81,10 @@ export class SignUp extends React.Component{
     return true;
   }
   signUp(){
-    // console.log(this.state.fName);
-    // console.log(this.state.lName);
-    // console.log(this.state.email);
-    // console.log(this.state.password);
-    console.log(this.state);
     if(this.checkAllFields()==true){
       fetch("http://localhost:8080/RedistrictSystem/register.do", {
     	  method: "POST",
-    	  credentials: 'include',//open sending cookie(default doesnt send cookie)
+    	  credentials: 'include',
     	  headers: {
     	    "Content-Type": "application/x-www-form-urlencoded"
     	  },
@@ -102,11 +98,9 @@ export class SignUp extends React.Component{
         console.log(data);
         this.props.history.push(process.env.PUBLIC_URL +'/');
       });
-
     }else{
       this.setState({submissionError:true});
     }
-
   }
   render(){
     return(
@@ -118,35 +112,63 @@ export class SignUp extends React.Component{
           <form>
             <div className="form-group">
               <label>First Name</label>
-              <input type="text" className="form-control" name="fName" placeholder="Enter first name" onBlur={this.handleInput} required/>
+              <input type="text"
+               className="form-control"
+               name="fName"
+               placeholder="Enter first name"
+               onBlur={this.handleInput}
+              />
               {this.state.invalidFName && <p className="text-danger">Please enter a valid first name</p>}
             </div>
             <div className="form-group">
               <label>Last Name</label>
-              <input type="text" className="form-control" name="lName" placeholder="Enter Last name" onBlur={this.handleInput}/>
+              <input
+               type="text"
+               className="form-control"
+               name="lName"
+               placeholder="Enter Last name"
+               onBlur={this.handleInput}
+              />
               {this.state.invalidLName && <p className="text-danger">Please enter a valid last name</p>}
             </div>
             <div className="form-group">
               <label>Email address</label>
-              <input type="email" className="form-control" name="email" placeholder="Enter email" onBlur={this.handleEmailInput}/>
+              <input
+               type="email"
+               className="form-control"
+               name="email"
+               placeholder="Enter email"
+               onBlur={this.handleEmailInput}
+              />
               {this.state.invalidEmail && <p className="text-danger">The field is empty</p>}
               {this.state.oldEmail && <p className="text-danger">The email address alrealy registerd</p>}
-
             </div>
             <div className="form-group">
               <label>Password</label>
-              <input type="text" className="form-control" name="password" placeholder="Password" onBlur={this.handleInput}/>
+              <input
+               type="text"
+               className="form-control"
+               name="password"
+               placeholder="Password"
+               onBlur={this.handleInput}
+              />
               {this.state.invalidPassword && <p className="text-danger">The field is empty</p>}
-
             </div>
             <div className="form-group">
               <label>Confirm the Password</label>
-              <input type="text" className="form-control" name="confirmPassword" placeholder="Password" onChange={this.checkPassword}/>
+              <input
+               type="text"
+               className="form-control"
+               name="confirmPassword"
+               placeholder="Password"
+               onChange={this.checkPassword}
+              />
               {this.state.incorrectPassword && <p className="text-danger">The Passwords do not match</p>}
-
             </div>
             <div className="form-group">
-              <button type="button" className="btn btn-primary" onClick={this.signUp} >Sign up</button>
+              <button type="button" className="btn btn-primary" onClick={this.signUp} >
+                Sign up
+              </button>
               {this.state.submissionError && <p className="text-danger">Woops, Something is wrong!</p>}
             </div>
           </form>
@@ -157,4 +179,3 @@ export class SignUp extends React.Component{
 };
 
 export default SignUp;
-//<Link to={process.env.PUBLIC_URL +'/'}></Link>

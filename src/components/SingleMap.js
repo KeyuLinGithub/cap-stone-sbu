@@ -29,12 +29,9 @@ class SingleMap extends React.Component {
     this.changeDLevel=this.changeDLevel.bind(this);
     this.updateLayer=this.updateLayer.bind(this);
 
-    this.handleCompactnessChange=this.handleCompactnessChange.bind(this);
-    this.handlePopulationChange=this.handlePopulationChange.bind(this);
-    this.handleRacialChange=this.handleRacialChange.bind(this);
-    this.handlePartisanChange=this.handlePartisanChange.bind(this);
+    this.handleConstraintChange=this.handleConstraintChange.bind(this);
+    
     this.removePreviousLayer=this.removePreviousLayer.bind(this);
-
     this.handleRedistrictRequest=this.handleRedistrictRequest.bind(this);
     this.changeAlgorithmStatus=this.changeAlgorithmStatus.bind(this);
   }
@@ -180,17 +177,10 @@ class SingleMap extends React.Component {
       }
     }
   }
-  handleCompactnessChange(e){
-    this.setState({compactness: e.target.value});
-  }
-  handlePopulationChange(e){
-    this.setState({population: e.target.value});
-  }
-  handleRacialChange(e){
-    this.setState({racial: e.target.value});
-  }
-  handlePartisanChange(e){
-    this.setState({partisan: e.target.value});
+  handleConstraintChange (event) {
+    var name = event.target.name;
+    var value = event.target.value;
+    this.setState({[name]: value});
   }
   removePreviousLayer(){
     var layer=this.Layer;
@@ -204,6 +194,7 @@ class SingleMap extends React.Component {
       redistrictStatus:true,
       algorithmStatus:true
     });
+    console.log(this.state);
   }
  changeAlgorithmStatus(){
    if(this.state.algorithmStatus==true){
@@ -255,23 +246,27 @@ class SingleMap extends React.Component {
             <label>Constraints By Weights:</label><br />
             <div>Partisan Fairness: {this.state.partisan}%</div>
             <input type="range"
+              name="partisan"
               value={this.state.partisan}
-              onChange={e=> {this.handlePartisanChange(e)}}
+              onChange={e=> {this.handleConstraintChange(e)}}
             />
             <div>Equal Population: {this.state.population}%</div>
             <input type="range"
+              name="population"
               value={this.state.population}
-              onChange={e=> {this.handlePopulationChange(e)}}
+              onChange={e=> {this.handleConstraintChange(e)}}
             />
             <div>Racial Fairness: {this.state.racial}%</div>
             <input type="range"
+              name="racial"
               value={this.state.racial}
-              onChange={e=> {this.handleRacialChange(e)}}
+              onChange={e=> {this.handleConstraintChange(e)}}
             />
             <div>Compactness: {this.state.compactness}%</div>
             <input type="range"
+              name="compactness"
               value={this.state.compactness}
-              onChange={e=> {this.handleCompactnessChange(e)}}
+              onChange={e=> {this.handleConstraintChange(e)}}
             />
             <div>
               Contiguity:&nbsp;&nbsp;

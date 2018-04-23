@@ -6,34 +6,7 @@ class Analysis extends React.Component {
   componentDidMount () {
     this.loadMap()
   }
-
-  loadMap () {
-    if (this.props && this.props.google) {
-      //google api wrapper
-      const { google } = this.props;
-      const maps = google.maps;
-      //find the component
-      const mapRef = this.refs.map;
-      const node = ReactDOM.findDOMNode(mapRef);
-
-      const mapConfig = Object.assign({}, {
-        center: new google.maps.LatLng(40.00, -98),
-        zoom: 4,
-        mapTypeId: 'roadmap',
-        mapTypeControl: false,
-        mapTypeControlOptions: {
-          mapTypeIds: [google.maps.MapTypeId.ROADMAP]
-        }
-      })
-
-      this.map = new maps.Map(node, mapConfig)
-    }
-  }
   render(){
-    const NewStyle = {
-      width: '100%',
-      height: '120vh'
-    }
     return(
         <div id="detailedanalysis">
           <div className="page-header">
@@ -42,7 +15,6 @@ class Analysis extends React.Component {
           <div className="card">
             <h4 className="card-header">About the Efficiency gap: </h4>
             <div className="card-block container">
-
               <div className="container col-sm-5">
                 <img src={demo} className="img-responsive" alt="Demo" />
               </div>

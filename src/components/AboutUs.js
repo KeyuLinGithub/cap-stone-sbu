@@ -10,7 +10,9 @@ export class AboutUs extends React.Component{
         <div className="card">
           <h3 className="card-header">This project: </h3>
           <div className="card-block">
-            <p className="card-text">This is the Cap Stone project for CSE 308 at Stony Brook University.</p>
+            <p className="card-text">
+              This is the Cap Stone project for CSE 308 at Stony Brook University.
+            </p>
           </div>
           <hr />
         </div>
@@ -26,7 +28,6 @@ export class AboutUs extends React.Component{
           </div>
           <hr />
         </div>
-
         <div className="card ">
           <h3 className="card-header">Give us feedback: </h3>
           <div className="card-block">
@@ -35,20 +36,36 @@ export class AboutUs extends React.Component{
                 <form>
                   <div className="form-group">
                     <label>Full Name</label>
-                    <input type="text" className="form-control" id="name" placeholder="Enter your name" />
+                    <input
+                     type="text"
+                     className="form-control"
+                     id="name"
+                     placeholder="Enter your name"
+                    />
                   </div>
                   <div className="form-group">
                     <label>Email address</label>
-                    <input type="email" className="form-control" id="email" placeholder="example@gmail.com" />
+                    <input
+                     type="email"
+                     className="form-control"
+                     id="email"
+                     placeholder="example@gmail.com"
+                    />
                   </div>
                   <div className="form-group">
                     <label>Feedback:</label>
-                    <input type="textarea" className="form-control" id="feedback" style={{ height: 150, width: 400 }}/>
+                    <input
+                     type="textarea"
+                     className="form-control"
+                     id="feedback"
+                     style={{ height: 150, width: 400 }}
+                     />
                   </div>
                   <div className="form-group">
-                    <Link to={process.env.PUBLIC_URL +'/'}><button type="button" className="btn btn-primary">Submit</button></Link>
+                    <Link to={process.env.PUBLIC_URL +'/'}>
+                      <button type="button" className="btn btn-primary">Submit</button>
+                    </Link>
                   </div>
-
                 </form>
               </div>
             </div>
