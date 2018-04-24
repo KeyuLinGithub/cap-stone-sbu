@@ -13,6 +13,7 @@ export class SignUp extends React.Component{
       invalidFName:false,
       invalidLName:false,
       invalidEmail:false,
+      showValidEmailMessage:false,
       oldEmail:false,
       invalidPassword:false,
       submissionError:false
@@ -42,9 +43,15 @@ export class SignUp extends React.Component{
     .then(response => response.json())
     .then(data => {
       if(data==true){
-        this.setState({oldEmail: false});
+        this.setState({
+          oldEmail: false,
+          showValidEmailMessage:true
+        });
       }else{
-        this.setState({oldEmail: true});
+        this.setState({
+          oldEmail: true,
+          showValidEmailMessage:false
+        });
       }
     });
   }
@@ -135,11 +142,12 @@ export class SignUp extends React.Component{
               <label>Email address</label>
               <input
                type="email"
-               className="form-control"
+               className="form-control form-control-success"
                name="email"
                placeholder="Enter email"
                onBlur={this.handleEmailInput}
               />
+              {this.state.showValidEmailMessage && <p className="text-success">Valid Email address <i className="fas fa-check"></i></p>}
               {this.state.invalidEmail && <p className="text-danger">The field is empty</p>}
               {this.state.oldEmail && <p className="text-danger">The email address alrealy registerd</p>}
             </div>
