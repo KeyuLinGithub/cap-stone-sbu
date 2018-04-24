@@ -41,7 +41,7 @@ export class SignUp extends React.Component{
     })
     .then(response => response.json())
     .then(data => {
-      if(data==1){
+      if(data==true){
         this.setState({oldEmail: false});
       }else{
         this.setState({oldEmail: true});
