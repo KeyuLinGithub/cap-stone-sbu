@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 
 //import all geojson
 import c_c_d from '../geodata/c_c_d.json';
-import n_c_d from '../geodata/n_c_d.json';
+import n_c_d from '../geodata/1.json';
 import o_c_d from '../geodata/o_c_d_test.json';
-import n_p from '../geodata/n_p.json';
+import n_p from '../geodata/2.json';
 import c_p from '../geodata/c_p.json';
 import o_p from '../geodata/o_p_test.json';
 
@@ -21,7 +21,7 @@ class SingleMap extends React.Component {
       racial:25,
       partisan:25,
       redistrictStatus:false,
-      algorithmStatus:false,
+      algorithmStatus:"stopped",
       algorithmStatusClassName:"btn btn-primary",
       algorithmStatusText:"Running..."
     };
@@ -34,6 +34,9 @@ class SingleMap extends React.Component {
   componentDidMount () {
     this.loadMap();
   }
+  componentWillUpdate(nextProps, nextState) {
+      console.log(nextState.algorithmStatus);
+   }
   loadMap(){
     if (this.props && this.props.google) {
       //map set up
@@ -83,7 +86,6 @@ class SingleMap extends React.Component {
   changeState(e){
     this.setState({state: e.target.value});
     this.updateLayer(e.target.value,this.state.dLevel);
-
   }
   changeDLevel(e){
     this.setState({dLevel: e.target.value});
@@ -97,7 +99,7 @@ class SingleMap extends React.Component {
     }
     fetch("http://localhost:8080/RedistrictSystem/displayState.do", {
   	  method: "POST",
-  	  credentials: 'include',//open sending cookie(default doesnt send cookie)
+  	  credentials: 'include',
   	  headers: {
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
@@ -107,9 +109,22 @@ class SingleMap extends React.Component {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      //this.layer.addGeoJson(data);
+      this.layer.addGeoJson(data);
+    });
+    //add color for the layer
+    var temp=this.layer;
+    this.layer.forEach(function (feature) {
+      //console.log(feature.getProperty('fill'))
+        temp.overrideStyle(feature, {
+          fillColor: feature.getProperty('fill'),
+          fillOpacity: 0.2,
+          strokeColor: '#000000',
+          strokeWeight: 1,
+          zIndex: 1
+        })
     });
   }
+
   updateMapCenter(state,dLevel){
     if(state==='US'){
       this.map.setZoom(4);
@@ -118,62 +133,76 @@ class SingleMap extends React.Component {
     }else if(state==='Colorado'){
       this.map.setZoom(7);
       this.map.setCenter({lat: 39, lng: -105.7821});
-      if(dLevel==="congressional"){
-        this.layer.addGeoJson(c_c_d);
-      }else{
-        this.layer.addGeoJson(c_p);
-      }
-      this.layer.setStyle({
-          fillColor: '#b0987a',
-           fillOpacity: 0.4,
-           strokeColor: '#000000',
-          strokeWeight: 1,
-           zIndex: 1,
-          visible: true
-      });
+      // if(dLevel==="congressional"){
+      //   this.layer.addGeoJson(c_c_d);
+      // }else{
+      //   this.layer.addGeoJson(c_p);
+      // }
+      // this.layer.setStyle({
+      //     fillColor: '#b0987a',
+      //      fillOpacity: 0.4,
+      //      strokeColor: '#000000',
+      //     strokeWeight: 1,
+      //      zIndex: 1,
+      //     visible: true
+      // });
     }else if(state==='NewHampshire'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 43.8938516, lng: -71.57239529999998});
-      if(dLevel==="congressional"){
-        this.layer.addGeoJson(n_c_d);
-      }else{
-        this.layer.addGeoJson(n_p);
-      }
-      this.layer.setStyle({
-          fillColor: '#b0987a',
-           fillOpacity: 0.4,
-           strokeColor: '#000000',
-          strokeWeight: 1,
-           zIndex: 1,
-          visible: true
-      });
+      // if(dLevel==="congressional"){
+      //   this.layer.addGeoJson(n_c_d);
+      // }else{
+      //   this.layer.addGeoJson(n_p);
+      // }
+      // //add color for the layer
+      // var temp=this.layer;
+      // this.layer.forEach(function (feature) {
+      //   //console.log(feature.getProperty('fill'))
+      //     temp.overrideStyle(feature, {
+      //       fillColor: feature.getProperty('fill'),
+      //       fillOpacity: 0.2,
+      //       strokeColor: '#000000',
+      //       strokeWeight: 1,
+      //       zIndex: 1
+      //     })
+      // });
+      // this.layer.setStyle({
+      //     fillColor: '#b0987a',
+      //      fillOpacity: 0.4,
+      //      strokeColor: '#000000',
+      //     strokeWeight: 1,
+      //      zIndex: 1,
+      //     visible: true
+      // });
     }else if(state==='Ohio'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 40.4172871, lng: -82.90712300000001});
-      if(dLevel==="congressional"){
-        this.layer.addGeoJson(o_c_d);
-        this.layer.setStyle({
-            fillColor: '#b0987a',
-             fillOpacity: 0.4,
-             strokeColor: '#000000',
-            strokeWeight: 1,
-             zIndex: 1,
-            visible: true
-        });
-      }else{
-        this.layer.addGeoJson(o_p);
-      }
-      //add color for the layer
-      var temp=this.layer;
-      this.layer.forEach(function (feature) {
-          temp.overrideStyle(feature, {
-            fillColor: feature.getProperty('fill'),
-            fillOpacity: 0.2,
-            strokeColor: '#000000',
-            strokeWeight: 1,
-            zIndex: 1
-          })
-      });
+      // if(dLevel==="congressional"){
+      //   this.layer.addGeoJson(o_c_d);
+      //   this.layer.setStyle({
+      //       fillColor: '#b0987a',
+      //        fillOpacity: 0.4,
+      //        strokeColor: '#000000',
+      //       strokeWeight: 1,
+      //        zIndex: 1,
+      //       visible: true
+      //   });
+      // }else{
+      //   this.layer.addGeoJson(o_p);
+      // }
+      // //add color for the layer
+      // var temp=this.layer;
+      // this.layer.forEach(function (feature) {
+      //
+      //     console.log(feature.getProperty('fill'));
+      //     temp.overrideStyle(feature, {
+      //       fillColor: feature.getProperty('fill'),
+      //       fillOpacity: 0.2,
+      //       strokeColor: '#000000',
+      //       strokeWeight: 1,
+      //       zIndex: 1
+      //     })
+      // });
     }
   }
   handleConstraintChange (event) {
@@ -184,30 +213,43 @@ class SingleMap extends React.Component {
   removePreviousLayer(){
     var layer=this.layer;
     layer.forEach(function (feature) {
-        //console.log(feature);
         layer.remove(feature);
     });
   }
   handleRedistrictRequest(){
     this.setState({
       redistrictStatus:true,
-      algorithmStatus:true
+      algorithmStatus:'running'
     });
-
+    this.algorithmStatus='running';
+    this.testFetch();
   }
- changeAlgorithmStatus(){
-   if(this.state.algorithmStatus==true){
+  testFetch(){
+      fetch(`http://www.reddit.com/search.json?q=food`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if(this.state.algorithmStatus=='running'){
+          this.testFetch();
+        }
+      })
+      .catch(err => console.log(err));
+  }
+  changeAlgorithmStatus(){
+   if(this.state.algorithmStatus==='running'){
      this.setState({
-       algorithmStatus:false,
+       algorithmStatus:'stopped',
        algorithmStatusClassName:"btn btn-danger",
        algorithmStatusText:"Stopped"
      });
+
    }else{
      this.setState({
-       algorithmStatus:true,
+       algorithmStatus:'running',
        algorithmStatusClassName:"btn btn-primary",
        algorithmStatusText:"Running..."
      });
+     this.testFetch();
    }
  }
   render(){
