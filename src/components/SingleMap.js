@@ -107,7 +107,7 @@ class SingleMap extends React.Component {
   	  headers: {
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
-  	  body: "state="+state+
+  	  body: "stateName="+state+
   	  		"&dLevel="+dLevel
   	})
     .then(response => response.json())
