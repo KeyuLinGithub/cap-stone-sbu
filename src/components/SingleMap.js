@@ -267,7 +267,7 @@ class SingleMap extends React.Component {
     .then(response => response.json())
     .then(data => {
       this.updateMapChange(data);
-      //this.requestMoreMapChange();
+      this.requestMoreMapChange();
     })
     .catch(err => console.log(err));
     // var data={pricienctID:"111",fill:"#000"};
@@ -294,7 +294,7 @@ class SingleMap extends React.Component {
     console.log(data.pricienctID);
     var temp=this.layer;
     this.layer.forEach(function (feature) {
-        if(data.pricienctID===feature.f.VTDI10){
+        if(data.VTDI10===feature.f.VTDI10){
           temp.overrideStyle(feature, {
             fillColor: data.fill,
             fillOpacity: 0.2,
