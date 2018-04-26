@@ -59,8 +59,8 @@ class SingleMap extends React.Component {
           mapTypeIds: [google.maps.MapTypeId.ROADMAP]
         }
       })
-      //data layer
       this.map = new maps.Map(node, mapConfig);
+      //data layer
       this.layer = new maps.Data();
       //info window
       var infowindow = new maps.InfoWindow();
@@ -103,7 +103,6 @@ class SingleMap extends React.Component {
     if(state==='US'){
       return;
     }
-    console.log(state+dLevel);
     fetch("http://localhost:8080/RedistrictSystem/displayState.do", {
   	  method: "POST",
   	  credentials: 'include',
@@ -117,19 +116,19 @@ class SingleMap extends React.Component {
     .then(data => {
       console.log(data);
       this.layer.addGeoJson(data);
+      //add color for the layer
+      var temp=this.layer;
+      this.layer.forEach(function (feature) {
+          temp.overrideStyle(feature, {
+            fillColor: feature.getProperty('fill'),
+            fillOpacity: 0.2,
+            strokeColor: '#000000',
+            strokeWeight: 1,
+            zIndex: 1
+          })
+      });
     });
-    //add color for the layer
-    var temp=this.layer;
-    this.layer.forEach(function (feature) {
-      //console.log(feature.getProperty('fill'))
-        temp.overrideStyle(feature, {
-          fillColor: feature.getProperty('fill'),
-          fillOpacity: 0.2,
-          strokeColor: '#000000',
-          strokeWeight: 1,
-          zIndex: 1
-        })
-    });
+
   }
 
   updateMapCenter(state,dLevel){
@@ -302,7 +301,7 @@ class SingleMap extends React.Component {
        algorithmStatusText:"Running...",
        buttonStatusText:'Pause'
      });
-     //this.testFetch();
+     this.requestMoreMapChange();
    }
  }
  stopAlgorithm(){
