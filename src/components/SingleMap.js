@@ -270,7 +270,8 @@ class SingleMap extends React.Component {
       //this.requestMoreMapChange();
     })
     .catch(err => console.log(err));
-
+    // var data={pricienctID:"111",fill:"#000"};
+    // this.updateMapChange(data);
     // var temp=this.layer;
     // this.layer.forEach(function (feature) {
     //     if(feature.f.VTDI10=== "A"){
@@ -286,10 +287,10 @@ class SingleMap extends React.Component {
     // });
   }
   updateMapChange(data){
-    console.log(data);
-    console.log(Object.values(data));
-    console.log(Object.values(data)[0]);
-    console.log(data.fill);
+    // console.log(data);
+    // console.log(Object.values(data));
+    // console.log(Object.values(data)[0]);
+    // console.log(data.fill);
     var temp=this.layer;
     this.layer.forEach(function (feature) {
         if(data.pricienctID===feature.f.VTDI10){
