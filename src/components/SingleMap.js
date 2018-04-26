@@ -262,6 +262,19 @@ class SingleMap extends React.Component {
   }
   updateMapChange(data){
     console.log(data);
+    var temp=this.layer;
+    this.layer.forEach(function (feature) {
+        if(data.VTDST10==="ATKI01"){
+          temp.overrideStyle(feature, {
+            fillColor: data.fill,
+            fillOpacity: 0.2,
+            strokeColor: '#000000',
+            strokeWeight: 1,
+            zIndex: 1
+          })
+        }
+
+    });
   }
   requestMoreMapChange(){
     fetch("http://localhost:8080/RedistrictSystem/process.do")
