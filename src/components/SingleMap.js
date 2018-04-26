@@ -20,6 +20,8 @@ class SingleMap extends React.Component {
       population:25,
       racial:25,
       partisan:25,
+      contiguity: false,
+      naturalBoundary: false,
       redistrictStatus:false,
       algorithmStatus:"stopped",
       algorithmStatusClassName:"btn btn-primary",
@@ -28,6 +30,7 @@ class SingleMap extends React.Component {
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
     this.handleConstraintChange=this.handleConstraintChange.bind(this);
+    this.handleCheckboxConstraintChange=this.handleCheckboxConstraintChange.bind(this);
     this.handleRedistrictRequest=this.handleRedistrictRequest.bind(this);
     this.changeAlgorithmStatus=this.changeAlgorithmStatus.bind(this);
   }
@@ -104,7 +107,7 @@ class SingleMap extends React.Component {
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
   	  body: "state="+state+
-  	  		"dLevel="+dLevel
+  	  		"&dLevel="+dLevel
   	})
     .then(response => response.json())
     .then(data => {
@@ -210,6 +213,14 @@ class SingleMap extends React.Component {
     var value = event.target.value;
     this.setState({[name]: value});
   }
+  handleCheckboxConstraintChange(event){
+    var name = event.target.name;
+    var value = false;
+    if(event.target.checked){
+      value=true;
+    }
+    this.setState({[name]: value});
+  }
   removePreviousLayer(){
     var layer=this.layer;
     layer.forEach(function (feature) {
@@ -222,19 +233,55 @@ class SingleMap extends React.Component {
       algorithmStatus:'running'
     });
     this.algorithmStatus='running';
-    this.testFetch();
+    //this.testFetch();
+    this.sendStartAlgorithmRequest();
   }
-  testFetch(){
-      fetch(`http://www.reddit.com/search.json?q=food`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        if(this.state.algorithmStatus=='running'){
-          this.testFetch();
-        }
-      })
-      .catch(err => console.log(err));
+  sendStartAlgorithmRequest(){
+    fetch("http://localhost:8080/RedistrictSystem/redistrict.do", {
+  	  method: "POST",
+  	  credentials: 'include',
+  	  headers: {
+  	    "Content-Type": "application/x-www-form-urlencoded"
+  	  },
+  	  body: "compactness="+this.state.compactness+
+  	  		"&population="+this.state.population+
+          "&racial="+this.state.racial+
+          "&partisan="+this.state.partisan+
+          "&contiguity="+this.state.contiguity+
+          "&naturalBoundary="+this.state.naturalBoundary
+  	})
+    .then(response => response.json())
+    .then(data => {
+      this.updateMapChange(data);
+      this.requestMoreMapChange();
+    })
+    .catch(err => console.log(err));
   }
+  updateMapChange(data){
+    console.log(data);
+  }
+  requestMoreMapChange(){
+    fetch("http://localhost:8080/RedistrictSystem/process.do")
+    .then(res => res.json())
+    .then(data => {
+      this.updateMapChange(data);
+      if(this.state.algorithmStatus=='running'){
+        this.requestMoreMapChange();
+      }
+    })
+    .catch(err => console.log(err));
+  }
+  // testFetch(){
+  //     fetch(`http://www.reddit.com/search.json?q=food`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       if(this.state.algorithmStatus=='running'){
+  //         this.testFetch();
+  //       }
+  //     })
+  //     .catch(err => console.log(err));
+  // }
   changeAlgorithmStatus(){
    if(this.state.algorithmStatus==='running'){
      this.setState({
@@ -249,7 +296,7 @@ class SingleMap extends React.Component {
        algorithmStatusClassName:"btn btn-primary",
        algorithmStatusText:"Running..."
      });
-     this.testFetch();
+     //this.testFetch();
    }
  }
   render(){
@@ -311,12 +358,12 @@ class SingleMap extends React.Component {
             />
             <div>
               Contiguity:&nbsp;&nbsp;
-              <input type="checkbox" className="form-check-input" />
+              <input type="checkbox" className="form-check-input" name="contiguity" onClick={e=> {this.handleCheckboxConstraintChange(e)}}/>
 
             </div>
             <div>
               Align with natural boundary:&nbsp;&nbsp;
-              <input type="checkbox" className="form-check-input" />
+              <input type="checkbox" className="form-check-input" name="naturalBoundary" onClick={e=> {this.handleCheckboxConstraintChange(e)}}/>
             </div>
           </div>
           <div className="form-group">
