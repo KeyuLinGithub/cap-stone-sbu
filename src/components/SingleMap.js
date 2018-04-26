@@ -290,7 +290,8 @@ class SingleMap extends React.Component {
     // console.log(data);
     // console.log(Object.values(data));
     // console.log(Object.values(data)[0]);
-    // console.log(data.fill);
+    console.log(data.fill);
+    console.log(data.pricienctID);
     var temp=this.layer;
     this.layer.forEach(function (feature) {
         if(data.pricienctID===feature.f.VTDI10){
