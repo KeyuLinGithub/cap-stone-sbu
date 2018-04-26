@@ -72,7 +72,7 @@ class SingleMap extends React.Component {
           zIndex: 3
         })
         if(this.state.dLevel==="CD"){
-          var content='STATEFP: '+e.feature.f.STATEFP+' GEOID: '+e.feature.f.GEOID;
+          var content='STATEFP: '+e.feature.f.STATEFP+' GEOID: '+e.feature.f.GEOID+' Population: '+e.feature.f.POPULATION;
           infowindow.setContent(content);
           infowindow.setPosition(e.latLng);
           infowindow.open(this.map);
