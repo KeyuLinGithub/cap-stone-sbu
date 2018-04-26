@@ -128,7 +128,18 @@ class SingleMap extends React.Component {
           })
       });
     });
-
+    // this.layer.addGeoJson(n_p);
+    // //add color for the layer
+    // var temp=this.layer;
+    // this.layer.forEach(function (feature) {
+    //     temp.overrideStyle(feature, {
+    //       fillColor: feature.getProperty('fill'),
+    //       fillOpacity: 0.2,
+    //       strokeColor: '#000000',
+    //       strokeWeight: 1,
+    //       zIndex: 1
+    //     })
+    // });
   }
 
   updateMapCenter(state,dLevel){
@@ -256,15 +267,31 @@ class SingleMap extends React.Component {
     .then(response => response.json())
     .then(data => {
       this.updateMapChange(data);
-      this.requestMoreMapChange();
+      //this.requestMoreMapChange();
     })
     .catch(err => console.log(err));
+
+    // var temp=this.layer;
+    // this.layer.forEach(function (feature) {
+    //     if(feature.f.VTDI10=== "A"){
+    //       temp.overrideStyle(feature, {
+    //         fillColor: '#f3370f',
+    //         fillOpacity: 0.2,
+    //         strokeColor: '#000000',
+    //         strokeWeight: 1,
+    //         zIndex: 1
+    //       })
+    //     }
+    //
+    // });
   }
   updateMapChange(data){
     console.log(data);
+    console.log(data.pricienctID);
+    console.log(data.fill);
     var temp=this.layer;
     this.layer.forEach(function (feature) {
-        if(data.pricienctID===feature.f.VTDST10){
+        if(data.pricienctID===feature.f.VTDI10){
           temp.overrideStyle(feature, {
             fillColor: data.fill,
             fillOpacity: 0.2,
