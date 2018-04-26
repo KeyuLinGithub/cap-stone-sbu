@@ -287,7 +287,8 @@ class SingleMap extends React.Component {
   }
   updateMapChange(data){
     console.log(data);
-    console.log(data.pricienctID);
+    console.log(Object.values(data));
+    console.log(Object.values(data)[0]);
     console.log(data.fill);
     var temp=this.layer;
     this.layer.forEach(function (feature) {
