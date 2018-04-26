@@ -1,14 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//import all geojson
-import c_c_d from '../geodata/c_c_d.json';
-import n_c_d from '../geodata/1.json';
-import o_c_d from '../geodata/o_c_d_test.json';
-import n_p from '../geodata/2.json';
-import c_p from '../geodata/c_p.json';
-import o_p from '../geodata/o_p_test.json';
-
 class SingleMap extends React.Component {
   constructor(props) {
     super(props);
@@ -40,9 +32,6 @@ class SingleMap extends React.Component {
   componentDidMount () {
     this.loadMap();
   }
-  componentWillUpdate(nextProps, nextState) {
-      console.log(nextState.algorithmStatus);
-   }
   loadMap(){
     if (this.props && this.props.google) {
       //map set up
@@ -89,14 +78,7 @@ class SingleMap extends React.Component {
       layer.setMap(this.map)
     }
   }
-  changeState(e){
-    this.setState({state: e.target.value});
-    this.updateLayer(e.target.value,this.state.dLevel);
-  }
-  changeDLevel(e){
-    this.setState({dLevel: e.target.value});
-    this.updateLayer(this.state.state,e.target.value);
-  }
+
   updateLayer(state,dLevel){
     this.removePreviousLayer();
     this.updateMapCenter(state,dLevel);
@@ -128,99 +110,36 @@ class SingleMap extends React.Component {
           })
       });
     });
-    // this.layer.addGeoJson(n_p);
-    // //add color for the layer
-    // var temp=this.layer;
-    // this.layer.forEach(function (feature) {
-    //     temp.overrideStyle(feature, {
-    //       fillColor: feature.getProperty('fill'),
-    //       fillOpacity: 0.2,
-    //       strokeColor: '#000000',
-    //       strokeWeight: 1,
-    //       zIndex: 1
-    //     })
-    // });
   }
 
   updateMapCenter(state,dLevel){
     if(state==='US'){
       this.map.setZoom(4);
       this.map.setCenter({lat: 40, lng: -98});
-      return;
     }else if(state==='CO'){
       this.map.setZoom(7);
       this.map.setCenter({lat: 39, lng: -105.7821});
-      // if(dLevel==="congressional"){
-      //   this.layer.addGeoJson(c_c_d);
-      // }else{
-      //   this.layer.addGeoJson(c_p);
-      // }
-      // this.layer.setStyle({
-      //     fillColor: '#b0987a',
-      //      fillOpacity: 0.4,
-      //      strokeColor: '#000000',
-      //     strokeWeight: 1,
-      //      zIndex: 1,
-      //     visible: true
-      // });
     }else if(state==='NH'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 43.8938516, lng: -71.57239529999998});
-      // if(dLevel==="congressional"){
-      //   this.layer.addGeoJson(n_c_d);
-      // }else{
-      //   this.layer.addGeoJson(n_p);
-      // }
-      // //add color for the layer
-      // var temp=this.layer;
-      // this.layer.forEach(function (feature) {
-      //   //console.log(feature.getProperty('fill'))
-      //     temp.overrideStyle(feature, {
-      //       fillColor: feature.getProperty('fill'),
-      //       fillOpacity: 0.2,
-      //       strokeColor: '#000000',
-      //       strokeWeight: 1,
-      //       zIndex: 1
-      //     })
-      // });
-      // this.layer.setStyle({
-      //     fillColor: '#b0987a',
-      //      fillOpacity: 0.4,
-      //      strokeColor: '#000000',
-      //     strokeWeight: 1,
-      //      zIndex: 1,
-      //     visible: true
-      // });
     }else if(state==='OH'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 40.4172871, lng: -82.90712300000001});
-      // if(dLevel==="congressional"){
-      //   this.layer.addGeoJson(o_c_d);
-      //   this.layer.setStyle({
-      //       fillColor: '#b0987a',
-      //        fillOpacity: 0.4,
-      //        strokeColor: '#000000',
-      //       strokeWeight: 1,
-      //        zIndex: 1,
-      //       visible: true
-      //   });
-      // }else{
-      //   this.layer.addGeoJson(o_p);
-      // }
-      // //add color for the layer
-      // var temp=this.layer;
-      // this.layer.forEach(function (feature) {
-      //
-      //     console.log(feature.getProperty('fill'));
-      //     temp.overrideStyle(feature, {
-      //       fillColor: feature.getProperty('fill'),
-      //       fillOpacity: 0.2,
-      //       strokeColor: '#000000',
-      //       strokeWeight: 1,
-      //       zIndex: 1
-      //     })
-      // });
     }
+  }
+  removePreviousLayer(){
+    var layer=this.layer;
+    layer.forEach(function (feature) {
+        layer.remove(feature);
+    });
+  }
+  changeState(e){
+    this.setState({state: e.target.value});
+    this.updateLayer(e.target.value,this.state.dLevel);
+  }
+  changeDLevel(e){
+    this.setState({dLevel: e.target.value});
+    this.updateLayer(this.state.state,e.target.value);
   }
   handleConstraintChange (event) {
     var name = event.target.name;
@@ -235,21 +154,16 @@ class SingleMap extends React.Component {
     }
     this.setState({[name]: value});
   }
-  removePreviousLayer(){
-    var layer=this.layer;
-    layer.forEach(function (feature) {
-        layer.remove(feature);
-    });
-  }
+
   handleRedistrictRequest(){
     this.setState({
       redistrictStatus:true,
       algorithmStatus:'running'
     });
     this.algorithmStatus='running';
-    //this.testFetch();
     this.sendStartAlgorithmRequest();
   }
+
   sendStartAlgorithmRequest(){
     fetch("http://localhost:8080/RedistrictSystem/redistrict.do", {
   	  method: "POST",
@@ -270,42 +184,9 @@ class SingleMap extends React.Component {
       this.requestMoreMapChange();
     })
     .catch(err => console.log(err));
-    // var data={pricienctID:"111",fill:"#000"};
-    // this.updateMapChange(data);
-    // var temp=this.layer;
-    // this.layer.forEach(function (feature) {
-    //     if(feature.f.VTDI10=== "A"){
-    //       temp.overrideStyle(feature, {
-    //         fillColor: '#f3370f',
-    //         fillOpacity: 0.2,
-    //         strokeColor: '#000000',
-    //         strokeWeight: 1,
-    //         zIndex: 1
-    //       })
-    //     }
-    //
-    // });
-  }
-  updateMapChange(data){
-    // console.log(data);
-    // console.log(Object.values(data));
-    // console.log(Object.values(data)[0]);
-    console.log(data.fill);
-    console.log(data.pricienctID);
-    var temp=this.layer;
-    this.layer.forEach(function (feature) {
-        if(data.VTDI10===feature.f.VTDI10){
-          temp.overrideStyle(feature, {
-            fillColor: data.fill,
-            fillOpacity: 0.2,
-            strokeColor: '#000000',
-            strokeWeight: 1,
-            zIndex: 1
-          })
-        }
 
-    });
   }
+
   requestMoreMapChange(){
     fetch("http://localhost:8080/RedistrictSystem/process.do")
     .then(res => res.json())
@@ -317,17 +198,28 @@ class SingleMap extends React.Component {
     })
     .catch(err => console.log(err));
   }
-  // testFetch(){
-  //     fetch(`http://www.reddit.com/search.json?q=food`)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       console.log(data);
-  //       if(this.state.algorithmStatus=='running'){
-  //         this.testFetch();
-  //       }
-  //     })
-  //     .catch(err => console.log(err));
-  // }
+  updateMapChange(data){
+    var temp=this.layer;
+    this.layer.forEach(function (feature) {
+        if(data.VTDI10===feature.f.VTDI10){
+          temp.overrideStyle(feature, {
+            fillColor: data.fill,
+            fillOpacity: 0.2,
+            strokeColor: '#000000',
+            strokeWeight: 1,
+            zIndex: 1
+          })
+        }
+    });
+  }
+  stopAlgorithm(){
+    this.setState({
+      algorithmStatus:'stopped',
+      algorithmStatusText:"Stopped",
+      inactiveButtonController:true
+    });
+  }
+
   changeAlgorithmStatus(){
    if(this.state.algorithmStatus==='running'){
      this.setState({
@@ -336,7 +228,6 @@ class SingleMap extends React.Component {
        algorithmStatusText:"Paused",
        buttonStatusText:'Resume'
      });
-
    }else{
      this.setState({
        algorithmStatus:'running',
@@ -347,19 +238,13 @@ class SingleMap extends React.Component {
      this.requestMoreMapChange();
    }
  }
- stopAlgorithm(){
-   this.setState({
-     algorithmStatus:'stopped',
-     algorithmStatusText:"Stopped",
-     inactiveButtonController:true
-   });
- }
-  render(){
-    const originalStyle = {
-      width: '100%',
-      height: '120vh'
-    }
-    return(
+
+render(){
+  const originalStyle = {
+    width: '100%',
+    height: '120vh'
+  }
+  return(
     <div id="singleMaps">
       <div className="page-header">
         <h1>Original Map</h1>
