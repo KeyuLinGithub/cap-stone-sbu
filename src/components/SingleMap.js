@@ -24,8 +24,10 @@ class SingleMap extends React.Component {
       naturalBoundary: false,
       redistrictStatus:false,
       algorithmStatus:"stopped",
-      algorithmStatusClassName:"btn btn-primary",
-      algorithmStatusText:"Running..."
+      algorithmStatusClassName:"btn btn-warning",
+      algorithmStatusText:"Running...",
+      buttonStatusText:"Pause",
+      inactiveButtonController:false
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
@@ -33,6 +35,7 @@ class SingleMap extends React.Component {
     this.handleCheckboxConstraintChange=this.handleCheckboxConstraintChange.bind(this);
     this.handleRedistrictRequest=this.handleRedistrictRequest.bind(this);
     this.changeAlgorithmStatus=this.changeAlgorithmStatus.bind(this);
+    this.stopAlgorithm=this.stopAlgorithm.bind(this);
   }
   componentDidMount () {
     this.loadMap();
@@ -287,18 +290,27 @@ class SingleMap extends React.Component {
    if(this.state.algorithmStatus==='running'){
      this.setState({
        algorithmStatus:'stopped',
-       algorithmStatusClassName:"btn btn-danger",
-       algorithmStatusText:"Stopped"
+       algorithmStatusClassName: "btn btn-info",
+       algorithmStatusText:"Paused",
+       buttonStatusText:'Resume'
      });
 
    }else{
      this.setState({
        algorithmStatus:'running',
-       algorithmStatusClassName:"btn btn-primary",
-       algorithmStatusText:"Running..."
+       algorithmStatusClassName:"btn btn-warning",
+       algorithmStatusText:"Running...",
+       buttonStatusText:'Pause'
      });
      //this.testFetch();
    }
+ }
+ stopAlgorithm(){
+   this.setState({
+     algorithmStatus:'stopped',
+     algorithmStatusText:"Stopped",
+     inactiveButtonController:true
+   });
  }
   render(){
     const originalStyle = {
@@ -359,34 +371,60 @@ class SingleMap extends React.Component {
             />
             <div>
               Contiguity:&nbsp;&nbsp;
-              <input type="checkbox" className="form-check-input" name="contiguity" onClick={e=> {this.handleCheckboxConstraintChange(e)}}/>
-
+              <input
+               type="checkbox"
+               className="form-check-input"
+               name="contiguity"
+               onClick={e=> {this.handleCheckboxConstraintChange(e)}}
+              />
             </div>
             <div>
               Align with natural boundary:&nbsp;&nbsp;
-              <input type="checkbox" className="form-check-input" name="naturalBoundary" onClick={e=> {this.handleCheckboxConstraintChange(e)}}/>
+              <input
+               type="checkbox"
+               className="form-check-input"
+               name="naturalBoundary"
+               onClick={e=> {this.handleCheckboxConstraintChange(e)}}
+              />
             </div>
           </div>
           <div className="form-group">
-            <button type="button" className="btn btn-primary" onClick={this.handleRedistrictRequest}>
+            <button
+             type="button"
+             className="btn btn-primary"
+             onClick={this.handleRedistrictRequest}
+            >
              Redistrict
             </button>
           </div>
           {this.state.redistrictStatus &&
             <div className="form-group">
               <label>Controller:</label><br />
-              The Status:&nbsp;
-              <button type="button" className={this.state.algorithmStatusClassName} onClick={this.changeAlgorithmStatus}>
-               {this.state.algorithmStatusText}
-              </button>
+              The Status:&nbsp;{this.state.algorithmStatusText}
               <br /><br/>
+              <button
+               type="button"
+               className={this.state.algorithmStatusClassName}
+               onClick={this.changeAlgorithmStatus}
+               disabled={this.state.inactiveButtonController}
+              >
+               {this.state.buttonStatusText}
+              </button>
+              &nbsp;&nbsp;
+              <button
+               type="button"
+               className="btn btn-danger"
+               onClick={this.stopAlgorithm}
+               disabled={this.state.inactiveButtonController}
+              >
+               Stop
+              </button>
+              <br/><br/>
               Reset the Map:
               <button type="button" className="btn btn-success">Reset</button>
-              <br /><br/>
-              --after that--<br />
+              <br/><br/>
               Show Analysis:
               <button type="button" className="btn btn-primary">Show</button>
-              <br />--after that--
             </div>
           }
         </div>
