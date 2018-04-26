@@ -14,7 +14,7 @@ class SingleMap extends React.Component {
     super(props);
     this.state = {
       state:"US",
-      dLevel:"congressional",
+      dLevel:"CD",
       color:"Default",
       compactness:25,
       population:25,
@@ -68,7 +68,7 @@ class SingleMap extends React.Component {
           strokeWeight: 3,
           zIndex: 3
         })
-        if(this.state.dLevel==="congressional"){
+        if(this.state.dLevel==="CD"){
           var content='STATEFP: '+e.feature.f.STATEFP+' GEOID: '+e.feature.f.GEOID;
           infowindow.setContent(content);
           infowindow.setPosition(e.latLng);
@@ -100,6 +100,7 @@ class SingleMap extends React.Component {
     if(state==='US'){
       return;
     }
+    console.log(state+dLevel);
     fetch("http://localhost:8080/RedistrictSystem/displayState.do", {
   	  method: "POST",
   	  credentials: 'include',
@@ -133,7 +134,7 @@ class SingleMap extends React.Component {
       this.map.setZoom(4);
       this.map.setCenter({lat: 40, lng: -98});
       return;
-    }else if(state==='Colorado'){
+    }else if(state==='CO'){
       this.map.setZoom(7);
       this.map.setCenter({lat: 39, lng: -105.7821});
       // if(dLevel==="congressional"){
@@ -149,7 +150,7 @@ class SingleMap extends React.Component {
       //      zIndex: 1,
       //     visible: true
       // });
-    }else if(state==='NewHampshire'){
+    }else if(state==='NH'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 43.8938516, lng: -71.57239529999998});
       // if(dLevel==="congressional"){
@@ -177,7 +178,7 @@ class SingleMap extends React.Component {
       //      zIndex: 1,
       //     visible: true
       // });
-    }else if(state==='Ohio'){
+    }else if(state==='OH'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 40.4172871, lng: -82.90712300000001});
       // if(dLevel==="congressional"){
@@ -317,16 +318,16 @@ class SingleMap extends React.Component {
             onChange={this.changeState}
             >
               <option value="US">US</option>
-              <option value="Colorado">Colorado</option>
-              <option value="NewHampshire">New Hampshire</option>
-              <option value="Ohio">Ohio</option>
+              <option value="CO">Colorado</option>
+              <option value="NH">New Hampshire</option>
+              <option value="OH">Ohio</option>
             </select>
           </div>
           <div className="form-group">
             <label>District Level:</label><br />
             <select id="compactness" onChange={this.changeDLevel}>
-              <option value="congressional" >Congressional district</option>
-              <option value="precinct" >Precinct district</option>
+              <option value="CD" >Congressional district</option>
+              <option value="PD" >Precinct district</option>
             </select>
           </div>
 
