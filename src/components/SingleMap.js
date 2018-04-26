@@ -29,10 +29,12 @@ class SingleMap extends React.Component {
     this.changeAlgorithmStatus=this.changeAlgorithmStatus.bind(this);
     this.stopAlgorithm=this.stopAlgorithm.bind(this);
   }
-  componentDidMount () {
-    this.loadMap();
+
+  componentDidMount(){
+    this.initializeMap();
   }
-  loadMap(){
+
+  initializeMap(){
     if (this.props && this.props.google) {
       //map set up
       const { google } = this.props;
@@ -72,14 +74,13 @@ class SingleMap extends React.Component {
           strokeWeight: 1,
           zIndex: 1
         })
-
         infowindow.close();
       })
       layer.setMap(this.map)
     }
   }
 
-  updateLayer(state,dLevel){
+  displayGeoJSON(state,dLevel){
     this.removePreviousLayer();
     this.updateMapCenter(state,dLevel);
     if(state==='US'){
@@ -127,25 +128,30 @@ class SingleMap extends React.Component {
       this.map.setCenter({lat: 40.4172871, lng: -82.90712300000001});
     }
   }
+
   removePreviousLayer(){
     var layer=this.layer;
     layer.forEach(function (feature) {
         layer.remove(feature);
     });
   }
+
   changeState(e){
     this.setState({state: e.target.value});
-    this.updateLayer(e.target.value,this.state.dLevel);
+    this.displayGeoJSON(e.target.value,this.state.dLevel);
   }
+
   changeDLevel(e){
     this.setState({dLevel: e.target.value});
-    this.updateLayer(this.state.state,e.target.value);
+    this.displayGeoJSON(this.state.state,e.target.value);
   }
+
   handleConstraintChange (event) {
     var name = event.target.name;
     var value = event.target.value;
     this.setState({[name]: value});
   }
+
   handleCheckboxConstraintChange(event){
     var name = event.target.name;
     var value = false;
@@ -160,7 +166,6 @@ class SingleMap extends React.Component {
       redistrictStatus:true,
       algorithmStatus:'running'
     });
-    this.algorithmStatus='running';
     this.sendStartAlgorithmRequest();
   }
 
@@ -184,7 +189,6 @@ class SingleMap extends React.Component {
       this.requestMoreMapChange();
     })
     .catch(err => console.log(err));
-
   }
 
   requestMoreMapChange(){
@@ -198,6 +202,7 @@ class SingleMap extends React.Component {
     })
     .catch(err => console.log(err));
   }
+
   updateMapChange(data){
     var temp=this.layer;
     this.layer.forEach(function (feature) {
@@ -212,6 +217,7 @@ class SingleMap extends React.Component {
         }
     });
   }
+
   stopAlgorithm(){
     this.setState({
       algorithmStatus:'stopped',
