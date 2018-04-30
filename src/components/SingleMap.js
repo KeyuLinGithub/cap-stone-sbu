@@ -178,10 +178,10 @@ class SingleMap extends React.Component {
   	  headers: {
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
-      body: "map[COMPACTNESSWEIGHT]="+this.state.compactness+
-          "&map[POPULATIONVARIANCEWEIGHT]="+this.state.population+
-          "&map[RACIALFAIRNESSWEIGHT]="+this.state.racial+
-          "&map[PARTISANFAIRNESSWEIGHT]="+this.state.partisan+
+      body: "objectElementMap[COMPACTNESSWEIGHT]="+this.state.compactness+
+          "&objectElementMap[POPULATIONVARIANCEWEIGHT]="+this.state.population+
+          "&objectElementMap[RACIALFAIRNESSWEIGHT]="+this.state.racial+
+          "&objectElementMap[PARTISANFAIRNESSWEIGHT]="+this.state.partisan+
           "&isContiguity="+this.state.contiguity+
           "&isNaturalBoundary="+this.state.naturalBoundary
   	})
