@@ -214,7 +214,7 @@ class SingleMap extends React.Component {
   updateMapChange(data){
     var temp=this.layer;
     this.layer.forEach(function (feature) {
-        if(data.VTDI10===feature.f.VTDI10){
+        if(data.VTDST10===feature.f.VTDST10){
           temp.overrideStyle(feature, {
             fillColor: data.fill,
             fillOpacity: 0.2,
