@@ -200,12 +200,12 @@ class SingleMap extends React.Component {
       	  headers: {
       	    "Content-Type": "application/x-www-form-urlencoded"
       	  },
-      	  body: "compactness="+this.state.compactness+
-      	  		"&population="+this.state.population+
-              "&racial="+this.state.racial+
-              "&partisan="+this.state.partisan+
-              "&contiguity="+this.state.contiguity+
-              "&naturalBoundary="+this.state.naturalBoundary
+      	  body: "COMPACTNESSWEIGHT="+this.state.compactness+
+      	  		"&POPULATIONVARIANCEWEIGHT="+this.state.population+
+              "&RACIALFAIRNESSWEIGHT="+this.state.racial+
+              "&PARTISANFAIRNESSWEIGHT="+this.state.partisan+
+              "&isContiguity="+this.state.contiguity+
+              "&isNaturalBoundary="+this.state.naturalBoundary
       	})
     .then(res => res.json())
     .then(data => {
