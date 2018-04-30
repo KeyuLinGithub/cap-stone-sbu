@@ -194,7 +194,13 @@ class SingleMap extends React.Component {
   }
 
   requestMoreMapChange(){
-    fetch("http://localhost:8080/RedistrictSystem/process.do")
+    fetch("http://localhost:8080/RedistrictSystem/process.do", {
+    	  method: "POST",
+      	  credentials: 'include',
+      	  headers: {
+      	    "Content-Type": "application/x-www-form-urlencoded"
+      	  }
+      	})
     .then(res => res.json())
     .then(data => {
       this.updateMapChange(data);
