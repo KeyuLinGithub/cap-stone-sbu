@@ -28,6 +28,8 @@ class SingleMap extends React.Component {
     this.handleRedistrictRequest=this.handleRedistrictRequest.bind(this);
     this.changeAlgorithmStatus=this.changeAlgorithmStatus.bind(this);
     this.stopAlgorithm=this.stopAlgorithm.bind(this);
+    this.resetMap=this.resetMap.bind(this);
+    this.showAnalysis=this.showAnalysis.bind(this);
   }
 
   componentDidMount(){
@@ -230,14 +232,6 @@ class SingleMap extends React.Component {
     });
   }
 
-  stopAlgorithm(){
-    this.setState({
-      algorithmStatus:'stopped',
-      algorithmStatusText:"Stopped",
-      inactiveButtonController:true
-    });
-  }
-
   changeAlgorithmStatus(){
    if(this.state.algorithmStatus==='running'){
      this.setState({
@@ -255,7 +249,37 @@ class SingleMap extends React.Component {
      });
      this.requestMoreMapChange();
    }
- }
+  }
+
+  stopAlgorithm(){
+     this.setState({
+       algorithmStatus:'stopped',
+       algorithmStatusText:"Stopped",
+       inactiveButtonController:true
+     });
+  }
+
+  resetMap(){
+    //reset the buttons
+    this.setState({
+      algorithmStatus:'stopped',
+      algorithmStatusClassName:"btn btn-warning",
+      algorithmStatusText:"Running...",
+      buttonStatusText:'Pause',
+      inactiveButtonController:false,
+      redistrictStatus:false,
+      compactness:25,
+      population:25,
+      racial:25,
+      partisan:25
+    });
+    //reset resetGeoJson
+    this.displayGeoJSON(this.state.state,this.state.dLevel);
+  }
+
+  showAnalysis(){
+    this.props.showAnalysis();
+  }
 
 render(){
   const originalStyle = {
@@ -338,6 +362,7 @@ render(){
              type="button"
              className="btn btn-primary"
              onClick={this.handleRedistrictRequest}
+             disabled={this.state.inactiveButtonController}
             >
              Redistrict
             </button>
@@ -366,10 +391,22 @@ render(){
               </button>
               <br/><br/>
               Reset the Map:
-              <button type="button" className="btn btn-success">Reset</button>
+              <button
+               type="button"
+               className="btn btn-success"
+               onClick={this.resetMap}
+              >
+                Reset
+              </button>
               <br/><br/>
               Show Analysis:
-              <button type="button" className="btn btn-primary">Show</button>
+              <button
+               type="button"
+               className="btn btn-primary"
+               onClick={this.showAnalysis}
+               >
+                Show
+              </button>
             </div>
           }
         </div>

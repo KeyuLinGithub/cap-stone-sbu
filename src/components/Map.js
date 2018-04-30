@@ -5,14 +5,29 @@ import SingleMap from './SingleMap';
 import Analysis from './Analysis';
 
 class MapPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayAnalysis: false
+    };
+    this.showAnalysis=this.showAnalysis.bind(this);
+  }
+  showAnalysis(){
+    if(this.state.displayAnalysis){
+      this.setState({displayAnalysis: false})
+    }else{
+      this.setState({displayAnalysis: true})
+    }
+    console.log(this.state.displayAnalysis);
+  }
   render() {
     return (
       <div className="container-fluid">
         <div className="row">
-        <SingleMap google={this.props.google} />
+          <SingleMap google={this.props.google} showAnalysis={this.showAnalysis}/>
         </div>
         <div className="row">
-        <Analysis />
+          {this.state.displayAnalysis && <Analysis />}
         </div >
       </div>
     );
