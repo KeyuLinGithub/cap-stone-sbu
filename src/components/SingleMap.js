@@ -30,6 +30,8 @@ class SingleMap extends React.Component {
     this.stopAlgorithm=this.stopAlgorithm.bind(this);
     this.resetMap=this.resetMap.bind(this);
     this.showAnalysis=this.showAnalysis.bind(this);
+
+    this.handleSearch=this.handleSearch.bind(this);
   }
 
   componentDidMount(){
@@ -46,7 +48,7 @@ class SingleMap extends React.Component {
       const mapConfig = Object.assign({}, {
         center: new google.maps.LatLng(40.00, -98),
         zoom: 4,
-        mapTypeId: 'roadmap',
+        mapTypeId: 'terrain',
         mapTypeControl: false,
         mapTypeControlOptions: {
           mapTypeIds: [google.maps.MapTypeId.ROADMAP]
@@ -79,6 +81,19 @@ class SingleMap extends React.Component {
         infowindow.close();
       })
       layer.setMap(this.map)
+      //add searchBar
+      var searchBarInput=ReactDOM.findDOMNode(this.refs.searchBar);
+      var searchBox = new google.maps.places.Autocomplete(searchBarInput);
+      var theMap=this.map;
+      theMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(searchBarInput);
+
+      searchBox.bindTo('bounds', theMap);
+
+      searchBox.addListener('place_changed', () => {
+        const place = searchBox.getPlace();
+        theMap.panTo(place.geometry.location);
+        theMap.setZoom(8);
+        });
     }
   }
 
@@ -169,6 +184,10 @@ class SingleMap extends React.Component {
       algorithmStatus:'running'
     });
     this.sendStartAlgorithmRequest();
+  }
+
+  handleSearch(event){
+    console.log(event.target.value);
   }
 
   sendStartAlgorithmRequest(){
@@ -405,6 +424,7 @@ render(){
           }
         </div>
         <div className="container col-sm-10" id="originalmap">
+          <input ref='searchBar' id="pac-input" className="controls" type="text" placeholder="Search Box" onBlur={this.handleSearch}/>
           <div ref='map' style={originalStyle}>
             loading map...
           </div>
