@@ -30,8 +30,6 @@ class SingleMap extends React.Component {
     this.stopAlgorithm=this.stopAlgorithm.bind(this);
     this.resetMap=this.resetMap.bind(this);
     this.showAnalysis=this.showAnalysis.bind(this);
-
-    this.handleSearch=this.handleSearch.bind(this);
   }
 
   componentDidMount(){
@@ -184,10 +182,6 @@ class SingleMap extends React.Component {
       algorithmStatus:'running'
     });
     this.sendStartAlgorithmRequest();
-  }
-
-  handleSearch(event){
-    console.log(event.target.value);
   }
 
   sendStartAlgorithmRequest(){
@@ -424,7 +418,7 @@ render(){
           }
         </div>
         <div className="container col-sm-10" id="originalmap">
-          <input ref='searchBar' id="pac-input" className="controls" type="text" placeholder="Search Box" onBlur={this.handleSearch}/>
+          <input ref='searchBar' id="pac-input" className="controls" type="text" placeholder="Search Box"/>
           <div ref='map' style={originalStyle}>
             loading map...
           </div>
