@@ -418,7 +418,13 @@ render(){
           }
         </div>
         <div className="container col-sm-10" id="originalmap">
-          <input ref='searchBar' id="pac-input" className="controls" type="text" placeholder="Search Box"/>
+          <input
+            ref='searchBar'
+            id="pac-input"
+            className="controls"
+            type="text"
+            placeholder="Search Box"
+          />
           <div ref='map' style={originalStyle}>
             loading map...
           </div>

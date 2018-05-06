@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export class User extends React.Component{
+class User extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +28,7 @@ export class User extends React.Component{
     .then(response => response.json())
     .then(data => {
       if(data==='USER' || data==='ADMIN'){
+        this.props.setUserRole(data);
         this.setState({
           login:true,
           showInvalid:false

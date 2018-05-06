@@ -1,52 +1,83 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-export class Admin extends React.Component{
+
+class Admin extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      user_page:false,
-      file_page:false,
-      map_page:false,
-      allUsers:{}
+      allUsers:[]
     };
-    this.handleUser=this.handleUser.bind(this);
-  }
-  handleUser(event) {
-    this.setState({user_page: true});
+
   }
   componentDidMount () {
     this.loadUsers()
   }
   loadUsers(){
-    
+    fetch("http://localhost:8080/RedistrictSystem/getUsers.do")
+    .then(res => res.json())
+    .then(data => {
+      this.setState({allUsers: data.users});
+    })
+    .catch(err => console.log(err));
   }
   render(){
     return(
       <div className="container">
         <div className="page-header">
-          <h1>Admin</h1>
+          <h1>Admin/User Management</h1>
         </div>
-        <div id="pill_nav">
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">User Management</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">File Managemnet</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Map Management</a>
-          </li>
-        </ul>
-
+        <div id='content' className="col-sm-4">
+          <ul className="list-group">
+            {
+              this.state.allUsers.map((name,index) =>
+                <li className="list-group-item">{index}: {name}</li>
+              )
+            }
+          </ul>
         </div>
-        <div id="contents">
-        <div className="page-header">
-          <h3>User Management</h3>
-
+        <div  className="col-sm-8">
+          <div className="page-header">
+            <h3>The user</h3>
+          </div>
+          <form>
+          <div className="form-group">
+            <label>First Name</label>
+            <input type="text"
+             className="form-control"
+             name="fName"
+            />
+            </div>
+          <div className="form-group">
+            <label>Last Name</label>
+            <input
+             type="text"
+             className="form-control"
+             name="lName"
+            />
+          </div>
+          <div className="form-group">
+            <label>Email address</label>
+            <input
+             type="email"
+             className="form-control form-control-success"
+             name="email"
+            />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+             type="text"
+             className="form-control"
+             name="password"
+            />
+          </div>
+          <div className="form-group">
+            <button type="button" className="btn btn-primary">
+              Save the Change
+            </button>
+          </div>
+          </form>
         </div>
-        </div>
-
       </div>
     )
   }

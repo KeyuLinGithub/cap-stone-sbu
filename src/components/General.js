@@ -1,6 +1,7 @@
 import React from 'react';
 import demo from '../img/demoImg.png';
-export class General extends React.Component {
+
+class General extends React.Component {
   render(){
     return(
       <div className="container mt-5 pt-5 pb-5">
