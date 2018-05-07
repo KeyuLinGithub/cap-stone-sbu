@@ -201,6 +201,9 @@ class SingleMap extends React.Component {
     .then(response => response.json())
     .then(data => {
       this.updateMapChange(data);
+      if(data.terminated){
+        return;
+      }
       this.requestMoreMapChange();
     })
     .catch(err => console.log(err));
@@ -217,7 +220,10 @@ class SingleMap extends React.Component {
     .then(res => res.json())
     .then(data => {
       this.updateMapChange(data);
-      if(this.state.algorithmStatus=='running'){
+      if(data.terminated){
+        return;
+      }
+      else if(this.state.algorithmStatus=='running'){
         this.requestMoreMapChange();
       }
     })
@@ -232,7 +238,7 @@ class SingleMap extends React.Component {
             fillColor: data.fill,
             fillOpacity: 0.2,
             strokeColor: '#000000',
-            strokeWeight: 1,
+            strokeWeight: 4,
             zIndex: 1
           })
         }
