@@ -19,7 +19,12 @@ class SingleMap extends React.Component {
       algorithmStatusClassName:"btn btn-warning",
       algorithmStatusText:"Running...",
       buttonStatusText:"Pause",
-      inactiveButtonController:false
+      inactiveButtonController:false,
+      infoboxPopulation:0,
+      infoboxAVGIncome:0,
+      infoboxNumOfCDs:0,
+      infoboxNumOfPDs:0,
+      infoboxArea:0
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
@@ -124,6 +129,29 @@ class SingleMap extends React.Component {
             strokeWeight: 1,
             zIndex: 1
           })
+      });
+      //request state info
+      this.displayStateInfo();
+    });
+  }
+
+  displayStateInfo(){
+    fetch("http://localhost:8080/RedistrictSystem/getStateInfo.do", {
+     method: "POST",
+     credentials: 'include',
+     headers: {
+       "Content-Type": "application/x-www-form-urlencoded"
+     },
+     body: "stateName="+state
+   })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({
+        infoboxPopulation:data.population,
+        infoboxAVGIncome:data.aveIncome,
+        infoboxNumOfCDs:data.numOfCds,
+        infoboxNumOfPDs:data.numOfPds,
+        infoboxArea:data.area
       });
     });
   }
@@ -437,11 +465,11 @@ render(){
           {this.state.state!=='US' &&
             <div id='stateInfoBox'>
               <h4>{this.state.state} :</h4>
-              <p>Population: 111</p>
-              <p>Avg. Income: 111</p>
-              <p>Area: 111 sq mi </p>
-              <p>Number of C. D.: 111</p>
-              <p>Number of P. D.: 111</p>
+              <p>Population: {this.state.infoboxPopulation}</p>
+              <p>Avg. Income: {this.state.infoboxAVGIncome}</p>
+              <p>Area: {this.state.infoboxArea} sq mi </p>
+              <p>Number of C. D.: {this.state.infoboxNumOfCDs}</p>
+              <p>Number of P. D.: {this.state.infoboxNumOfPDs}</p>
             </div>
           }
         </div>
