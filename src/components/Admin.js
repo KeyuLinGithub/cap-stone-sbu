@@ -97,7 +97,7 @@ class Admin extends React.Component{
           <ul className="list-group">
             {this.state.allUsers &&
               this.state.allUsers.map((user,index) =>
-                <li className="list-group-item" onClick={() => this.changeCurrentPerson(index)}>{index+1}: {user.firstName} {user.lastName} <i className="fas fa-times-circle" onClick={() => this.deleteUser(index)}></i></li>
+                <li className="list-group-item" ><div onClick={() => this.changeCurrentPerson(index)}>{index+1}: {user.firstName} {user.lastName}</div> <i className="fas fa-times-circle" onClick={() => this.deleteUser(index)}></i></li>
               )
             }
           </ul>
