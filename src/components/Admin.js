@@ -16,9 +16,7 @@ class Admin extends React.Component{
     fetch("http://localhost:8080/RedistrictSystem/getUsers.do")
     .then(res => res.json())
     .then(data => {
-      //this.setState({allUsers: data.users});
-      console.log(data);
-      console.log(data[0]);
+      this.setState({allUsers: data});
     })
     .catch(err => console.log(err));
   }
@@ -29,7 +27,13 @@ class Admin extends React.Component{
           <h1>Admin/User Management</h1>
         </div>
         <div id='content' className="col-sm-4">
-
+          <ul className="list-group">
+            {
+              this.state.allUsers.map((user,index) =>
+                <li className="list-group-item">{index}: {firstName} {lastName}</li>
+              )
+            }
+          </ul>
         </div>
         <div  className="col-sm-8">
           <div className="page-header">
@@ -80,11 +84,3 @@ class Admin extends React.Component{
 };
 
 export default Admin;
-
-// <ul className="list-group">
-//   {
-//     this.state.allUsers.map((name,index) =>
-//       <li className="list-group-item">{index}: {name}</li>
-//     )
-//   }
-// </ul>
