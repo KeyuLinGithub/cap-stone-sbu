@@ -46,7 +46,8 @@ class Admin extends React.Component{
   	})
     .catch(err => console.log(err));
 
-    var newList=this.state.allUsers.remove(index);
+    var newList=this.state.allUsers
+    newList.remove(index);
     this.setState({allUsers: newList});
   }
   submitChange(){
@@ -97,7 +98,7 @@ class Admin extends React.Component{
           <ul className="list-group">
             {this.state.allUsers &&
               this.state.allUsers.map((user,index) =>
-                <li className="list-group-item" ><div onClick={() => this.changeCurrentPerson(index)}>{index+1}: {user.firstName} {user.lastName}</div> <i className="fas fa-times-circle" onClick={() => this.deleteUser(index)}></i></li>
+                <li className="list-group-item" ><span onClick={() => this.changeCurrentPerson(index)}>{index+1}: {user.firstName} {user.lastName}</span> <i className="fas fa-times-circle" onClick={() => this.deleteUser(index)}></i></li>
               )
             }
           </ul>
