@@ -13,7 +13,7 @@ class Admin extends React.Component{
       currentEmail:''
     };
     this.changeCurrentPerson=this.changeCurrentPerson.bind(this);
-    this.submitChange=this.submitChange.bind(this;)
+    this.submitChange=this.submitChange.bind(this);
   }
   componentDidMount () {
     this.loadUsers()
