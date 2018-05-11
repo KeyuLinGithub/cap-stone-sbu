@@ -25,7 +25,7 @@ class Admin extends React.Component{
     .catch(err => console.log(err));
   }
   loadUserInfo(index){
-    var theUser=allUsers[index];
+    var theUser=this.state.allUsers[index];
     this.setState({
       currentFirstName: theUser.firstName,
       currentLastName: theUser.lastName,
@@ -40,7 +40,7 @@ class Admin extends React.Component{
         </div>
         <div id='content' className="col-sm-4">
           <ul className="list-group">
-            {
+            {this.state.allUsers &&
               this.state.allUsers.map((user,index) =>
                 <li className="list-group-item">{index+1}: {user.firstName} {user.lastName}</li>
               )
