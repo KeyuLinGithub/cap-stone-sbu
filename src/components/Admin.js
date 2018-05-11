@@ -57,7 +57,7 @@ class Admin extends React.Component{
     this.setState({
       currentFirstName: theUser.firstName,
       currentLastName: theUser.lastName,
-      currentPreferParty: theUser.preferParty
+      currentPreferParty: theUser.preferParty,
       currentEmail:theUser.email
     });
   }
