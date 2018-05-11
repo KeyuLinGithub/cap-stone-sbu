@@ -30,7 +30,7 @@ class Admin extends React.Component{
           <ul className="list-group">
             {
               this.state.allUsers.map((user,index) =>
-                <li className="list-group-item">{index}: {firstName} {lastName}</li>
+                <li className="list-group-item">{index}: {user.firstName} {user.lastName}</li>
               )
             }
           </ul>
