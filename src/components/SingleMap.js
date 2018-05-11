@@ -230,6 +230,11 @@ class SingleMap extends React.Component {
     .then(data => {
       this.updateMapChange(data);
       if(data.terminated){
+        this.setState({
+          algorithmStatus:'finished',
+          algorithmStatusText:"Finished",
+          inactiveButtonController:true
+        });
         return;
       }
       this.requestMoreMapChange();
@@ -249,6 +254,11 @@ class SingleMap extends React.Component {
     .then(data => {
       this.updateMapChange(data);
       if(data.terminated){
+        this.setState({
+          algorithmStatus:'finished',
+          algorithmStatusText:"Finished",
+          inactiveButtonController:true
+        });
         return;
       }
       else if(this.state.algorithmStatus=='running'){
