@@ -3,7 +3,7 @@ import React from 'react';
 import { GoogleApiWrapper } from 'google-maps-react';
 import SingleMap from './SingleMap';
 import Analysis from './Analysis';
-
+import Comparison from './Comparison';
 class MapPage extends React.Component {
   constructor(props) {
     super(props);
@@ -29,6 +29,9 @@ class MapPage extends React.Component {
         <div className="row">
           {this.state.displayAnalysis && <Analysis />}
         </div >
+        <div className="row">
+          <Comparison/>
+        </div>
       </div>
     );
   }

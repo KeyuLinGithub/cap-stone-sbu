@@ -346,7 +346,7 @@ render(){
   return(
     <div id="singleMaps">
       <div className="page-header">
-        <h1>Original Map</h1>
+        <h1>Map</h1>
       </div>
       <div>
         <div className="container col-sm-2">
