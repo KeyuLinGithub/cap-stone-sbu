@@ -166,9 +166,9 @@ class SingleMap extends React.Component {
     }else if(state==='NH'){
       this.map.setZoom(8);
       this.map.setCenter({lat: 43.8938516, lng: -71.57239529999998});
-    }else if(state==='OH'){
+    }else if(state==='SC'){
       this.map.setZoom(8);
-      this.map.setCenter({lat: 40.4172871, lng: -82.90712300000001});
+      this.map.setCenter({lat: 33.836082, lng: -81.163727});
     }
   }
 
@@ -342,7 +342,7 @@ render(){
               <option value="US">US</option>
               <option value="CO">Colorado</option>
               <option value="NH">New Hampshire</option>
-              <option value="OH">Ohio</option>
+              <option value="SC">South Carolina</option>
             </select>
           </div>
           <div className="form-group">
