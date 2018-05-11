@@ -14,6 +14,7 @@ class Admin extends React.Component{
     };
     this.changeCurrentPerson=this.changeCurrentPerson.bind(this);
     this.submitChange=this.submitChange.bind(this);
+    this.handleInput=this.handleInput.bind(this);
   }
   componentDidMount () {
     this.loadUsers()
@@ -24,7 +25,13 @@ class Admin extends React.Component{
     })
     this.loadUserInfo(index);
   }
+  handleInput (event) {
+    var name = event.target.name;
+    var value = event.target.value;
+    this.setState({[name]: value});
+  }
   submitChange(){
+    console.log(this.state);
     //change locally
     this.state.allUsers[this.state.currentUserIndex].firstName=this.state.currentFirstName;
     this.state.allUsers[this.state.currentUserIndex].lastName=this.state.currentLastName;
@@ -85,8 +92,9 @@ class Admin extends React.Component{
             <label>First Name</label>
             <input type="text"
              className="form-control"
-             name="fName"
+             name="currentFirstName"
              value={this.state.currentFirstName}
+             onChange={this.handleInput}
             />
             </div>
           <div className="form-group">
@@ -94,15 +102,17 @@ class Admin extends React.Component{
             <input
              type="text"
              className="form-control"
-             name="lName"
+             name="currentLastName"
              value={this.state.currentLastName}
+             onChange={this.handleInput}
             />
           </div>
           <div className="form-group">
             <label>Preferred Party</label><br />
             <select id="PreferredParty"
-             name='party'
+             name='currentPreferParty'
              value={this.state.currentPreferParty}
+             onChange={this.handleInput}
             >
               <option value="REPUBLICAN">REPUBLICAN</option>
               <option value="DEMOCRATIC">DEMOCRATIC</option>
