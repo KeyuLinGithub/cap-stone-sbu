@@ -67,22 +67,7 @@ class Admin extends React.Component{
              name="lName"
             />
           </div>
-          <div className="form-group">
-            <label>Email address</label>
-            <input
-             type="email"
-             className="form-control form-control-success"
-             name="email"
-            />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-             type="text"
-             className="form-control"
-             name="password"
-            />
-          </div>
+          
           <div className="form-group">
             <button type="button" className="btn btn-primary">
               Save the Change

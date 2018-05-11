@@ -19,7 +19,7 @@ class StateInfo extends React.Component {
   }
   getStateInfo(){
     var state=this.props.state;
-    fetch("http://localhost:8080/RedistrictSystem/getStateInfo.do", {
+    fetch("http://localhost:8080/RedistrictSystem/getCompareState.do", {
      method: "POST",
      credentials: 'include',
      headers: {
