@@ -15,6 +15,7 @@ class Admin extends React.Component{
     this.changeCurrentPerson=this.changeCurrentPerson.bind(this);
     this.submitChange=this.submitChange.bind(this);
     this.handleInput=this.handleInput.bind(this);
+    this.deleteUser=this.deleteUser.bind(this);
   }
   componentDidMount () {
     this.loadUsers()
@@ -29,6 +30,24 @@ class Admin extends React.Component{
     var name = event.target.name;
     var value = event.target.value;
     this.setState({[name]: value});
+  }
+  deleteUser(index){
+    if(this.state.currentUserIndex!=0 && this.state.currentUserIndex==index){
+      this.setState({currentUserIndex: index-1});
+    }
+    var deleteEmail=this.state.allUsers[index].email;
+    fetch("http://localhost:8080/RedistrictSystem/deleteUser.do", {
+  	  method: "POST",
+  	  credentials: 'include',
+  	  headers: {
+  	    "Content-Type": "application/x-www-form-urlencoded"
+  	  },
+      body: "email="+deleteEmail
+  	})
+    .catch(err => console.log(err));
+
+    var newList=this.state.allUsers.remove(index);
+    this.setState({allUsers: newList});
   }
   submitChange(){
     console.log(this.state);
@@ -78,7 +97,7 @@ class Admin extends React.Component{
           <ul className="list-group">
             {this.state.allUsers &&
               this.state.allUsers.map((user,index) =>
-                <li className="list-group-item" onClick={() => this.changeCurrentPerson(index)}>{index+1}: {user.firstName} {user.lastName}</li>
+                <li className="list-group-item" onClick={() => this.changeCurrentPerson(index)}>{index+1}: {user.firstName} {user.lastName} <i className="fas fa-times-circle" onClick={() => this.deleteUser(index)}></i></li>
               )
             }
           </ul>
