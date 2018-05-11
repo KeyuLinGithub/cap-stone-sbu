@@ -6,14 +6,42 @@ class Admin extends React.Component{
     super(props);
     this.state = {
       allUsers:[],
+      currentUserIndex: 0,
       currentFirstName: '',
       currentLastName: '',
-      currentPreferParty: ''
+      currentPreferParty: '',
+      currentEmail:''
     };
-
+    this.changeCurrentPerson=this.changeCurrentPerson.bind(this);
+    this.submitChange=this.submitChange.bind(this;)
   }
   componentDidMount () {
     this.loadUsers()
+  }
+  changeCurrentPerson(index){
+    this.setState({
+      currentUserIndex: index
+    })
+    this.loadUserInfo(index);
+  }
+  submitChange(){
+    //change locally
+    this.state.allUsers[this.state.currentUserIndex].firstName=this.state.currentFirstName;
+    this.state.allUsers[this.state.currentUserIndex].lastName=this.state.currentLastName;
+    this.state.allUsers[this.state.currentUserIndex].preferParty=this.state.currentPreferParty;
+    //change remotely
+    fetch("http://localhost:8080/RedistrictSystem/updateUser.do", {
+  	  method: "POST",
+  	  credentials: 'include',
+  	  headers: {
+  	    "Content-Type": "application/x-www-form-urlencoded"
+  	  },
+      body: "firstName="+this.state.currentFirstName+
+            "&lastName="+this.state.currentLastName+
+            "&party="+this.state.currentPreferParty+
+            "&email="+this.state.currentEmail
+  	})
+    .catch(err => console.log(err));
   }
   loadUsers(){
     fetch("http://localhost:8080/RedistrictSystem/getUsers.do")
@@ -30,6 +58,7 @@ class Admin extends React.Component{
       currentFirstName: theUser.firstName,
       currentLastName: theUser.lastName,
       currentPreferParty: theUser.preferParty
+      currentEmail:theUser.email
     });
   }
   render(){
@@ -42,7 +71,7 @@ class Admin extends React.Component{
           <ul className="list-group">
             {this.state.allUsers &&
               this.state.allUsers.map((user,index) =>
-                <li className="list-group-item">{index+1}: {user.firstName} {user.lastName}</li>
+                <li className="list-group-item" onClick={() => this.changeCurrentPerson(index)}>{index+1}: {user.firstName} {user.lastName}</li>
               )
             }
           </ul>
@@ -57,6 +86,7 @@ class Admin extends React.Component{
             <input type="text"
              className="form-control"
              name="fName"
+             value={this.state.currentFirstName}
             />
             </div>
           <div className="form-group">
@@ -65,11 +95,22 @@ class Admin extends React.Component{
              type="text"
              className="form-control"
              name="lName"
+             value={this.state.currentLastName}
             />
           </div>
-          
           <div className="form-group">
-            <button type="button" className="btn btn-primary">
+            <label>Preferred Party</label><br />
+            <select id="PreferredParty"
+             name='party'
+             value={this.state.currentPreferParty}
+            >
+              <option value="REPUBLICAN">REPUBLICAN</option>
+              <option value="DEMOCRATIC">DEMOCRATIC</option>
+              <option value="OTHERS">OTHERS</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <button type="button" className="btn btn-primary" onClick={this.submitChange}>
               Save the Change
             </button>
           </div>
