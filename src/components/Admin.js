@@ -5,7 +5,10 @@ class Admin extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      allUsers:[]
+      allUsers:[],
+      currentFirstName: '',
+      currentLastName: '',
+      currentPreferParty: ''
     };
 
   }
@@ -17,8 +20,17 @@ class Admin extends React.Component{
     .then(res => res.json())
     .then(data => {
       this.setState({allUsers: data});
+      this.loadUserInfo();
     })
     .catch(err => console.log(err));
+  }
+  loadUserInfo(index){
+    var theUser=allUsers[index];
+    this.setState({
+      currentFirstName: theUser.firstName,
+      currentLastName: theUser.lastName,
+      currentPreferParty: theUser.preferParty
+    });
   }
   render(){
     return(
@@ -30,7 +42,7 @@ class Admin extends React.Component{
           <ul className="list-group">
             {
               this.state.allUsers.map((user,index) =>
-                <li className="list-group-item">{index}: {user.firstName} {user.lastName}</li>
+                <li className="list-group-item">{index+1}: {user.firstName} {user.lastName}</li>
               )
             }
           </ul>
