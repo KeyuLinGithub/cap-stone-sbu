@@ -23,7 +23,6 @@ class SignUp extends React.Component{
     this.handleEmailInput=this.handleEmailInput.bind(this);
     this.signUp=this.signUp.bind(this);
     this.checkPassword=this.checkPassword.bind(this);
-    this.changeParty=this.changeParty.bind(this);
   }
   handleInput (event) {
     var name = event.target.name;
@@ -90,6 +89,7 @@ class SignUp extends React.Component{
     return true;
   }
   signUp(){
+    console.log(this.state);
     if(this.checkAllFields()==true){
       fetch("http://localhost:8080/RedistrictSystem/register.do", {
     	  method: "POST",
@@ -154,13 +154,14 @@ class SignUp extends React.Component{
               {this.state.oldEmail && <p className="text-danger">The email address alrealy registerd</p>}
             </div>
             <div className="form-group">
-              <label>Preferred Party</label>
+              <label>Preferred Party</label><br />
               <select id="PreferredParty"
                name='party'
                onChange={this.handleInput}
               >
                 <option value="REPUBLICAN">REPUBLICAN</option>
                 <option value="DEMOCRATIC">DEMOCRATIC</option>
+                <option value="OTHERS">OTHERS</option>
               </select>
             </div>
             <div className="form-group">
