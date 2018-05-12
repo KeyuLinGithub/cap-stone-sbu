@@ -49,7 +49,7 @@ class Admin extends React.Component{
     .catch(err => console.log(err));
 
     var newList=this.state.allUsers
-    newList.remove(index);
+    newList.splice(index, 1);
     this.setState({allUsers: newList});
 
     console.log("delete only");
