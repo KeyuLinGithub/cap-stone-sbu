@@ -25,6 +25,8 @@ class Admin extends React.Component{
       currentUserIndex: index
     })
     this.loadUserInfo(index);
+
+    console.log("change user only");
   }
   handleInput (event) {
     var name = event.target.name;
@@ -49,6 +51,8 @@ class Admin extends React.Component{
     var newList=this.state.allUsers
     newList.remove(index);
     this.setState({allUsers: newList});
+
+    console.log("delete only");
   }
   submitChange(){
     console.log(this.state);
