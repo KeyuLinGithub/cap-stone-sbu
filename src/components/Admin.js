@@ -16,6 +16,7 @@ class Admin extends React.Component{
     this.submitChange=this.submitChange.bind(this);
     this.handleInput=this.handleInput.bind(this);
     this.deleteUser=this.deleteUser.bind(this);
+    this.changePropertyFile=this.changePropertyFile.bind(this);
   }
   componentDidMount () {
     this.loadUsers()
@@ -27,6 +28,11 @@ class Admin extends React.Component{
     this.loadUserInfo(index);
 
     console.log("change user only");
+  }
+
+  changePropertyFile(){
+    fetch("http://localhost:8080/RedistrictSystem/changePropertyFile.do")
+    .catch(err => console.log(err));
   }
   handleInput (event) {
     var name = event.target.name;
@@ -153,6 +159,14 @@ class Admin extends React.Component{
             </button>
           </div>
           </form>
+        </div>
+        <div className="page-header">
+          <h1>Admin/File Management</h1>
+        </div>
+        <div>
+          <button type="button" className="btn btn-primary" onClick={this.changePropertyFile} >
+            Change the Property File
+          </button>
         </div>
       </div>
     )
