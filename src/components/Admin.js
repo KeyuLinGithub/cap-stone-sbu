@@ -31,7 +31,7 @@ class Admin extends React.Component{
   }
 
   changePropertyFile(){
-    fetch("http://localhost:8080/RedistrictSystem/changePropertyFile.do")
+    fetch("http://localhost:8080/RedistrictSystem/editProperties.do")
     .catch(err => console.log(err));
   }
   handleInput (event) {
