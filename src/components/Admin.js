@@ -102,75 +102,105 @@ class Admin extends React.Component{
     return(
       <div className="container">
         <div className="page-header">
-          <h1>Admin/User Management-Add User</h1>
+          <h1>Admin</h1>
         </div>
-        <NewUser />
-        <div className="page-header">
-          <h1>Admin/User Management-Edit User</h1>
-        </div>
-        <div>
-          <div id='content' className="col-sm-4">
-            <ul className="list-group">
-              {this.state.allUsers &&
-                this.state.allUsers.map((user,index) =>
-                  <li className="list-group-item" ><span onClick={() => this.changeCurrentPerson(index)}>{index+1}: {user.firstName} {user.lastName}</span> <span onClick={() => this.deleteUser(index)}><i className="fas fa-times-circle" ></i></span></li>
-                )
-              }
-            </ul>
-          </div>
-          <div  className="col-sm-8">
-            <div className="page-header">
-              <h3>The user</h3>
+        <div className="panel-group">
+
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h4 className="panel-title">
+                <a data-toggle="collapse" href="#collapse2">
+                  Admin/User Management-Edit User
+                </a>
+              </h4>
             </div>
-            <form>
-            <div className="form-group">
-              <label>First Name</label>
-              <input type="text"
-               className="form-control"
-               name="currentFirstName"
-               value={this.state.currentFirstName}
-               onChange={this.handleInput}
-              />
+            <div id="collapse2" className="panel-collapse collapse">
+              <div className="panel-body">
+                <div id='content' className="col-sm-4">
+                  <ul className="list-group">
+                    {this.state.allUsers &&
+                      this.state.allUsers.map((user,index) =>
+                        <li className="list-group-item" ><span onClick={() => this.changeCurrentPerson(index)}>{index+1}: {user.firstName} {user.lastName}</span> <span onClick={() => this.deleteUser(index)}><i className="fas fa-times-circle" ></i></span></li>
+                      )
+                    }
+                  </ul>
+                </div>
+                <div  className="col-sm-8">
+                  <div className="page-header">
+                    <h3>The user</h3>
+                  </div>
+                  <form>
+                  <div className="form-group">
+                    <label>First Name</label>
+                    <input type="text"
+                     className="form-control"
+                     name="currentFirstName"
+                     value={this.state.currentFirstName}
+                     onChange={this.handleInput}
+                    />
+                    </div>
+                  <div className="form-group">
+                    <label>Last Name</label>
+                    <input
+                     type="text"
+                     className="form-control"
+                     name="currentLastName"
+                     value={this.state.currentLastName}
+                     onChange={this.handleInput}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Preferred Party</label><br />
+                    <select id="PreferredParty"
+                     name='currentPreferParty'
+                     value={this.state.currentPreferParty}
+                     onChange={this.handleInput}
+                    >
+                      <option value="REPUBLICAN">REPUBLICAN</option>
+                      <option value="DEMOCRATIC">DEMOCRATIC</option>
+                      <option value="OTHERS">OTHERS</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <button type="button" className="btn btn-primary" onClick={this.submitChange}>
+                      Save the Change
+                    </button>
+                  </div>
+                  </form>
+                </div>
               </div>
-            <div className="form-group">
-              <label>Last Name</label>
-              <input
-               type="text"
-               className="form-control"
-               name="currentLastName"
-               value={this.state.currentLastName}
-               onChange={this.handleInput}
-              />
             </div>
-            <div className="form-group">
-              <label>Preferred Party</label><br />
-              <select id="PreferredParty"
-               name='currentPreferParty'
-               value={this.state.currentPreferParty}
-               onChange={this.handleInput}
-              >
-                <option value="REPUBLICAN">REPUBLICAN</option>
-                <option value="DEMOCRATIC">DEMOCRATIC</option>
-                <option value="OTHERS">OTHERS</option>
-              </select>
+          </div>
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h4 className="panel-title">
+                <a data-toggle="collapse" href="#collapse1">
+                  Admin/User Management-Add User
+                </a>
+              </h4>
             </div>
-            <div className="form-group">
-              <button type="button" className="btn btn-primary" onClick={this.submitChange}>
-                Save the Change
-              </button>
+            <div id="collapse1" className="panel-collapse collapse">
+              <div className="panel-body">
+                <NewUser loadUsers={this.loadUsers}/>
+              </div>
             </div>
-            </form>
+          </div>
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h4 className="panel-title">
+                <a data-toggle="collapse" href="#collapse3">Admin/File Management</a>
+              </h4>
+            </div>
+            <div id="collapse3" className="panel-collapse collapse">
+              <div className="panel-body">
+                <button type="button" className="btn btn-primary" onClick={this.changePropertyFile} >
+                  Change the Property File
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="page-header">
-          <h1>Admin/File Management</h1>
-        </div>
-        <div>
-          <button type="button" className="btn btn-primary" onClick={this.changePropertyFile} >
-            Change the Property File
-          </button>
-        </div>
       </div>
     )
   }

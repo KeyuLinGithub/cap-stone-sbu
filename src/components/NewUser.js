@@ -119,12 +119,13 @@ class NewUser extends React.Component{
       this.setState({submissionError:true});
     }
     this.myFormRef.reset();
+    this.props.loadUsers();
   }
   render(){
     return(
       <div className="container">
         <div className="container col-sm-4">
-          <form ref={(el) => this.myFormRef = el;}>
+          <form ref={(el) => this.myFormRef = el}>
             <div className="form-group">
               <label>First Name</label>
               <input type="text"
