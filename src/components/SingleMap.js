@@ -77,8 +77,8 @@ class SingleMap extends React.Component {
                       +' <br\>Population of Asian: '+e.feature.f.blackAfrican
                       +' <br\>Population of African American: '+e.feature.f.asian
                       +' <br\>HouseHold Avg. Income: '+e.feature.f.houseHoldAvg
-                      +' <br\>Democratic votes: '+e.feature.f.dVotes
-                      +' <br\>Republican votes: '+e.feature.f.rVotes;
+                      +' <br\>Democratic votes: '+e.feature.f.DVOTES
+                      +' <br\>Republican votes: '+e.feature.f.RVOTES;
           infowindow.setContent(content);
           infowindow.setPosition(e.latLng);
           infowindow.open(this.map);
