@@ -11,7 +11,9 @@ class StateInfo extends React.Component {
       infoboxNumOfPDs:0,
       infoboxArea:0,
       infoboxCompactness: 0,
-      infoboxPoliticalFairness: 0
+      infoboxPoliticalFairness: 0,
+      infoboxGoodness: data.goodness,
+      infoboxRacialFairness: data.racialFairness
     };
   }
   componentDidMount(){
@@ -36,7 +38,9 @@ class StateInfo extends React.Component {
         infoboxNumOfPDs:data.numOfPds,
         infoboxArea:data.area,
         infoboxCompactness: data.compactness,
-        infoboxPoliticalFairness: data.politicalFairness
+        infoboxPoliticalFairness: data.politicalFairness,
+        infoboxGoodness: data.goodness,
+        infoboxRacialFairness: data.racialFairness
       });
     });
   }
@@ -51,6 +55,8 @@ class StateInfo extends React.Component {
         <p>Number of P. D.: {this.state.infoboxNumOfPDs}</p>
         <p>Compactness: {this.state.infoboxCompactness}</p>
         <p>Political Fairness: {this.state.infoboxPoliticalFairness}</p>
+        <p>Racial Fairness: {this.state.infoboxRacialFairness}</p>
+        <p>Goodness: {this.state.infoboxGoodness}</p>
       </div>
     )
   }
