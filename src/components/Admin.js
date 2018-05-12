@@ -9,7 +9,7 @@ class Admin extends React.Component{
       currentUserIndex: 0,
       currentFirstName: '',
       currentLastName: '',
-      currentPreferParty: '',
+      currentPreferParty: 'REPUBLICAN',
       currentEmail:''
     };
     this.changeCurrentPerson=this.changeCurrentPerson.bind(this);
