@@ -106,7 +106,7 @@ class NewUser extends React.Component{
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        this.props.history.push(process.env.PUBLIC_URL +'/');
+        
       });
     }else{
       this.setState({submissionError:true});
