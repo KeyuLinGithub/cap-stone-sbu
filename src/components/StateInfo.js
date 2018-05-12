@@ -12,8 +12,8 @@ class StateInfo extends React.Component {
       infoboxArea:0,
       infoboxCompactness: 0,
       infoboxPoliticalFairness: 0,
-      infoboxGoodness: data.goodness,
-      infoboxRacialFairness: data.racialFairness
+      infoboxGoodness: 0,
+      infoboxRacialFairness: 0
     };
   }
   componentDidMount(){
