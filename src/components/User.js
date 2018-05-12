@@ -42,6 +42,7 @@ class User extends React.Component{
   }
   handleLogout(){
     this.setState({login:false});
+    this.props.setUserRole('GUEST');
   }
   editEmail(event){
     this.setState({username: event.target.value});
