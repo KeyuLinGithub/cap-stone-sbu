@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import NewUser from './NewUser';
 class Admin extends React.Component{
   constructor(props) {
     super(props);
@@ -96,7 +96,11 @@ class Admin extends React.Component{
     return(
       <div className="container">
         <div className="page-header">
-          <h1>Admin/User Management</h1>
+          <h1>Admin/User Management-Add User</h1>
+        </div>
+        <NewUser />
+        <div className="page-header">
+          <h1>Admin/User Management-Edit User</h1>
         </div>
         <div id='content' className="col-sm-4">
           <ul className="list-group">
