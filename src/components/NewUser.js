@@ -57,6 +57,7 @@ class NewUser extends React.Component{
     });
   }
   checkPassword(event){
+    this.setState({confirmPassword:''});
     if(event.target.value.length!=0 &&
        event.target.value!=this.state.password){
       this.setState({incorrectPassword:true});
@@ -106,17 +107,24 @@ class NewUser extends React.Component{
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        
+        this.setState({
+          fName:'',
+          lName:'',
+          email:'',
+          password:'',
+          party: 'REPUBLICAN'
+        });
       });
     }else{
       this.setState({submissionError:true});
     }
+    this.myFormRef.reset();
   }
   render(){
     return(
       <div className="container">
         <div className="container col-sm-4">
-          <form>
+          <form ref={(el) => this.myFormRef = el;}>
             <div className="form-group">
               <label>First Name</label>
               <input type="text"
