@@ -24,7 +24,8 @@ class SingleMap extends React.Component {
       infoboxAVGIncome:0,
       infoboxNumOfCDs:0,
       infoboxNumOfPDs:0,
-      infoboxArea:0
+      infoboxArea:0,
+      previousHistoryList: []
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
@@ -35,12 +36,47 @@ class SingleMap extends React.Component {
     this.stopAlgorithm=this.stopAlgorithm.bind(this);
     this.resetMap=this.resetMap.bind(this);
     this.showAnalysis=this.showAnalysis.bind(this);
+    this.saveMap=this.saveMap.bind(this);
+    this.requestPreviousGeoJson=this.requestPreviousGeoJson.bind(this);
+    this.deletePreviousGeojson=this.deletePreviousGeojson.bind(this);
   }
 
   componentDidMount(){
     this.initializeMap();
+    this.loadPreviousHistory();
   }
-
+  loadPreviousHistory(){
+    fetch("http://localhost:8080/RedistrictSystem/getFileList.do")
+    .then(response => response.json())
+    .then(data => {
+      this.setState({
+        previousHistoryList:data
+      });
+    })
+    .catch(err => console.log(err));
+  }
+  requestPreviousGeoJson(fileName){
+    fetch("http://localhost:8080/RedistrictSystem/importState.do", {
+     method: "POST",
+     credentials: 'include',
+     headers: {
+       "Content-Type": "application/x-www-form-urlencoded"
+     },
+     body: "fileName="+fileName
+    })
+    .catch(err => console.log(err));
+  }
+  deletePreviousGeojson(fileName){
+    fetch("http://localhost:8080/RedistrictSystem/removeFile.do", {
+     method: "POST",
+     credentials: 'include',
+     headers: {
+       "Content-Type": "application/x-www-form-urlencoded"
+     },
+     body: "fileName="+fileName
+    })
+    .catch(err => console.log(err));
+  }
   initializeMap(){
     if (this.props && this.props.google) {
       //map set up
@@ -318,6 +354,10 @@ class SingleMap extends React.Component {
      });
   }
 
+  saveMap(){
+    fetch("http://localhost:8080/RedistrictSystem/exportState.do");
+  }
+
   resetMap(){
     //reset the buttons
     this.setState({
@@ -340,6 +380,7 @@ class SingleMap extends React.Component {
     this.props.showAnalysis();
   }
 
+
 render(){
   const originalStyle = {
     width: '100%',
@@ -352,6 +393,31 @@ render(){
       </div>
       <div>
         <div className="container col-sm-2">
+          <div className="panel-group">
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h3 className="panel-title">
+                  <a data-toggle="collapse" href="#collapsePrevious">Previous History</a>
+                </h3>
+              </div>
+              <div id="collapsePrevious" className="panel-collapse collapse">
+                <div className="panel-body">
+                  <ul className="list-group">
+                    {this.state.previousHistoryList.length==0 &&
+                      <li className="list-group-item" >No History found for this User</li>
+                    }
+                    {this.state.previousHistoryList.length!=0 &&
+
+                      this.state.previousHistoryList.map((fileName,index) =>
+                        <li className="list-group-item" ><span onClick={() => this.requestPreviousGeoJson(fileName)}>{index+1}: {fileName}</span> <span onClick={() => this.deletePreviousGeojson(fileName)}><i className="fas fa-times-circle" ></i></span></li>
+                      )
+
+                    }
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="form-group">
             <label>State:</label><br />
             <select id="state"
@@ -449,11 +515,22 @@ render(){
                Stop
               </button>
               <br/><br/>
-              Reset the Map:
+              Save the progress:
               <button
                type="button"
                className="btn btn-success"
                onClick={this.resetMap}
+               disabled={!this.state.inactiveButtonController}
+              >
+                Save
+              </button>
+              <br/><br/>
+              Reset the Map:
+              <button
+               type="button"
+               className="btn btn-success"
+               onClick={this.saveMap}
+               disabled={!this.state.inactiveButtonController}
               >
                 Reset
               </button>
@@ -463,6 +540,7 @@ render(){
                type="button"
                className="btn btn-primary"
                onClick={this.showAnalysis}
+               disabled={!this.state.inactiveButtonController}
                >
                 Show
               </button>

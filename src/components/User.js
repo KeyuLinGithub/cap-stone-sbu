@@ -29,6 +29,7 @@ class User extends React.Component{
     .then(data => {
       if(data==='USER' || data==='ADMIN'){
         this.props.setUserRole(data);
+        this.props.setCurrentUser(this.state.username);
         this.setState({
           login:true,
           showInvalid:false

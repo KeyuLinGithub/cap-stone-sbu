@@ -6,12 +6,18 @@ class Header extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      userRole:'GUEST'
+      userRole:'GUEST',
+      currentUser:''
     };
     this.setUserRole=this.setUserRole.bind(this);
+    this.setCurrentUser=this.setCurrentUser.bind(this);
   }
   setUserRole(role){
     this.setState({userRole:role});
+  }
+  setCurrentUser(userName){
+    this.setState({currentUser:userName});
+    this.props.setCurrentUser(userName);
   }
   render(){
     return(
@@ -33,7 +39,7 @@ class Header extends React.Component{
             }
 
           </ul>
-          <User setUserRole={this.setUserRole}/>
+          <User setUserRole={this.setUserRole} setCurrentUser={this.setCurrentUser}/>
         </div>
         </div>
       </nav>
