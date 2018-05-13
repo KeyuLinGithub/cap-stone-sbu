@@ -375,7 +375,14 @@ class SingleMap extends React.Component {
   }
 
   saveMap(){
-    fetch("http://localhost:8080/RedistrictSystem/exportState.do");
+    fetch("http://localhost:8080/RedistrictSystem/exportState.do", {
+     method: "POST",
+     credentials: 'include',
+     headers: {
+       "Content-Type": "application/x-www-form-urlencoded"
+     },
+     body: "fileName="+"aa.json"
+    });
   }
 
   resetMap(){
