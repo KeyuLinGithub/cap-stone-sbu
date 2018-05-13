@@ -77,10 +77,10 @@ class SingleMap extends React.Component {
       this.setState({
         state:data.sName,
         dLevel:"PD",
-        compactness:data.preference.COMPACTNESSWEIGHT,
-        population:data.preference.POPULATIONVARIANCEWEIGHT,
-        racial:data.preference.RACIALFAIRNESSWEIGHT,
-        partisan:data.preference.PARTISANFAIRNESSWEIGHT
+        compactness:data.COMPACTNESSWEIGHT,
+        population:data.POPULATIONVARIANCEWEIGHT,
+        racial:data.RACIALFAIRNESSWEIGHT,
+        partisan:data.PARTISANFAIRNESSWEIGHT
       });
     })
     .catch(err => console.log(err));
