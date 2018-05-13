@@ -382,7 +382,7 @@ class SingleMap extends React.Component {
      headers: {
        "Content-Type": "application/x-www-form-urlencoded"
      },
-     body: "fileName="+"aa.json"
+     body: "fileName="+this.state.newFileName+'.json'
     });
   }
 
