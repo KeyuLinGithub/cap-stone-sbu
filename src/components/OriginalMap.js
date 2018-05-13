@@ -4,11 +4,15 @@ class OriginalMap extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
+      state:'US'
     };
     this.displayOriginalMap=this.displayOriginalMap.bind(this);
   }
   componentDidMount(){
     this.displayOriginalMap();
+  }
+  getDerivedStateFromProps(nextProps, prevState){
+    console.log(nextProps);
   }
   displayOriginalMap(){
     if(this.state.showOriginalMap){

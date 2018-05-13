@@ -249,6 +249,7 @@ class SingleMap extends React.Component {
   changeState(e){
     this.setState({state: e.target.value});
     this.displayGeoJSON(e.target.value,this.state.dLevel);
+    this.props.showOriginal(e.target.value);
   }
 
   changeDLevel(e){
@@ -436,6 +437,14 @@ render(){
   }
   return(
     <div id="singleMaps">
+    <button
+     type="button"
+     className="btn btn-success"
+     onClick={this.saveMap}
+     
+    >
+      Save
+    </button>
       <div className="page-header">
         <h1>Map</h1>
       </div>

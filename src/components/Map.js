@@ -24,13 +24,14 @@ class MapPage extends React.Component {
     console.log(this.state.displayAnalysis);
   }
   showOriginal(theState){
+    console.log('dam111');
     this.setState({state:theState});
   }
   render() {
     return (
       <div className="container-fluid">
         <div className="row">
-          <SingleMap google={this.props.google} showAnalysis={this.showAnalysis}/>
+          <SingleMap google={this.props.google} showAnalysis={this.showAnalysis} showOriginal={this.showOriginal}/>
         </div>
         <div className="row">
           <OriginalMap google={this.props.google} state={this.state.state}/>
