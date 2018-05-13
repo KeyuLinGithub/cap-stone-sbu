@@ -9,7 +9,7 @@ class MapPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayAnalysis: false
+      displayAnalysis: false,
       state: 'US'
     };
     this.showAnalysis=this.showAnalysis.bind(this);
