@@ -25,7 +25,8 @@ class SingleMap extends React.Component {
       infoboxNumOfCDs:0,
       infoboxNumOfPDs:0,
       infoboxArea:0,
-      previousHistoryList: []
+      previousHistoryList: [],
+      newFileName:'default'
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
@@ -397,7 +398,8 @@ class SingleMap extends React.Component {
       compactness:25,
       population:25,
       racial:25,
-      partisan:25
+      partisan:25,
+      newFileName:'default'
     });
     //reset resetGeoJson
     this.displayGeoJSON(this.state.state,this.state.dLevel);
@@ -544,6 +546,12 @@ render(){
               </button>
               <br/><br/>
               Save the progress:
+              <br/>
+              <input type="text" name="newFileName"
+                onChange={e=> {this.handleConstraintChange(e)}}
+                style={{width:"70px"}}
+                value={this.state.newFileName}/>.json
+              &nbsp;&nbsp;
               <button
                type="button"
                className="btn btn-success"
@@ -553,7 +561,7 @@ render(){
                 Save
               </button>
               <br/><br/>
-              Reset the Map:
+              Reset the Map:&nbsp;&nbsp;
               <button
                type="button"
                className="btn btn-success"
@@ -563,7 +571,7 @@ render(){
                 Reset
               </button>
               <br/><br/>
-              Show Analysis:
+              Show Analysis:&nbsp;&nbsp;
               <button
                type="button"
                className="btn btn-primary"
