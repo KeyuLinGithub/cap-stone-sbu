@@ -389,7 +389,7 @@ class SingleMap extends React.Component {
   	// })
     // .catch(err => console.log(err));
 
-    fetch("http://localhost:8080/RedistrictSystem/exportState.do", {
+    fetch("http://localhost:8080/RedistrictSystem/process.do", {
      method: "POST",
      credentials: 'include',
      headers: {
@@ -441,7 +441,7 @@ render(){
      type="button"
      className="btn btn-success"
      onClick={this.saveMap}
-     
+
     >
       Save
     </button>
