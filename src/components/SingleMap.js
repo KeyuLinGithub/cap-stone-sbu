@@ -64,6 +64,7 @@ class SingleMap extends React.Component {
      },
      body: "fileName="+fileName
     })
+    .then(response => this.loadPreviousHistory())
     .catch(err => console.log(err));
   }
   deletePreviousGeojson(fileName){
@@ -74,8 +75,10 @@ class SingleMap extends React.Component {
        "Content-Type": "application/x-www-form-urlencoded"
      },
      body: "fileName="+fileName
-    })
+   })
+   .then()
     .catch(err => console.log(err));
+
   }
   initializeMap(){
     if (this.props && this.props.google) {
