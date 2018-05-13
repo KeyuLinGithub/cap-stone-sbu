@@ -64,7 +64,24 @@ class SingleMap extends React.Component {
      },
      body: "fileName="+fileName
     })
-
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      //load loadGeoJson
+      this.removePreviousLayer();
+      this.layer.addGeoJson(data);
+      //move map setCenter
+      this.updateMapCenter(data.sName,'PD');
+      //update constraints
+      this.setState({
+        state:data.sName,
+        dLevel:"PD",
+        compactness:data.preference.COMPACTNESSWEIGHT,
+        population:data.preference.POPULATIONVARIANCEWEIGHT,
+        racial:data.preference.RACIALFAIRNESSWEIGHT,
+        partisan:data.preference.PARTISANFAIRNESSWEIGHT
+      });
+    })
     .catch(err => console.log(err));
   }
   deletePreviousGeojson(fileName){
@@ -425,6 +442,7 @@ render(){
             <label>State:</label><br />
             <select id="state"
             onChange={this.changeState}
+            value={this.state.state}
             >
               <option value="US">US</option>
               <option value="CO">Colorado</option>
@@ -434,7 +452,7 @@ render(){
           </div>
           <div className="form-group">
             <label>District Level:</label><br />
-            <select id="compactness" onChange={this.changeDLevel}>
+            <select id="compactness" onChange={this.changeDLevel} value={this.state.dLevel}>
               <option value="CD" >Congressional district</option>
               <option value="PD" >Precinct district</option>
             </select>
