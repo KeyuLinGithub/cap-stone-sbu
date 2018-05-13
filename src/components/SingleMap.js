@@ -547,7 +547,7 @@ render(){
               <button
                type="button"
                className="btn btn-success"
-               onClick={this.resetMap}
+               onClick={this.saveMap}
                disabled={!this.state.inactiveButtonController}
               >
                 Save
@@ -557,7 +557,7 @@ render(){
               <button
                type="button"
                className="btn btn-success"
-               onClick={this.saveMap}
+               onClick={this.resetMap}
                disabled={!this.state.inactiveButtonController}
               >
                 Reset
