@@ -4,6 +4,7 @@ import { GoogleApiWrapper } from 'google-maps-react';
 import SingleMap from './SingleMap';
 import Analysis from './Analysis';
 import Comparison from './Comparison';
+import OriginalMap from './OriginalMap';
 class MapPage extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +26,9 @@ class MapPage extends React.Component {
       <div className="container-fluid">
         <div className="row">
           <SingleMap google={this.props.google} showAnalysis={this.showAnalysis}/>
+        </div>
+        <div className="row">
+          <OriginalMap google={this.props.google} />
         </div>
         <div className="row">
           {this.state.displayAnalysis && <Analysis />}

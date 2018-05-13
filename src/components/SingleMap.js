@@ -26,7 +26,8 @@ class SingleMap extends React.Component {
       infoboxNumOfPDs:0,
       infoboxArea:0,
       previousHistoryList: [],
-      newFileName:'default'
+      newFileName:'default',
+      showOriginalMap:false
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
@@ -40,12 +41,13 @@ class SingleMap extends React.Component {
     this.saveMap=this.saveMap.bind(this);
     this.requestPreviousGeoJson=this.requestPreviousGeoJson.bind(this);
     this.deletePreviousGeojson=this.deletePreviousGeojson.bind(this);
-    this.displayOriginalMap=this.displayOriginalMap.bind(this);
+    this.showOrigninalMap=this.showOrigninalMap.bind(this);
   }
 
   componentDidMount(){
     this.initializeMap();
     this.loadPreviousHistory();
+    //this.displayOriginalMap();
   }
   loadPreviousHistory(){
     fetch("http://localhost:8080/RedistrictSystem/getFileList.do")
@@ -165,32 +167,6 @@ class SingleMap extends React.Component {
         });
     }
   }
-
-  displayOriginalMap(){
-    if (this.props && this.props.google) {
-      //map set up
-      const { google } = this.props;
-      const maps = google.maps;
-      const mapRef = this.refs.originalmap;
-      const node = ReactDOM.findDOMNode(mapRef);
-      const mapConfig = Object.assign({}, {
-        center: new google.maps.LatLng(40.00, -98),
-        zoom: 4,
-        mapTypeId: 'terrain',
-        mapTypeControl: false,
-        mapTypeControlOptions: {
-          mapTypeIds: [google.maps.MapTypeId.ROADMAP]
-        }
-      })
-      this.map2 = new maps.Map(node, mapConfig);
-      //data layer
-      this.layer2 = new maps.Data();
-
-      this.layer2.setMap(this.map2)
-
-    }
-  }
-
   displayGeoJSON(state,dLevel){
     this.removePreviousLayer();
     this.updateMapCenter(state,dLevel);
@@ -403,13 +379,14 @@ class SingleMap extends React.Component {
 
   saveMap(){
     fetch("http://localhost:8080/RedistrictSystem/exportState.do", {
-     method: "POST",
-     credentials: 'include',
-     headers: {
-       "Content-Type": "application/x-www-form-urlencoded"
-     },
-     body: "fileName="+this.state.newFileName+'.json'
-    });
+  	  method: "POST",
+  	  credentials: 'include',
+  	  headers: {
+  	    "Content-Type": "application/x-www-form-urlencoded"
+  	  },
+      body: "fileName="+this.state.newFileName+'.json'
+  	})
+    .catch(err => console.log(err));
   }
 
   resetMap(){
@@ -430,7 +407,9 @@ class SingleMap extends React.Component {
     //reset resetGeoJson
     this.displayGeoJSON(this.state.state,this.state.dLevel);
   }
-
+  showOrigninalMap(){
+    this.props.showOriginal(this.state.state);
+  }
   showAnalysis(){
     this.props.showAnalysis();
   }
@@ -595,6 +574,16 @@ render(){
                disabled={!this.state.inactiveButtonController}
               >
                 Reset
+              </button>
+
+              <br/><br/>
+              Display Original Map:&nbsp;&nbsp;
+              <button
+               type="button"
+               className="btn btn-primary"
+               onClick={this.displayOriginalMap}
+               >
+                Show
               </button>
               <br/><br/>
               Show Analysis:&nbsp;&nbsp;
