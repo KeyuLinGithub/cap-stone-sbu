@@ -637,7 +637,7 @@ render(){
               <h4>{this.state.state} :</h4>
               <p>Population: {this.state.infoboxPopulation}</p>
               <p>Avg. Income: $ {this.state.infoboxAVGIncome}</p>
-              <p>Area: {this.state.infoboxArea} sq mi² </p>
+              <p>Area: {this.state.infoboxArea} mi² </p>
               <p>Number of C. D.: {this.state.infoboxNumOfCDs}</p>
               <p>Number of P. D.: {this.state.infoboxNumOfPDs}</p>
             </div>
