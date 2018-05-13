@@ -378,15 +378,28 @@ class SingleMap extends React.Component {
   }
 
   saveMap(){
+    // fetch("http://localhost:8080/RedistrictSystem/exportState.do", {
+  	//   method: "POST",
+  	//   credentials: 'include',
+  	//   headers: {
+  	//     "Content-Type": "application/x-www-form-urlencoded"
+  	//   },
+    //   body: "fileName="+this.state.newFileName+'.json'
+  	// })
+    // .catch(err => console.log(err));
+
     fetch("http://localhost:8080/RedistrictSystem/exportState.do", {
-  	  method: "POST",
-  	  credentials: 'include',
-  	  headers: {
-  	    "Content-Type": "application/x-www-form-urlencoded"
-  	  },
-      body: "fileName="+this.state.newFileName+'.json'
-  	})
-    .catch(err => console.log(err));
+     method: "POST",
+     credentials: 'include',
+     headers: {
+       "Content-Type": "application/x-www-form-urlencoded"
+     },
+     body: "fileName="+this.state.newFileName+'.json'
+   })
+    .then(response => response.json())
+    .then(data => {
+      console.log('woops');
+    });
   }
 
   resetMap(){

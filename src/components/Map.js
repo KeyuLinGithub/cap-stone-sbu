@@ -10,8 +10,10 @@ class MapPage extends React.Component {
     super(props);
     this.state = {
       displayAnalysis: false
+      state: 'US'
     };
     this.showAnalysis=this.showAnalysis.bind(this);
+    this.showOriginal=this.showOriginal.bind(this);
   }
   showAnalysis(){
     if(this.state.displayAnalysis){
@@ -21,6 +23,9 @@ class MapPage extends React.Component {
     }
     console.log(this.state.displayAnalysis);
   }
+  showOriginal(theState){
+    this.setState({state:theState});
+  }
   render() {
     return (
       <div className="container-fluid">
@@ -28,7 +33,7 @@ class MapPage extends React.Component {
           <SingleMap google={this.props.google} showAnalysis={this.showAnalysis}/>
         </div>
         <div className="row">
-          <OriginalMap google={this.props.google} />
+          <OriginalMap google={this.props.google} state={this.state.state}/>
         </div>
         <div className="row">
           {this.state.displayAnalysis && <Analysis />}
