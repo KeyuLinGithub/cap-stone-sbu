@@ -40,6 +40,7 @@ class SingleMap extends React.Component {
     this.saveMap=this.saveMap.bind(this);
     this.requestPreviousGeoJson=this.requestPreviousGeoJson.bind(this);
     this.deletePreviousGeojson=this.deletePreviousGeojson.bind(this);
+    this.displayOriginalMap=this.displayOriginalMap.bind(this);
   }
 
   componentDidMount(){
@@ -165,6 +166,31 @@ class SingleMap extends React.Component {
     }
   }
 
+  displayOriginalMap(){
+    if (this.props && this.props.google) {
+      //map set up
+      const { google } = this.props;
+      const maps = google.maps;
+      const mapRef = this.refs.originalmap;
+      const node = ReactDOM.findDOMNode(mapRef);
+      const mapConfig = Object.assign({}, {
+        center: new google.maps.LatLng(40.00, -98),
+        zoom: 4,
+        mapTypeId: 'terrain',
+        mapTypeControl: false,
+        mapTypeControlOptions: {
+          mapTypeIds: [google.maps.MapTypeId.ROADMAP]
+        }
+      })
+      this.map2 = new maps.Map(node, mapConfig);
+      //data layer
+      this.layer2 = new maps.Data();
+
+      this.layer2.setMap(this.map2)
+
+    }
+  }
+
   displayGeoJSON(state,dLevel){
     this.removePreviousLayer();
     this.updateMapCenter(state,dLevel);
@@ -284,10 +310,10 @@ class SingleMap extends React.Component {
   	  headers: {
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
-      body: "objectElementMap[COMPACTNESSWEIGHT]="+this.state.compactness+
-          "&objectElementMap[POPULATIONVARIANCEWEIGHT]="+this.state.population+
-          "&objectElementMap[RACIALFAIRNESSWEIGHT]="+this.state.racial+
-          "&objectElementMap[PARTISANFAIRNESSWEIGHT]="+this.state.partisan+
+      body: "COMPACTNESSWEIGHT="+this.state.compactness+
+          "&POPULATIONVARIANCEWEIGHT="+this.state.population+
+          "&RACIALFAIRNESSWEIGHT="+this.state.racial+
+          "&PARTISANFAIRNESSWEIGHT="+this.state.partisan+
           "&isContiguity="+this.state.contiguity+
           "&isNaturalBoundary="+this.state.naturalBoundary
   	})
