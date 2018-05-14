@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Switch from "react-switch";
 class SingleMap extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +29,9 @@ class SingleMap extends React.Component {
       newFileName:'default',
       showOriginalMap:false,
       originalDetails:[],
-      currentDetails:[]
+      currentDetails:[],
+      checkedStatus:true,
+      reservedList:[]
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
@@ -164,6 +166,17 @@ class SingleMap extends React.Component {
         })
         infowindow.close();
       })
+      //
+      layer.addListener('click', e => {
+        layer.overrideStyle(e.feature, {
+          fillOpacity: 0.8
+        })
+        var list=this.state.reservedList;
+        list.push(e.feature.f.VTDST10);
+        this.setState({
+          reservedList: list
+        })
+      })
       layer.setMap(this.map)
       //add searchBar
       var searchBarInput=ReactDOM.findDOMNode(this.refs.searchBar);
@@ -209,7 +222,8 @@ class SingleMap extends React.Component {
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
   	  body: "stateName="+state+
-  	  		"&dLevel="+dLevel
+  	  		"&dLevel="+dLevel+
+          "&reservedList="+this.state.reservedList
   	})
     .then(response => response.json())
     .then(data => {
@@ -287,6 +301,15 @@ class SingleMap extends React.Component {
   changeDLevel(e){
     this.setState({dLevel: e.target.value});
     this.displayGeoJSON(this.state.state,e.target.value);
+    if(e.target.value==="PD"){
+      this.setState({
+        checkedStatus: false
+      });
+    }else{
+      this.setState({
+        checkedStatus: true
+      });
+    }
   }
 
   handleConstraintChange (event) {
@@ -493,6 +516,12 @@ render(){
     >
       Save
     </button>
+    <Switch
+          onChange={this.handleChange}
+          checked={this.state.checked}
+          id="normal-switch"
+          disabled={true}
+        />
       <div className="page-header">
         <h1>Map</h1>
       </div>
@@ -541,6 +570,15 @@ render(){
               <option value="CD" >Congressional district</option>
               <option value="PD" >Precinct district</option>
             </select>
+          </div>
+          <div className="form-group">
+            <label>District Level:</label><br />
+            <Switch
+                  onChange={this.handleChange}
+                  checked={this.state.checked}
+                  id="normal-switch"
+                  disabled={this.state.checkedStatus}
+            />
           </div>
 
           <div className="form-group">
