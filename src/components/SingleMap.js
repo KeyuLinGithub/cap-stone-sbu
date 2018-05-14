@@ -495,7 +495,7 @@ class SingleMap extends React.Component {
   	// })
     // .catch(err => console.log(err));
 
-    fetch("http://localhost:8080/RedistrictSystem/process.do", {
+    fetch("http://localhost:8080/RedistrictSystem/exportState.do", {
      method: "POST",
      credentials: 'include',
      headers: {
