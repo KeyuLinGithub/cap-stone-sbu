@@ -32,7 +32,8 @@ class SingleMap extends React.Component {
       currentDetails:[],
       checkedStatus:true,
       reservedList:[],
-      checked:false
+      checked:false,
+      year:'1997'
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
@@ -347,6 +348,9 @@ class SingleMap extends React.Component {
     var name = event.target.name;
     var value = event.target.value;
     this.setState({[name]: value});
+    if(name==="year"){
+      this.props.changeYear(value);
+    }
   }
 
   handleCheckboxConstraintChange(event){
@@ -602,6 +606,22 @@ render(){
             <select id="compactness" onChange={this.changeDLevel} value={this.state.dLevel}>
               <option value="CD" >Congressional district</option>
               <option value="PD" >Precinct district</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Year:</label><br />
+            <select id="compactness" name="year" onChange={this.handleConstraintChange} value={this.state.year}>
+              <option value='1997'>1997-1998</option>
+              <option value='1999 '>1999-2000</option>
+              <option value='2001'>2001-2002</option>
+              <option value='2003'>2003-2004</option>
+              <option value='2005'>2005-2006</option>
+              <option value='2007'>2007-2008</option>
+              <option value='2009'>2009-2010</option>
+              <option value='2011'>2011-2012</option>
+              <option value='2013'>2013-2014</option>
+              <option value='2015'>2015-2016</option>
+              <option value='2017'>2017-2018</option>
             </select>
           </div>
           <div className="form-group">

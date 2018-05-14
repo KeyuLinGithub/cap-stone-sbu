@@ -11,11 +11,16 @@ class MapPage extends React.Component {
     this.state = {
       displayAnalysis: false,
       state: 'US',
-      viewOriginalMap:false
+      viewOriginalMap:false,
+      year: '1997'
     };
     this.showAnalysis=this.showAnalysis.bind(this);
     this.showOriginal=this.showOriginal.bind(this);
     this.viewOriginalMap=this.viewOriginalMap.bind(this);
+    this.changeYear=this.changeYear.bind(this);
+  }
+  changeYear(value){
+    this.setState({year: value});
   }
   showAnalysis(){
     if(this.state.displayAnalysis){
@@ -42,7 +47,7 @@ class MapPage extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <SingleMap google={this.props.google} showAnalysis={this.showAnalysis} showOriginal={this.showOriginal} viewOriginalMap={this.viewOriginalMap}/>
+          <SingleMap google={this.props.google} changeYear={this.changeYear} showAnalysis={this.showAnalysis} showOriginal={this.showOriginal} viewOriginalMap={this.viewOriginalMap}/>
         </div>
         <div className="row">
           {this.state.viewOriginalMap==true && <OriginalMap google={this.props.google} state={this.state.state}/>}
@@ -52,7 +57,7 @@ class MapPage extends React.Component {
           {this.state.displayAnalysis && <Analysis />}
         </div >
         <div className="row">
-          <Comparison/>
+          <Comparison year={this.state.year}/>
         </div>
       </div>
     );

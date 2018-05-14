@@ -14,13 +14,19 @@ class StateInfo extends React.Component {
       infoboxPoliticalFairness: 0,
       infoboxGoodness: 0,
       infoboxRacialFairness: 0,
-      details:[]
+      details:[],
+      year:'1997'
     };
   }
   componentDidMount(){
-    this.requestState();
+    this.requestState('1997');
   }
-  requestState(){
+  shouldComponentUpdate(nextProps, nextState){
+    console.log(nextProps.year);
+    this.requestState(nextProps.year);
+    return true;
+  }
+  requestState(year){
     var state=this.props.state;
     var dLevel='PD';
     fetch("http://localhost:8080/RedistrictSystem/displayState.do", {
@@ -30,7 +36,8 @@ class StateInfo extends React.Component {
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
   	  body: "stateName="+state+
-  	  		"&dLevel="+dLevel
+  	  		"&dLevel="+dLevel+
+          "&year="+year
   	})
     .then(response => response.json())
     .then(data => {
@@ -67,7 +74,7 @@ class StateInfo extends React.Component {
   render(){
     return(
       <div>
-        <div className='well col-sm-4' >
+        <div className='well col-sm-3' >
           <h3>{this.props.stateName}:</h3>
           <p>Population: {this.state.infoboxPopulation}</p>
           <p>Avg. Income: {this.state.infoboxAVGIncome}</p>
@@ -79,7 +86,7 @@ class StateInfo extends React.Component {
           <p>Racial Fairness: {this.state.infoboxRacialFairness}</p>
           <p>Goodness: {this.state.infoboxGoodness}</p>
         </div>
-        <div className="col-sm-8">
+        <div className="col-sm-9">
         <table className="table">
           <thead>
             <tr>
@@ -89,6 +96,7 @@ class StateInfo extends React.Component {
               <th scope="col">Racial Fairness</th>
               <th scope="col">Compactness</th>
               <th scope="col">Goodness</th>
+              <th scope="col">Representative</th>
             </tr>
           </thead>
           <tbody>
@@ -102,6 +110,7 @@ class StateInfo extends React.Component {
                 <td>{district.racialFairness}</td>
                 <td>{district.compactness}</td>
                 <td>{district.goodness}</td>
+                <td>{district.representative}</td>
               </tr>
               )
             }

@@ -9,15 +9,15 @@ class Comparison extends React.Component {
           <div className="page-header">
             <h2>Comparison Among States</h2>
           </div>
-          <div id="states" className="col-sm-10 col-sm-offset-1">
+          <div id="states" className="col-sm-12">
             <div className="col-sm-12 ">
-              <StateInfo state='CO' stateName="Colorado"/>
+              <StateInfo state='CO' stateName="Colorado" year={this.props.year}/>
             </div>
             <div className="col-sm-12 " >
-              <StateInfo state='NH'stateName='New Hampshire'/>
+              <StateInfo state='NH'stateName='New Hampshire' year={this.props.year}/>
             </div>
             <div  className="col-sm-12 ">
-              <StateInfo state='SC' stateName='South Carolina'/>
+              <StateInfo state='SC' stateName='South Carolina'year={this.props.year}/>
             </div>
           </div>
         </div>

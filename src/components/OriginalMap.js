@@ -14,6 +14,7 @@ class OriginalMap extends React.Component{
   shouldComponentUpdate(nextProps, nextState){
     console.log(nextProps.state);
     this.displayGeoJSON(nextProps.state);
+    return true;
   }
   displayGeoJSON(state){
     this.removePreviousLayer();
