@@ -100,7 +100,7 @@ class NewUser extends React.Component{
     	  },
     	  body:  "firstName="+this.state.fName+
               "&lastName="+this.state.lName+
-              "&party="+this.state.preferParty+
+              "&party="+this.state.party+
             "&email="+this.state.email+
     	  		"&password="+this.state.password
     	})
