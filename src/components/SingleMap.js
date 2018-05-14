@@ -358,7 +358,7 @@ class SingleMap extends React.Component {
           algorithmStatus:'finished',
           algorithmStatusText:"Finished",
           inactiveButtonController:true,
-          currentDetails:data.details
+          
         });
         return;
       }
