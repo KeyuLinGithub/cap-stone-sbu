@@ -86,7 +86,7 @@ class StateInfo extends React.Component {
           <p>Number of C. D.: {this.state.infoboxNumOfCDs}</p>
           <p>Number of P. D.: {this.state.infoboxNumOfPDs}</p>
           <p>Compactness: {this.state.infoboxCompactness}</p>
-          <p>Political Fairness: {this.state.infoboxPoliticalFairness}</p>
+          <p>Partisan Fairness: {this.state.infoboxPoliticalFairness}</p>
           <p>Racial Fairness: {this.state.infoboxRacialFairness}</p>
           <p>Goodness: {this.state.infoboxGoodness}</p>
         </div>
