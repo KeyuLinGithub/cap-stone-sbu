@@ -358,7 +358,7 @@ class SingleMap extends React.Component {
           algorithmStatus:'finished',
           algorithmStatusText:"Finished",
           inactiveButtonController:true,
-          
+
         });
         return;
       }
@@ -456,7 +456,8 @@ class SingleMap extends React.Component {
       population:25,
       racial:25,
       partisan:25,
-      newFileName:'default'
+      newFileName:'default',
+      currentDetails: this.state.originalDetails
     });
     //reset resetGeoJson
     this.displayGeoJSON(this.state.state,this.state.dLevel);
