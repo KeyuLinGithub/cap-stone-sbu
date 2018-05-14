@@ -25,14 +25,18 @@ class StateInfo extends React.Component {
   shouldComponentUpdate(nextProps, nextState){
     //console.log(nextProps.year);
     //this.requestState(nextProps.year);
-    if(nextProps.year===this.state.year && nextState==this.state){
-       console.log("111");
-       return false;
-    }
+    // if(nextProps.year===this.state.year && nextState==this.state){
+    //    console.log("111");
+    //    return false;
+    // }
     //this.setState({year:nextProps.year});
-    this.requestState(nextProps.year);
-    console.log("222");
-    return true;
+    //
+    //console.log("222");
+    if(nextProps.year!==this.state.year){
+      this.requestState(nextProps.year);
+      return true;
+    }
+    return false;
   }
   requestState(year){
     var state=this.props.state;
