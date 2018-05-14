@@ -68,7 +68,7 @@ class StateInfo extends React.Component {
         infoboxNumOfPDs:data.numOfPds,
         infoboxArea:data.area,
         infoboxCompactness: data.compactness,
-        infoboxPoliticalFairness: data.politicalFairness,
+        infoboxPoliticalFairness: data.partisanFairness,
         infoboxGoodness: data.goodness,
         infoboxRacialFairness: data.racialFairness,
         details: data.details,

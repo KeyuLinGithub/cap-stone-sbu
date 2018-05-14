@@ -186,7 +186,7 @@ class SingleMap extends React.Component {
           // })
         }else{
           layer.overrideStyle(e.feature, {
-            fillOpacity: 0.2
+            fillOpacity: 0.4
           })
           this.preservePD(false,e.feature.f.VTDST10);
           // var list=this.state.reservedList;
@@ -267,7 +267,7 @@ class SingleMap extends React.Component {
       this.layer.forEach(function (feature) {
           temp.overrideStyle(feature, {
             fillColor: feature.getProperty('fill'),
-            fillOpacity: 0.2,
+            fillOpacity: 0.4,
             strokeColor: '#000000',
             strokeWeight: 1,
             zIndex: 1
@@ -448,7 +448,7 @@ class SingleMap extends React.Component {
         if(data.VTDST10===feature.f.VTDST10){
           temp.overrideStyle(feature, {
             fillColor: data.fill,
-            fillOpacity: 0.2,
+            fillOpacity: 0.4,
             strokeColor: '#000000',
             strokeWeight: 4,
             zIndex: 1
