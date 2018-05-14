@@ -645,6 +645,87 @@ render(){
           }
         </div>
       </div>
+      <div className="col-sm-12">
+        <div className="page-header">
+          <h3>Current Analysis</h3>
+        </div>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Original data</th>
+              <th scope="col">Population Variance</th>
+              <th scope="col">Partisan Variance</th>
+              <th scope="col">Racial Fairness</th>
+              <th scope="col">Compactness</th>
+              <th scope="col">Goodness</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">CD 1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">CD 2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">CD 3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Current data</th>
+              <th scope="col">Population Variance</th>
+              <th scope="col">Partisan Variance</th>
+              <th scope="col">Racial Fairness</th>
+              <th scope="col">Compactness</th>
+              <th scope="col">Goodness</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">CD 1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">CD 2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">CD 3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     )
   }

@@ -13,7 +13,8 @@ class StateInfo extends React.Component {
       infoboxCompactness: 0,
       infoboxPoliticalFairness: 0,
       infoboxGoodness: 0,
-      infoboxRacialFairness: 0
+      infoboxRacialFairness: 0,
+      details:[]
     };
   }
   componentDidMount(){
@@ -41,22 +42,54 @@ class StateInfo extends React.Component {
         infoboxPoliticalFairness: data.politicalFairness,
         infoboxGoodness: data.goodness,
         infoboxRacialFairness: data.racialFairness
+        details: data.details
       });
     });
   }
   render(){
     return(
-      <div className='well'>
-        <h3>{this.props.stateName}:</h3>
-        <p>Population: {this.state.infoboxPopulation}</p>
-        <p>Avg. Income: {this.state.infoboxAVGIncome}</p>
-        <p>Area: {this.state.infoboxArea} mi² </p>
-        <p>Number of C. D.: {this.state.infoboxNumOfCDs}</p>
-        <p>Number of P. D.: {this.state.infoboxNumOfPDs}</p>
-        <p>Compactness: {this.state.infoboxCompactness}</p>
-        <p>Political Fairness: {this.state.infoboxPoliticalFairness}</p>
-        <p>Racial Fairness: {this.state.infoboxRacialFairness}</p>
-        <p>Goodness: {this.state.infoboxGoodness}</p>
+      <div>
+        <div className='well col-sm-4' >
+          <h3>{this.props.stateName}:</h3>
+          <p>Population: {this.state.infoboxPopulation}</p>
+          <p>Avg. Income: {this.state.infoboxAVGIncome}</p>
+          <p>Area: {this.state.infoboxArea} mi² </p>
+          <p>Number of C. D.: {this.state.infoboxNumOfCDs}</p>
+          <p>Number of P. D.: {this.state.infoboxNumOfPDs}</p>
+          <p>Compactness: {this.state.infoboxCompactness}</p>
+          <p>Political Fairness: {this.state.infoboxPoliticalFairness}</p>
+          <p>Racial Fairness: {this.state.infoboxRacialFairness}</p>
+          <p>Goodness: {this.state.infoboxGoodness}</p>
+        </div>
+        <div className="col-sm-8">
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Population Variance</th>
+              <th scope="col">Partisan Variance</th>
+              <th scope="col">Racial Fairness</th>
+              <th scope="col">Compactness</th>
+              <th scope="col">Goodness</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {
+              this.state.details.map((district,index) =>
+              <tr>
+                <th scope="row">{district.cdName}</th>
+                <td>{district.populationVariance}</td>
+                <td>{district.partisanFairnes}</td>
+                <td>{district.racialFairness}</td>
+                <td>{district.compactness}</td>
+                <td>{district.goodness}</td>
+              </tr>
+              )
+            }
+          </tbody>
+        </table>
+        </div>
       </div>
     )
   }

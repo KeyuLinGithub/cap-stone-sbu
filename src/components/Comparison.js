@@ -10,13 +10,13 @@ class Comparison extends React.Component {
             <h2>Comparison Among States</h2>
           </div>
           <div id="states" className="col-sm-10 col-sm-offset-1">
-            <div className="col-sm-4">
+            <div className="col-sm-12 ">
               <StateInfo state='CO' stateName="Colorado"/>
             </div>
-            <div className="col-sm-4">
+            <div className="col-sm-12 " >
               <StateInfo state='NH'stateName='New Hampshire'/>
             </div>
-            <div className="col-sm-4">
+            <div  className="col-sm-12 ">
               <StateInfo state='SC' stateName='South Carolina'/>
             </div>
           </div>
