@@ -168,14 +168,26 @@ class SingleMap extends React.Component {
       })
       //
       layer.addListener('click', e => {
-        layer.overrideStyle(e.feature, {
-          fillOpacity: 0.8
-        })
-        var list=this.state.reservedList;
-        list.push(e.feature.f.VTDST10);
-        this.setState({
-          reservedList: list
-        })
+        if(this.state.checkedStatus){
+          layer.overrideStyle(e.feature, {
+            fillOpacity: 0.8
+          })
+          var list=this.state.reservedList;
+          list.push(e.feature.f.VTDST10);
+          this.setState({
+            reservedList: list
+          })
+        }else{
+          layer.overrideStyle(e.feature, {
+            fillOpacity: 0.2
+          })
+          var list=this.state.reservedList;
+          list.push(e.feature.f.VTDST10);
+          this.setState({
+            reservedList: list
+          })
+        }
+
       })
       layer.setMap(this.map)
       //add searchBar
@@ -222,8 +234,8 @@ class SingleMap extends React.Component {
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
   	  body: "stateName="+state+
-  	  		"&dLevel="+dLevel+
-          "&reservedList="+this.state.reservedList
+  	  		"&dLevel="+dLevel
+
   	})
     .then(response => response.json())
     .then(data => {
@@ -347,7 +359,8 @@ class SingleMap extends React.Component {
           "&RACIALFAIRNESSWEIGHT="+this.state.racial+
           "&PARTISANFAIRNESSWEIGHT="+this.state.partisan+
           "&isContiguity="+this.state.contiguity+
-          "&isNaturalBoundary="+this.state.naturalBoundary
+          "&isNaturalBoundary="+this.state.naturalBoundary+
+          "&reservedList="+this.state.reservedList
   	})
     .then(response => response.json())
     .then(data => {
