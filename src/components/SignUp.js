@@ -168,7 +168,7 @@ class SignUp extends React.Component{
             <div className="form-group">
               <label>Password</label>
               <input
-               type="text"
+               type="password"
                className="form-control"
                name="password"
                placeholder="Password"
@@ -179,7 +179,7 @@ class SignUp extends React.Component{
             <div className="form-group">
               <label>Confirm the Password</label>
               <input
-               type="text"
+               type="password"
                className="form-control"
                name="confirmPassword"
                placeholder="Password"
