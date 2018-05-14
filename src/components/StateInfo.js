@@ -98,7 +98,7 @@ class StateInfo extends React.Component {
               <tr>
                 <th scope="row">{district.cdName}</th>
                 <td>{district.populationVariance}</td>
-                <td>{district.partisanFairnes}</td>
+                <td>{district.partisanFairness}</td>
                 <td>{district.racialFairness}</td>
                 <td>{district.compactness}</td>
                 <td>{district.goodness}</td>

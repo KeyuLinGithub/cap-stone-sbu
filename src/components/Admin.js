@@ -19,7 +19,8 @@ class Admin extends React.Component{
     this.changePropertyFile=this.changePropertyFile.bind(this);
   }
   componentDidMount () {
-    this.loadUsers()
+    this.loadUsers();
+    confirm("Press a button!");
   }
   changeCurrentPerson(index){
     this.setState({
