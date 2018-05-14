@@ -373,7 +373,7 @@ class SingleMap extends React.Component {
     console.log("!!!");
     console.log(data);
     console.log("!!!");
-    if(data.details){
+    if(data.newGoodness){
       this.setState({currentDetails: data.newGoodness});
     }
     var temp=this.layer;
