@@ -112,7 +112,7 @@ class StateInfo extends React.Component {
                 <td>{district.racialFairness}</td>
                 <td>{district.compactness}</td>
                 <td>{district.goodness}</td>
-                <td>{district.representative}</td>
+                <td>{district.representive}</td>
               </tr>
               )
             }
