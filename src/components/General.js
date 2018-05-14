@@ -32,7 +32,7 @@ class General extends React.Component {
             />
           </div>
           <div className="container col-sm-6">
-            <h3>About congressional-redistrict-generation:</h3>
+            <h3>About This Application:</h3>
             <p>
             The congressional-redistrict-generation is a tool to analyze Gerrymanderring in US and generate new congressional district boundaries without any political influence. It reassigns the congressional districts base on the votes of each polling place under several constraints of users, and displays the new districts with demographic data. It also provides comparison between the original and new district distribution to user for further analysis.
             </p>
