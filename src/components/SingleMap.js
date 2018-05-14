@@ -419,11 +419,11 @@ class SingleMap extends React.Component {
         });
         if(data.isMax){
           this.setState({
-            algorithmStatus:'finished/Max Times'
+            algorithmStatusText:'finished/Max Times'
           });
         }else{
           this.setState({
-            algorithmStatus:'finished/Peak Goodness'
+            algorithmStatusText:'finished/Peak Goodness'
           });
         }
         return;
@@ -439,7 +439,7 @@ class SingleMap extends React.Component {
     console.log("!!!");
     console.log(data);
     console.log("!!!");
-    if(data.newGoodness){
+    if(data.newGoodness.length!=0){
       this.setState({currentDetails: data.newGoodness});
     }
     var temp=this.layer;
