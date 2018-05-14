@@ -671,7 +671,7 @@ render(){
               />
             </div>
             <div>
-              Align with natural boundary:&nbsp;&nbsp;
+              Align with county boundary:&nbsp;&nbsp;
               <input
                type="checkbox"
                className="form-check-input"
