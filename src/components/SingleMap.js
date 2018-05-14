@@ -373,7 +373,7 @@ class SingleMap extends React.Component {
           "&RACIALFAIRNESSWEIGHT="+this.state.racial+
           "&PARTISANFAIRNESSWEIGHT="+this.state.partisan+
           "&isContiguity="+this.state.contiguity+
-          "&isNaturalBoundary="+this.state.naturalBoundary+
+          "&isNaturalBoundary="+this.state.naturalBoundary
           //"&reservedList="+this.state.reservedList
   	})
     .then(response => response.json())
