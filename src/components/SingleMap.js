@@ -159,14 +159,30 @@ class SingleMap extends React.Component {
       var searchBox = new google.maps.places.Autocomplete(searchBarInput);
       var theMap=this.map;
       theMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(searchBarInput);
-
+      //change location based on search
       searchBox.bindTo('bounds', theMap);
+      //add marker
+      var marker = new google.maps.Marker({
+          map: this.map,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
 
       searchBox.addListener('place_changed', () => {
         const place = searchBox.getPlace();
         theMap.panTo(place.geometry.location);
         theMap.setZoom(8);
-        });
+        //marker
+        marker.setIcon(/** @type {google.maps.Icon} */({
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(35, 35)
+        }));
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+      });
+
     }
   }
   displayGeoJSON(state,dLevel){
