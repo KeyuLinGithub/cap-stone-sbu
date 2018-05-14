@@ -96,6 +96,17 @@ class SingleMap extends React.Component {
     console.log('here we go');
     //move map setCenter
     this.updateMapCenter(data.sName,'PD');
+    //add color for the layer
+    var temp=this.layer;
+    this.layer.forEach(function (feature) {
+        temp.overrideStyle(feature, {
+          fillColor: feature.getProperty('fill'),
+          fillOpacity: 0.4,
+          strokeColor: '#000000',
+          strokeWeight: 1,
+          zIndex: 1
+        })
+    });
     //update constraints
     this.setState({
       state:data.sName,
