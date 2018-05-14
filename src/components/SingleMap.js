@@ -144,6 +144,11 @@ class SingleMap extends React.Component {
           infowindow.setContent(content);
           infowindow.setPosition(e.latLng);
           infowindow.open(this.map);
+        }else if(this.state.dLevel==="PD"){
+          var content='County: '+e.feature.f.county;
+          infowindow.setContent(content);
+          infowindow.setPosition(e.latLng);
+          infowindow.open(this.map);
         }
       })
       layer.addListener('mouseout', e => {
