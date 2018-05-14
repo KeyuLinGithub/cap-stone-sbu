@@ -85,7 +85,7 @@ class SingleMap extends React.Component {
 
       console.log(data);
       //load loadGeoJson
-      this.removePreviousLayer();
+      //this.removePreviousLayer();
       layer.addGeoJson(data);
       console.log('here we go');
       //move map setCenter
