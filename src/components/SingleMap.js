@@ -374,7 +374,7 @@ class SingleMap extends React.Component {
     console.log(data);
     console.log("!!!");
     if(data.details){
-      this.setState({currentDetails: data.details});
+      this.setState({currentDetails: data.newGoodness});
     }
     var temp=this.layer;
     this.layer.forEach(function (feature) {
