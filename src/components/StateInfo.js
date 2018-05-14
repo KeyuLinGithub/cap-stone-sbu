@@ -36,8 +36,8 @@ class StateInfo extends React.Component {
   	    "Content-Type": "application/x-www-form-urlencoded"
   	  },
   	  body: "stateName="+state+
-  	  		"&dLevel="+dLevel+
-          "&year="+year
+  	  		"&dLevel="+dLevel
+
   	})
     .then(response => response.json())
     .then(data => {
@@ -52,7 +52,8 @@ class StateInfo extends React.Component {
      headers: {
        "Content-Type": "application/x-www-form-urlencoded"
      },
-     body: "stateName="+state
+     body: "stateName="+state+
+          "&year="+year
    })
     .then(response => response.json())
     .then(data => {
