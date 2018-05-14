@@ -65,7 +65,7 @@ class Admin extends React.Component{
     //change locally
     this.state.allUsers[this.state.currentUserIndex].firstName=this.state.currentFirstName;
     this.state.allUsers[this.state.currentUserIndex].lastName=this.state.currentLastName;
-    this.state.allUsers[this.state.currentUserIndex].preferParty=this.state.currentPreferParty;
+    this.state.allUsers[this.state.currentUserIndex].party=this.state.currentPreferParty;
     //change remotely
     fetch("http://localhost:8080/RedistrictSystem/updateUser.do", {
   	  method: "POST",
@@ -95,7 +95,7 @@ class Admin extends React.Component{
     this.setState({
       currentFirstName: theUser.firstName,
       currentLastName: theUser.lastName,
-      currentPreferParty: theUser.preferParty,
+      currentPreferParty: theUser.party,
       currentEmail:theUser.email
     });
   }
