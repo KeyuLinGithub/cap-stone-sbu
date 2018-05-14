@@ -18,7 +18,24 @@ class StateInfo extends React.Component {
     };
   }
   componentDidMount(){
-    this.getStateInfo();
+    this.requestState();
+  }
+  requestState(){
+    var state=this.props.state;
+    var dLevel='PD';
+    fetch("http://localhost:8080/RedistrictSystem/displayState.do", {
+  	  method: "POST",
+  	  credentials: 'include',
+  	  headers: {
+  	    "Content-Type": "application/x-www-form-urlencoded"
+  	  },
+  	  body: "stateName="+state+
+  	  		"&dLevel="+dLevel
+  	})
+    .then(response => response.json())
+    .then(data => {
+      this.getStateInfo();
+      });
   }
   getStateInfo(){
     var state=this.props.state;
