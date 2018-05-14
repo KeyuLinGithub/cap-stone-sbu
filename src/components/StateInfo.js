@@ -41,11 +41,12 @@ class StateInfo extends React.Component {
   	})
     .then(response => response.json())
     .then(data => {
-      this.getStateInfo();
+      this.getStateInfo(year);
       });
   }
-  getStateInfo(){
+  getStateInfo(year){
     var state=this.props.state;
+
     fetch("http://localhost:8080/RedistrictSystem/getCompareState.do", {
      method: "POST",
      credentials: 'include',
