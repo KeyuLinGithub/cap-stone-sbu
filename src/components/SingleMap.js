@@ -168,24 +168,26 @@ class SingleMap extends React.Component {
       })
       //
       layer.addListener('click', e => {
-        if(this.state.checkedStatus){
+        if(this.state.checked){
           layer.overrideStyle(e.feature, {
             fillOpacity: 0.8
           })
-          var list=this.state.reservedList;
-          list.push(e.feature.f.VTDST10);
-          this.setState({
-            reservedList: list
-          })
+          this.preservePD(true,e.feature.f.VTDST10);
+          // var list=this.state.reservedList;
+          // list.push(e.feature.f.VTDST10);
+          // this.setState({
+          //   reservedList: list
+          // })
         }else{
           layer.overrideStyle(e.feature, {
             fillOpacity: 0.2
           })
-          var list=this.state.reservedList;
-          list.push(e.feature.f.VTDST10);
-          this.setState({
-            reservedList: list
-          })
+          this.preservePD(false,e.feature.f.VTDST10);
+          // var list=this.state.reservedList;
+          // list.push(e.feature.f.VTDST10);
+          // this.setState({
+          //   reservedList: list
+          // })
         }
 
       })
@@ -220,6 +222,18 @@ class SingleMap extends React.Component {
       });
 
     }
+  }
+  preservePD(select,id){
+    fetch("http://localhost:8080/RedistrictSystem/reservePrecinct.do", {
+  	  method: "POST",
+  	  credentials: 'include',
+  	  headers: {
+  	    "Content-Type": "application/x-www-form-urlencoded"
+  	  },
+  	  body: "select="+select+
+  	  		"&VTDST10="+id
+
+  	})
   }
   displayGeoJSON(state,dLevel){
     this.removePreviousLayer();
@@ -360,7 +374,7 @@ class SingleMap extends React.Component {
           "&PARTISANFAIRNESSWEIGHT="+this.state.partisan+
           "&isContiguity="+this.state.contiguity+
           "&isNaturalBoundary="+this.state.naturalBoundary+
-          "&reservedList="+this.state.reservedList
+          //"&reservedList="+this.state.reservedList
   	})
     .then(response => response.json())
     .then(data => {
@@ -533,6 +547,7 @@ render(){
           onChange={this.handleChange}
           checked={this.state.checked}
           id="normal-switch"
+          name="checked"
           disabled={true}
         />
       <div className="page-header">
@@ -587,9 +602,10 @@ render(){
           <div className="form-group">
             <label>Reserve District:</label><br />
             <Switch
-                  onChange={this.handleChange}
+                  onChange={this.handleCheckboxConstraintChange}
                   checked={this.state.checked}
                   id="normal-switch"
+                  name="checked"
                   disabled={this.state.checkedStatus}
             />
           </div>
