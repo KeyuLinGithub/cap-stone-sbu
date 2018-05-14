@@ -33,7 +33,7 @@ class SingleMap extends React.Component {
       checkedStatus:true,
       reservedList:[],
       checked:false,
-      year:'1997'
+      year:'2017'
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
