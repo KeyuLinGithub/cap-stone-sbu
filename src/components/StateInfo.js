@@ -29,7 +29,7 @@ class StateInfo extends React.Component {
        console.log("111");
        return false;
     }
-    this.setState({year:nextProps.year});
+    //this.setState({year:nextProps.year});
     this.requestState(nextProps.year);
     console.log("222");
     return true;
@@ -77,7 +77,8 @@ class StateInfo extends React.Component {
         infoboxPoliticalFairness: data.politicalFairness,
         infoboxGoodness: data.goodness,
         infoboxRacialFairness: data.racialFairness,
-        details: data.details
+        details: data.details,
+        year:year
       });
     });
   }
