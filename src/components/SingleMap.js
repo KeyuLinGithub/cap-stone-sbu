@@ -370,6 +370,9 @@ class SingleMap extends React.Component {
   }
 
   updateMapChange(data){
+    console.log("!!!");
+    console.log(data);
+    console.log("!!!");
     if(data.details){
       this.setState({currentDetails: data.details});
     }
