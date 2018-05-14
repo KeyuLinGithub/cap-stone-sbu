@@ -82,25 +82,29 @@ class SingleMap extends React.Component {
     })
     .then(response => response.json())
     .then(data => {
+      this.loadPrev(data);
 
-      console.log(data);
-      //load loadGeoJson
-      //this.removePreviousLayer();
-      layer.addGeoJson(data);
-      console.log('here we go');
-      //move map setCenter
-      this.updateMapCenter(data.sName,'PD');
-      //update constraints
-      this.setState({
-        state:data.sName,
-        dLevel:"PD",
-        compactness:data.COMPACTNESSWEIGHT,
-        population:data.POPULATIONVARIANCEWEIGHT,
-        racial:data.RACIALFAIRNESSWEIGHT,
-        partisan:data.PARTISANFAIRNESSWEIGHT
-      });
     })
     .catch(err => console.log(err));
+  }
+  loadPrev(data){
+    console.log('shutUp!');
+    console.log(data);
+    //load loadGeoJson
+    this.removePreviousLayer();
+    this.layer.addGeoJson(data);
+    console.log('here we go');
+    //move map setCenter
+    this.updateMapCenter(data.sName,'PD');
+    //update constraints
+    this.setState({
+      state:data.sName,
+      dLevel:"PD",
+      compactness:data.COMPACTNESSWEIGHT,
+      population:data.POPULATIONVARIANCEWEIGHT,
+      racial:data.RACIALFAIRNESSWEIGHT,
+      partisan:data.PARTISANFAIRNESSWEIGHT
+    });
   }
   deletePreviousGeojson(fileName){
     if(window.confirm('Are you sure you want to delete this user?')){
