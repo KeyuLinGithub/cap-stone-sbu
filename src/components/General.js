@@ -8,7 +8,7 @@ class General extends React.Component {
         <div className="page-header">
           <h1>General</h1>
         </div>
-        <div className="row mb-5">
+        <div className="row">
           <div className="container col-sm-6">
             <h3>What is Gerrymander?</h3>
             <p>
@@ -23,7 +23,7 @@ class General extends React.Component {
             />
           </div>
         </div>
-        <div className="row mb-5">
+        <div className="row ">
           <div className="container col-sm-6">
             <img
              src={'https://source.unsplash.com/collection/1973752/1600x900,'+'2'}
@@ -36,6 +36,23 @@ class General extends React.Component {
             <p>
             The congressional-redistrict-generation is a tool to analyze Gerrymanderring in US and generate new congressional district boundaries without any political influence. It reassigns the congressional districts base on the votes of each polling place under several constraints of users, and displays the new districts with demographic data. It also provides comparison between the original and new district distribution to user for further analysis.
             </p>
+          </div>
+        </div>
+        <div className="page-header">
+          <h3>Evidence-based Heuristics</h3>
+        </div>
+        <div className="row">
+          <div className="container col-sm-6">
+            <p>
+            The congressional-redistrict-generation is a tool to analyze Gerrymanderring in US and generate new congressional district boundaries without any political influence. It reassigns the congressional districts base on the votes of each polling place under several constraints of users, and displays the new districts with demographic data. It also provides comparison between the original and new district distribution to user for further analysis.
+            </p>
+          </div>
+          <div className="container col-sm-6">
+            <img
+             src={'https://source.unsplash.com/collection/1973752/1600x900,'+'3'}
+             className="img-responsive"
+             alt="Demo"
+            />
           </div>
         </div>
         <hr/>
