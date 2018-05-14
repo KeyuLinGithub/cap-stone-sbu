@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import cheers from  '../img/cheers.png';
 class AboutUs extends React.Component{
   render(){
     return(
@@ -47,8 +47,21 @@ class AboutUs extends React.Component{
                     <li><a href="https://www.washingtonpost.com/news/wonk/wp/2016/06/09/how-a-widespread-practice-to-politically-empower-african-americans-might-actually-harm-them/?noredirect=on&utm_term=.755ddbe520dc">Article 3</a></li>
                   </ul>
                   </li>
-                  
+
                 </ul>
+            </div>
+          </div>
+          <hr />
+        </div>
+        <div className="card ">
+          <h3 className="card-header">Frist success with 100% compactness:</h3>
+          <div className="card-block">
+            <div className="container">
+              <img
+               src={cheers}
+               className="img-responsive"
+               alt="First Sucess"
+              />
             </div>
           </div>
           <hr />
