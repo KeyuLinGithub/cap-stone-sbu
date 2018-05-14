@@ -572,7 +572,7 @@ render(){
             </select>
           </div>
           <div className="form-group">
-            <label>District Level:</label><br />
+            <label>Reserve District:</label><br />
             <Switch
                   onChange={this.handleChange}
                   checked={this.state.checked}
