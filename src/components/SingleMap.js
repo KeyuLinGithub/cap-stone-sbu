@@ -355,11 +355,18 @@ class SingleMap extends React.Component {
       this.updateMapChange(data);
       if(data.terminated){
         this.setState({
-          algorithmStatus:'finished',
           algorithmStatusText:"Finished",
           inactiveButtonController:true,
-
         });
+        if(data.isMax){
+          this.setState({
+            algorithmStatus:'finished/Max Times'
+          });
+        }else{
+          this.setState({
+            algorithmStatus:'finished/Peak Goodness'
+          });
+        }
         return;
       }
       else if(this.state.algorithmStatus=='running'){
