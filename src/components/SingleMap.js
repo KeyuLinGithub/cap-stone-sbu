@@ -553,13 +553,6 @@ render(){
     >
       Save
     </button>
-    <Switch
-          onChange={this.handleChange}
-          checked={this.state.checked}
-          id="normal-switch"
-          name="checked"
-          disabled={true}
-        />
       <div className="page-header">
         <h1>Map</h1>
       </div>
@@ -749,16 +742,7 @@ render(){
                >
                 Show
               </button>
-              <br/><br/>
-              Show Analysis:&nbsp;&nbsp;
-              <button
-               type="button"
-               className="btn btn-primary"
-               onClick={this.showAnalysis}
-               disabled={!this.state.inactiveButtonController}
-               >
-                Show
-              </button>
+
             </div>
           }
         </div>
