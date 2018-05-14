@@ -40,6 +40,7 @@ class Admin extends React.Component{
     this.setState({[name]: value});
   }
   deleteUser(index){
+
     if(this.state.currentUserIndex!=0 && this.state.currentUserIndex==index){
       this.setState({currentUserIndex: index-1});
     }
@@ -78,6 +79,10 @@ class Admin extends React.Component{
             "&party="+this.state.currentPreferParty+
             "&email="+this.state.currentEmail
   	})
+    .then(response => response.json())
+    .then(data => {
+      this.loadUsers();
+    })
     .catch(err => console.log(err));
   }
   loadUsers(){
