@@ -19,8 +19,8 @@ class StateInfo extends React.Component {
     };
   }
   componentDidMount(){
-    this.requestState('1997');
-    console.log("000");
+    this.requestState('2017');
+    
   }
   componentWillUpdate(nextProps, nextState) {
     if(nextProps.year!==this.state.year){
