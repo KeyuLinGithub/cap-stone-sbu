@@ -25,7 +25,7 @@ class StateInfo extends React.Component {
   shouldComponentUpdate(nextProps, nextState){
     //console.log(nextProps.year);
     //this.requestState(nextProps.year);
-    if(nextProps.year===this.state.year){
+    if(nextProps.year===this.state.year || nextState==this.state){
        console.log("111");
        return false;
     }
