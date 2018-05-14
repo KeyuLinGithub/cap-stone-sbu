@@ -12,7 +12,7 @@ class MapPage extends React.Component {
       displayAnalysis: false,
       state: 'US',
       viewOriginalMap:false,
-      year: '1997'
+      year: '2017'
     };
     this.showAnalysis=this.showAnalysis.bind(this);
     this.showOriginal=this.showOriginal.bind(this);
