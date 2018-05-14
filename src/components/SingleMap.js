@@ -370,6 +370,9 @@ class SingleMap extends React.Component {
   }
 
   updateMapChange(data){
+    if(data.details){
+      this.setState({currentDetails: data.details});
+    }
     var temp=this.layer;
     this.layer.forEach(function (feature) {
         if(data.VTDST10===feature.f.VTDST10){
