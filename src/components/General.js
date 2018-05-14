@@ -44,7 +44,8 @@ class General extends React.Component {
         <div className="row">
           <div className="container col-sm-6">
             <p>
-            The congressional-redistrict-generation is a tool to analyze Gerrymanderring in US and generate new congressional district boundaries without any political influence. It reassigns the congressional districts base on the votes of each polling place under several constraints of users, and displays the new districts with demographic data. It also provides comparison between the original and new district distribution to user for further analysis.
+            Precincts’ Population:
+            Since it’s almost impossible to find precise population of each precinct, we made approximations of the population of each precinct based on official election ballots. We firstly get the registered voters of each precinct. Then we calculate the ratio (registered voters of a precinct)/(registered voters of a state) for each precinct. Furthermore, we multiply the ratio with the total population of the state to get an approximate value of population for each precinct. Finally, we can use the population of each precinct to calculate the population of all congressional districts and find the population variance between congressional districts, which ensures the population equality across electoral districts.
             </p>
           </div>
           <div className="container col-sm-6">
