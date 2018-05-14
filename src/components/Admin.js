@@ -65,9 +65,13 @@ class Admin extends React.Component{
   submitChange(){
     console.log(this.state);
     //change locally
-    this.state.allUsers[this.state.currentUserIndex].firstName=this.state.currentFirstName;
-    this.state.allUsers[this.state.currentUserIndex].lastName=this.state.currentLastName;
-    this.state.allUsers[this.state.currentUserIndex].party=this.state.currentPreferParty;
+    var list=this.state.allUsers;
+    list[this.state.currentUserIndex].firstName=this.state.currentFirstName;
+    list[this.state.currentUserIndex].lastName=this.state.currentLastName;
+    list[this.state.currentUserIndex].party=this.state.currentPreferParty;
+    this.setState({
+      allUsers: list
+    });
     //change remotely
     fetch("http://localhost:8080/RedistrictSystem/updateUser.do", {
   	  method: "POST",
