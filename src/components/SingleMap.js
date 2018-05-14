@@ -792,8 +792,8 @@ render(){
           <thead>
             <tr>
               <th scope="col">Original data</th>
-              <th scope="col">Population Variance</th>
-              <th scope="col">Partisan Variance</th>
+              <th scope="col">Equal Population</th>
+              <th scope="col">Partisan Fairness</th>
               <th scope="col">Racial Fairness</th>
               <th scope="col">Compactness</th>
               <th scope="col">Goodness</th>
@@ -818,8 +818,8 @@ render(){
           <thead>
             <tr>
               <th scope="col">Current data</th>
-              <th scope="col">Population Variance</th>
-              <th scope="col">Partisan Variance</th>
+              <th scope="col">Equal Population</th>
+              <th scope="col">Partisan Fairness</th>
               <th scope="col">Racial Fairness</th>
               <th scope="col">Compactness</th>
               <th scope="col">Goodness</th>

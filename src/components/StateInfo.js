@@ -93,8 +93,8 @@ class StateInfo extends React.Component {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Population Variance</th>
-              <th scope="col">Partisan Variance</th>
+              <th scope="col">Equal Population</th>
+              <th scope="col">Partisan Fairness</th>
               <th scope="col">Racial Fairness</th>
               <th scope="col">Compactness</th>
               <th scope="col">Goodness</th>
