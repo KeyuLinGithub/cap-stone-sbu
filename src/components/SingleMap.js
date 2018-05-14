@@ -27,7 +27,9 @@ class SingleMap extends React.Component {
       infoboxArea:0,
       previousHistoryList: [],
       newFileName:'default',
-      showOriginalMap:false
+      showOriginalMap:false,
+      originalDetails:[],
+      currentDetails:[]
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
@@ -218,7 +220,9 @@ class SingleMap extends React.Component {
         infoboxAVGIncome:data.aveIncome,
         infoboxNumOfCDs:data.numOfCds,
         infoboxNumOfPDs:data.numOfPds,
-        infoboxArea:data.area
+        infoboxArea:data.area,
+        originalDetails:data.details,
+        currentDetails:data.details
       });
     });
   }
@@ -325,7 +329,8 @@ class SingleMap extends React.Component {
         this.setState({
           algorithmStatus:'finished',
           algorithmStatusText:"Finished",
-          inactiveButtonController:true
+          inactiveButtonController:true,
+          currentDetails:data.details
         });
         return;
       }
@@ -661,68 +666,34 @@ render(){
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">CD 1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">CD 2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">CD 3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
+            {
+              this.state.originalDetails.map((district,index) =>
+              <tr>
+                <th scope="row">{district.cdName}</th>
+                <td>{district.populationVariance}</td>
+                <td>{district.partisanFairnes}</td>
+                <td>{district.racialFairness}</td>
+                <td>{district.compactness}</td>
+                <td>{district.goodness}</td>
+              </tr>
+              )
+            }
           </tbody>
         </table>
         <table className="table">
           <thead>
-            <tr>
-              <th scope="col">Current data</th>
-              <th scope="col">Population Variance</th>
-              <th scope="col">Partisan Variance</th>
-              <th scope="col">Racial Fairness</th>
-              <th scope="col">Compactness</th>
-              <th scope="col">Goodness</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">CD 1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">CD 2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">CD 3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
+            {
+              this.state.currentDetails.map((district,index) =>
+              <tr>
+                <th scope="row">{district.cdName}</th>
+                <td>{district.populationVariance}</td>
+                <td>{district.partisanFairnes}</td>
+                <td>{district.racialFairness}</td>
+                <td>{district.compactness}</td>
+                <td>{district.goodness}</td>
+              </tr>
+              )
+            }
           </tbody>
         </table>
       </div>
