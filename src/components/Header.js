@@ -31,7 +31,15 @@ class Header extends React.Component{
           </div>
           <ul className="nav navbar-nav">
             <li ><Link to={process.env.PUBLIC_URL +'/'}>General</Link></li>
-            <li ><Link to={process.env.PUBLIC_URL +'/Maps'}>Maps</Link></li>
+            
+            {
+              this.state.userRole==="GUEST" &&
+              <li ><Link to={process.env.PUBLIC_URL +'/GuestMap'}>Maps</Link></li>
+            }
+            {
+              this.state.userRole!=="GUEST" &&
+              <li ><Link to={process.env.PUBLIC_URL +'/Maps'}>Maps</Link></li>
+            }
             <li ><Link to={process.env.PUBLIC_URL +'/AboutUs'}>About Us</Link></li>
             {
               this.state.userRole==='ADMIN' &&

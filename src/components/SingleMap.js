@@ -556,14 +556,6 @@ render(){
   }
   return(
     <div id="singleMaps">
-    <button
-     type="button"
-     className="btn btn-success"
-     onClick={this.saveMap}
-
-    >
-      Save
-    </button>
       <div className="page-header">
         <h1>Map</h1>
       </div>

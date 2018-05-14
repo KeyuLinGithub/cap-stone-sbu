@@ -9,6 +9,7 @@ import MapPage from './components/Map';
 import AboutUs from './components/AboutUs';
 import SignUp from './components/SignUp';
 import Admin from './components/Admin';
+import GuestMap from './components/GuestMap';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
         <Root>
           <Route path={process.env.PUBLIC_URL +'/'} exact={true} component={General} />
           <Route path={process.env.PUBLIC_URL +'/Maps'} component={MapPage} />
+          <Route path={process.env.PUBLIC_URL +'/GuestMap'} component={GuestMap} />
           <Route path={process.env.PUBLIC_URL +'/AboutUs'} component={AboutUs} />
           <Route path={process.env.PUBLIC_URL +'/SignUp'} component={SignUp} />
           <Route path={process.env.PUBLIC_URL +'/Admin'} component={Admin} />
