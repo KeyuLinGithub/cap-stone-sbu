@@ -71,6 +71,7 @@ class SingleMap extends React.Component {
     .catch(err => console.log(err));
   }
   requestPreviousGeoJson(fileName){
+    var layer=this.layer;
     fetch("http://localhost:8080/RedistrictSystem/importState.do", {
      method: "POST",
      credentials: 'include',
@@ -81,10 +82,12 @@ class SingleMap extends React.Component {
     })
     .then(response => response.json())
     .then(data => {
+
       console.log(data);
       //load loadGeoJson
       this.removePreviousLayer();
-      this.layer.addGeoJson(data);
+      layer.addGeoJson(data);
+      console.log('here we go');
       //move map setCenter
       this.updateMapCenter(data.sName,'PD');
       //update constraints
