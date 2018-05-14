@@ -33,7 +33,8 @@ class SingleMap extends React.Component {
       checkedStatus:true,
       reservedList:[],
       checked:false,
-      year:'2017'
+      year:'2017',
+      inactiveRedistrictButtonController:false
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
@@ -366,7 +367,8 @@ class SingleMap extends React.Component {
   handleRedistrictRequest(){
     this.setState({
       redistrictStatus:true,
-      algorithmStatus:'running'
+      algorithmStatus:'running',
+      inactiveRedistrictButtonController:true
     });
     this.sendStartAlgorithmRequest();
   }
@@ -388,6 +390,7 @@ class SingleMap extends React.Component {
   	})
     .then(response => response.json())
     .then(data => {
+      //this.setState({inactiveRedistrictButtonController:true});
       this.updateMapChange(data);
       if(data.terminated){
         this.setState({
@@ -524,7 +527,8 @@ class SingleMap extends React.Component {
       racial:25,
       partisan:25,
       newFileName:'default',
-      currentDetails: this.state.originalDetails
+      currentDetails: this.state.originalDetails,
+      inactiveRedistrictButtonController:false
     });
     //reset resetGeoJson
     this.displayGeoJSON(this.state.state,this.state.dLevel);
@@ -679,7 +683,7 @@ render(){
              type="button"
              className="btn btn-primary"
              onClick={this.handleRedistrictRequest}
-             disabled={this.state.inactiveButtonController}
+             disabled={ this.state.inactiveRedistrictButtonController}
             >
              Redistrict
             </button>
