@@ -20,7 +20,7 @@ class Admin extends React.Component{
   }
   componentDidMount () {
     this.loadUsers();
-    confirm("Press a button!");
+
   }
   changeCurrentPerson(index){
     this.setState({
@@ -41,25 +41,25 @@ class Admin extends React.Component{
     this.setState({[name]: value});
   }
   deleteUser(index){
+    if(window.confirm('Are you sure you want to delete this user?')){
+      if(this.state.currentUserIndex!=0 && this.state.currentUserIndex==index){
+        this.setState({currentUserIndex: index-1});
+      }
+      var deleteEmail=this.state.allUsers[index].email;
+      fetch("http://localhost:8080/RedistrictSystem/deleteUser.do", {
+    	  method: "POST",
+    	  credentials: 'include',
+    	  headers: {
+    	    "Content-Type": "application/x-www-form-urlencoded"
+    	  },
+        body: "email="+deleteEmail
+    	})
+      .catch(err => console.log(err));
 
-    if(this.state.currentUserIndex!=0 && this.state.currentUserIndex==index){
-      this.setState({currentUserIndex: index-1});
+      var newList=this.state.allUsers
+      newList.splice(index, 1);
+      this.setState({allUsers: newList});
     }
-    var deleteEmail=this.state.allUsers[index].email;
-    fetch("http://localhost:8080/RedistrictSystem/deleteUser.do", {
-  	  method: "POST",
-  	  credentials: 'include',
-  	  headers: {
-  	    "Content-Type": "application/x-www-form-urlencoded"
-  	  },
-      body: "email="+deleteEmail
-  	})
-    .catch(err => console.log(err));
-
-    var newList=this.state.allUsers
-    newList.splice(index, 1);
-    this.setState({allUsers: newList});
-
     console.log("delete only");
   }
   submitChange(){

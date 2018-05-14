@@ -91,17 +91,18 @@ class SingleMap extends React.Component {
     .catch(err => console.log(err));
   }
   deletePreviousGeojson(fileName){
-    fetch("http://localhost:8080/RedistrictSystem/removeFile.do", {
-     method: "POST",
-     credentials: 'include',
-     headers: {
-       "Content-Type": "application/x-www-form-urlencoded"
-     },
-     body: "fileName="+fileName
-   })
-   .then(response => this.loadPreviousHistory())
-    .catch(err => console.log(err));
-
+    if(window.confirm('Are you sure you want to delete this user?')){
+      fetch("http://localhost:8080/RedistrictSystem/removeFile.do", {
+       method: "POST",
+       credentials: 'include',
+       headers: {
+         "Content-Type": "application/x-www-form-urlencoded"
+       },
+       body: "fileName="+fileName
+     })
+     .then(response => this.loadPreviousHistory())
+      .catch(err => console.log(err));
+    }
   }
   initializeMap(){
     if (this.props && this.props.google) {
