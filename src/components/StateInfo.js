@@ -19,10 +19,10 @@ class StateInfo extends React.Component {
     };
   }
   componentDidMount(){
-    this.requestState('1997');
+    //this.requestState('1997');
   }
   shouldComponentUpdate(nextProps, nextState){
-    console.log(nextProps.year);
+    //console.log(nextProps.year);
     this.requestState(nextProps.year);
     return true;
   }
@@ -58,7 +58,7 @@ class StateInfo extends React.Component {
    })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      //console.log(data);
       this.setState({
         infoboxPopulation:data.population,
         infoboxAVGIncome:data.aveIncome,
