@@ -77,7 +77,7 @@ class StateInfo extends React.Component {
    })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      console.log(data.details);
       this.setState({
         infoboxPopulation:data.population,
         infoboxAVGIncome:data.aveIncome,
