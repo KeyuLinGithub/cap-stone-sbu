@@ -15,11 +15,11 @@ class StateInfo extends React.Component {
       infoboxGoodness: 0,
       infoboxRacialFairness: 0,
       details:[],
-      year:'1997'
+      year:'1991'
     };
   }
   componentDidMount(){
-    this.requestState('1997');
+    //this.requestState('1997');
   }
   shouldComponentUpdate(nextProps, nextState){
     //console.log(nextProps.year);
