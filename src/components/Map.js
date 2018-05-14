@@ -10,10 +10,12 @@ class MapPage extends React.Component {
     super(props);
     this.state = {
       displayAnalysis: false,
-      state: 'US'
+      state: 'US',
+      viewOriginalMap:false
     };
     this.showAnalysis=this.showAnalysis.bind(this);
     this.showOriginal=this.showOriginal.bind(this);
+    this.viewOriginalMap=this.viewOriginalMap.bind(this);
   }
   showAnalysis(){
     if(this.state.displayAnalysis){
@@ -24,17 +26,27 @@ class MapPage extends React.Component {
     console.log(this.state.displayAnalysis);
   }
   showOriginal(theState){
-    console.log('dam111');
     this.setState({state:theState});
+  }
+  viewOriginalMap(){
+    if(this.state.viewOriginalMap==true){
+      this.setState({viewOriginalMap:false});
+    }else{
+      this.setState({viewOriginalMap:true});
+    }
+    console.log("2");
+    console.log(this.state);
+
   }
   render() {
     return (
       <div className="container-fluid">
         <div className="row">
-          <SingleMap google={this.props.google} showAnalysis={this.showAnalysis} showOriginal={this.showOriginal}/>
+          <SingleMap google={this.props.google} showAnalysis={this.showAnalysis} showOriginal={this.showOriginal} viewOriginalMap={this.viewOriginalMap}/>
         </div>
         <div className="row">
-          <OriginalMap google={this.props.google} state={this.state.state}/>
+          {this.state.viewOriginalMap==true && <OriginalMap google={this.props.google} state={this.state.state}/>}
+
         </div>
         <div className="row">
           {this.state.displayAnalysis && <Analysis />}

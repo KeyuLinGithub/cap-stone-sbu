@@ -423,7 +423,8 @@ class SingleMap extends React.Component {
     this.displayGeoJSON(this.state.state,this.state.dLevel);
   }
   showOrigninalMap(){
-    this.props.showOriginal(this.state.state);
+    this.props.viewOriginalMap();
+    console.log('1')
   }
   showAnalysis(){
     this.props.showAnalysis();
@@ -604,7 +605,7 @@ render(){
               <button
                type="button"
                className="btn btn-primary"
-               onClick={this.displayOriginalMap}
+               onClick={this.showOrigninalMap}
                >
                 Show
               </button>

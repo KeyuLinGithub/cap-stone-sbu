@@ -11,8 +11,62 @@ class OriginalMap extends React.Component{
   componentDidMount(){
     this.displayOriginalMap();
   }
-  getDerivedStateFromProps(nextProps, prevState){
-    console.log(nextProps);
+  shouldComponentUpdate(nextProps, nextState){
+    console.log(nextProps.state);
+    this.displayGeoJSON(nextProps.state);
+  }
+  displayGeoJSON(state){
+    this.removePreviousLayer();
+    this.updateMapCenter(state);
+    if(state==='US'){
+      return;
+    }
+    fetch("http://localhost:8080/RedistrictSystem/displayState.do", {
+  	  method: "POST",
+  	  credentials: 'include',
+  	  headers: {
+  	    "Content-Type": "application/x-www-form-urlencoded"
+  	  },
+  	  body: "stateName="+state+
+  	  		"&dLevel="+'PD'
+  	})
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      this.layer2.addGeoJson(data);
+      //add color for the layer
+      var temp=this.layer2;
+      this.layer2.forEach(function (feature) {
+          temp.overrideStyle(feature, {
+            fillColor: feature.getProperty('fill'),
+            fillOpacity: 0.2,
+            strokeColor: '#000000',
+            strokeWeight: 1,
+            zIndex: 1
+          })
+      });
+    });
+  }
+  updateMapCenter(state){
+    if(state==='US'){
+      this.map2.setZoom(4);
+      this.map2.setCenter({lat: 40, lng: -98});
+    }else if(state==='CO'){
+      this.map2.setZoom(7);
+      this.map2.setCenter({lat: 39, lng: -105.7821});
+    }else if(state==='NH'){
+      this.map2.setZoom(8);
+      this.map2.setCenter({lat: 43.8938516, lng: -71.57239529999998});
+    }else if(state==='SC'){
+      this.map2.setZoom(8);
+      this.map2.setCenter({lat: 33.836082, lng: -81.163727});
+    }
+  }
+  removePreviousLayer(){
+    var layer=this.layer2;
+    layer.forEach(function (feature) {
+        layer.remove(feature);
+    });
   }
   displayOriginalMap(){
     if(this.state.showOriginalMap){
