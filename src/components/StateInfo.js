@@ -15,13 +15,13 @@ class StateInfo extends React.Component {
       infoboxGoodness: 0,
       infoboxRacialFairness: 0,
       details:[],
-      year:'1991'
+      year:'1997'
     };
   }
   componentDidMount(){
     this.requestState('1997');
   }
-  shouldComponentUpdate(nextProps, nextState){
+  //shouldComponentUpdate(nextProps, nextState){
     //console.log(nextProps.year);
     //this.requestState(nextProps.year);
     // if(nextProps.year===this.state.year){
@@ -29,8 +29,8 @@ class StateInfo extends React.Component {
     // }
     // this.setState({year:nextProps.year});
     // this.requestState(nextProps.year);
-    return true;
-  }
+    //return true;
+  //}
   requestState(year){
     var state=this.props.state;
     var dLevel='PD';
