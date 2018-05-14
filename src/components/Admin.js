@@ -90,6 +90,7 @@ class Admin extends React.Component{
     .catch(err => console.log(err));
   }
   loadUserInfo(index){
+    console.log(this.state);
     var theUser=this.state.allUsers[index];
     this.setState({
       currentFirstName: theUser.firstName,
