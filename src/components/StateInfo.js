@@ -22,7 +22,13 @@ class StateInfo extends React.Component {
     this.requestState('1997');
     console.log("000");
   }
-  shouldComponentUpdate(nextProps, nextState){
+  componentWillUpdate(nextProps, nextState) {
+    if(nextProps.year!==this.state.year){
+      this.requestState(nextProps.year);
+      this.setState({year:nextProps.year})
+    }
+  }
+  //shouldComponentUpdate(nextProps, nextState){
     //console.log(nextProps.year);
     //this.requestState(nextProps.year);
     // if(nextProps.year===this.state.year && nextState==this.state){
@@ -32,13 +38,13 @@ class StateInfo extends React.Component {
     //this.setState({year:nextProps.year});
     //
     //console.log("222");
-    if(nextProps.year!==this.state.year){
-      this.requestState(nextProps.year);
-      this.setState({year:nextProps.year})
-      return true;
-    }
-    return false;
-  }
+  //   if(nextProps.year!==this.state.year){
+  //     this.requestState(nextProps.year);
+  //     this.setState({year:nextProps.year})
+  //     return true;
+  //   }
+  //   return false;
+  // }
   requestState(year){
     var state=this.props.state;
     var dLevel='PD';
