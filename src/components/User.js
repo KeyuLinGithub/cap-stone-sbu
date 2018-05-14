@@ -34,7 +34,6 @@ class User extends React.Component{
           login:true,
           showInvalid:false
         });
-        this.props.history.push(process.env.PUBLIC_URL +'/');
       }else{
         this.setState({
           showInvalid:true,
