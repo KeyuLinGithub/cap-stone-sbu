@@ -111,7 +111,6 @@ class OriginalMap extends React.Component{
             <h1>Original Map</h1>
           </div>
           <div className="container col-sm-2" >
-            text
           </div>
           <div className="container col-sm-10" >
             <div ref='map2' style={originalStyle}>

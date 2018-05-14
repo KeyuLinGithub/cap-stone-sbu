@@ -114,12 +114,13 @@ class NewUser extends React.Component{
           password:'',
           party: 'REPUBLICAN'
         });
+        this.props.loadUsers();
       });
     }else{
       this.setState({submissionError:true});
     }
     this.myFormRef.reset();
-    this.props.loadUsers();
+
   }
   render(){
     return(
