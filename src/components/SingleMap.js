@@ -247,6 +247,7 @@ class SingleMap extends React.Component {
     if(state==='US'){
       return;
     }
+    console.log(state);
     fetch("http://localhost:8080/RedistrictSystem/displayState.do", {
   	  method: "POST",
   	  credentials: 'include',
