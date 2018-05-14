@@ -19,33 +19,33 @@ class StateInfo extends React.Component {
     };
   }
   componentDidMount(){
-    this.requestState('2017');
-    
+    this.getStateInfo('2017');
+
   }
   componentWillUpdate(nextProps, nextState) {
     if(nextProps.year!==this.state.year){
-      this.requestState(nextProps.year);
+      this.getStateInfo(nextProps.year);
       this.setState({year:nextProps.year})
     }
   }
-  requestState(year){
-    var state=this.props.state;
-    var dLevel='PD';
-    fetch("http://localhost:8080/RedistrictSystem/displayState.do", {
-  	  method: "POST",
-  	  credentials: 'include',
-  	  headers: {
-  	    "Content-Type": "application/x-www-form-urlencoded"
-  	  },
-  	  body: "stateName="+state+
-  	  		"&dLevel="+dLevel
-
-  	})
-    .then(response => response.json())
-    .then(data => {
-      this.getStateInfo(year);
-      });
-  }
+  // requestState(year){
+  //   var state=this.props.state;
+  //   var dLevel='PD';
+  //   fetch("http://localhost:8080/RedistrictSystem/displayState.do", {
+  // 	  method: "POST",
+  // 	  credentials: 'include',
+  // 	  headers: {
+  // 	    "Content-Type": "application/x-www-form-urlencoded"
+  // 	  },
+  // 	  body: "stateName="+state+
+  // 	  		"&dLevel="+dLevel
+  //
+  // 	})
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     this.getStateInfo(year);
+  //     });
+  // }
   getStateInfo(year){
     var state=this.props.state;
 
