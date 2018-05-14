@@ -31,7 +31,8 @@ class SingleMap extends React.Component {
       originalDetails:[],
       currentDetails:[],
       checkedStatus:true,
-      reservedList:[]
+      reservedList:[],
+      checked:false
     };
     this.changeState=this.changeState.bind(this);
     this.changeDLevel=this.changeDLevel.bind(this);
@@ -46,8 +47,12 @@ class SingleMap extends React.Component {
     this.requestPreviousGeoJson=this.requestPreviousGeoJson.bind(this);
     this.deletePreviousGeojson=this.deletePreviousGeojson.bind(this);
     this.showOrigninalMap=this.showOrigninalMap.bind(this);
+    this.handleChange=this.handleChange.bind(this);
   }
-
+  handleChange(thechecked) {
+      this.setState({ checked: thechecked });
+      console.log(thechecked);
+    }
   componentDidMount(){
     this.initializeMap();
     this.loadPreviousHistory();
@@ -602,7 +607,7 @@ render(){
           <div className="form-group">
             <label>Reserve District:</label><br />
             <Switch
-                  onChange={this.handleCheckboxConstraintChange}
+                  onChange={this.handleChange}
                   checked={this.state.checked}
                   id="normal-switch"
                   name="checked"
