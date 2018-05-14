@@ -30,45 +30,25 @@ class AboutUs extends React.Component{
           <hr />
         </div>
         <div className="card ">
-          <h3 className="card-header">Give us feedback: </h3>
+          <h3 className="card-header">Resources: </h3>
           <div className="card-block">
             <div className="container">
-              <div className="col-lg-4 col-lg-offset-1">
-                <form>
-                  <div className="form-group">
-                    <label>Full Name</label>
-                    <input
-                     type="text"
-                     className="form-control"
-                     id="name"
-                     placeholder="Enter your name"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Email address</label>
-                    <input
-                     type="email"
-                     className="form-control"
-                     id="email"
-                     placeholder="example@gmail.com"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Feedback:</label>
-                    <input
-                     type="textarea"
-                     className="form-control"
-                     id="feedback"
-                     style={{ height: 150, width: 400 }}
-                     />
-                  </div>
-                  <div className="form-group">
-                    <Link to={process.env.PUBLIC_URL +'/'}>
-                      <button type="button" className="btn btn-primary">Submit</button>
-                    </Link>
-                  </div>
-                </form>
-              </div>
+                <ul>
+                  <li>Libraries:
+                  <ul>
+                    <li><a href="https://github.com/jdiemke/delaunay-triangulator">delaunay-triangulator</a></li>
+                    <li><a href="https://sourceforge.net/projects/jts-topo-suite/">jts-topp-suite</a></li>
+                  </ul>
+                  </li>
+                  <li>Relative Readings:
+                  <ul>
+                    <li><a href="https://gking.harvard.edu/files/gking/files/compact.pdf">Article 1</a></li>
+                    <li><a href="https://www.washingtonpost.com/graphics/2017/politics/courts-law/gerrymander/?utm_term=.5daf3dce66f8">Article 2</a></li>
+                    <li><a href="https://www.washingtonpost.com/news/wonk/wp/2016/06/09/how-a-widespread-practice-to-politically-empower-african-americans-might-actually-harm-them/?noredirect=on&utm_term=.755ddbe520dc">Article 3</a></li>
+                  </ul>
+                  </li>
+                  
+                </ul>
             </div>
           </div>
           <hr />
